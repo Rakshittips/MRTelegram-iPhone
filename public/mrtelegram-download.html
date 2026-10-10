@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get MRTelegram — Telegram with an iOS Look for Android</title>
+<meta name="description" content="Download MRTelegram for Android. Telegram with an iPhone-style look and extra privacy controls.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{
+    --bg:#0a0612;
+    --panel:#130c20;
+    --panel-2:#1a1128;
+    --line:rgba(255,255,255,0.08);
+    --text:#f3eefb;
+    --sub:#9a8fb3;
+    --faint:#5e5573;
+    --grad:linear-gradient(135deg,#8b5cf6,#ec4899 55%,#f97316);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      radial-gradient(circle at 12% -5%, rgba(139,92,246,0.20), transparent 40%),
+      radial-gradient(circle at 95% 10%, rgba(249,115,22,0.12), transparent 35%),
+      radial-gradient(circle at 50% 100%, rgba(236,72,153,0.10), transparent 45%),
+      var(--bg);
+    color:var(--text);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    line-height:1.5;
+  }
+  .wrap{max-width:960px; margin:0 auto; padding:0 24px;}
+  a{text-decoration:none; color:inherit;}
+
+  /* NAV */
+  nav{display:flex; align-items:center; justify-content:space-between; padding:22px 0;}
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Syne',sans-serif; font-weight:700; font-size:16px;}
+  .brand .mark{width:32px; height:32px; border-radius:9px; background:var(--grad); display:flex; align-items:center; justify-content:center; font-size:14px; color:#fff;}
+  .nav-cta{
+    font-size:12.5px; font-weight:600; border:1px solid var(--line); padding:9px 16px; border-radius:999px;
+    display:flex; align-items:center; gap:6px; cursor:pointer; background:transparent; color:inherit; font-family:inherit;
+    transition:background .2s;
+  }
+  .nav-cta:hover{background:rgba(255,255,255,0.06);}
+
+  /* HERO */
+  .hero{padding:56px 0 40px; display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:7px;
+    font-size:11.5px; font-weight:800; color:#f592c0;
+    background:rgba(236,72,153,0.10); border:1px solid rgba(236,72,153,0.25);
+    padding:6px 12px; border-radius:999px; margin-bottom:18px;
+  }
+  h1{font-family:'Syne', sans-serif; font-size:42px; font-weight:700; line-height:1.08; letter-spacing:-0.01em;}
+  h1 em{font-style:normal; background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .hero p.lead{margin-top:16px; font-size:15px; color:var(--sub); max-width:440px;}
+  .hero-stats{display:flex; gap:26px; margin-top:26px;}
+  .hero-stats div .num{font-family:'Syne',sans-serif; font-weight:700; font-size:20px;}
+  .hero-stats div .lbl{font-size:11px; color:var(--faint); margin-top:2px;}
+
+  .dl-row{display:flex; align-items:center; gap:14px; margin-top:30px; flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--grad); color:#fff; font-weight:700; font-size:14px;
+    padding:15px 26px; border-radius:14px; display:inline-flex; align-items:center; gap:10px;
+    box-shadow:0 14px 30px -12px rgba(236,72,153,0.55); border:0; cursor:pointer; font-family:inherit;
+    transition:transform .15s ease, filter .15s ease;
+  }
+  .btn-primary:hover{filter:brightness(1.08); transform:translateY(-1px);}
+  .btn-primary:active{transform:scale(0.97);}
+  .btn-secondary{
+    border:1px solid var(--line); color:var(--sub); font-weight:600; font-size:13px;
+    padding:14px 20px; border-radius:14px; display:inline-flex; align-items:center; gap:8px;
+    transition:background .2s, color .2s;
+  }
+  .btn-secondary:hover{background:rgba(255,255,255,0.04); color:var(--text);}
+
+  /* hero card */
+  .hero-visual{background:var(--panel); border:1px solid var(--line); border-radius:26px; padding:26px; position:relative; overflow:hidden;}
+  .hero-visual::before{content:''; position:absolute; inset:0; background:radial-gradient(circle at 70% 0%, rgba(139,92,246,0.18), transparent 60%); pointer-events:none;}
+  .hv-head{display:flex; align-items:center; gap:12px; position:relative;}
+  .hv-icon{width:44px; height:44px; border-radius:13px; background:var(--grad); display:flex; align-items:center; justify-content:center; font-size:19px; color:#fff;}
+  .hv-head .name{font-weight:700; font-size:14.5px;}
+  .hv-head .ver{font-size:11px; color:var(--faint);}
+  .hv-bars{margin-top:22px; display:flex; flex-direction:column; gap:10px; position:relative;}
+  .hv-bar{
+    background:var(--panel-2); border:1px solid var(--line); border-radius:11px;
+    padding:11px 13px; display:flex; align-items:center; gap:10px; font-size:12px; color:var(--sub);
+    cursor:pointer; transition:background .15s, transform .15s; user-select:none;
+  }
+  .hv-bar:hover{background:rgba(255,255,255,0.06); color:var(--text);}
+  .hv-bar:active{transform:scale(0.98);}
+  .hv-bar i{font-size:13px; color:#b79bfb; width:16px;}
+  .hv-bar .tick{margin-left:auto; color:#59e0a8; font-size:12px;}
+
+  /* SECTION HEADS */
+  .section-head{max-width:520px; margin:0 0 30px;}
+  .section-head .kicker{font-size:11.5px; font-weight:700; color:var(--faint); letter-spacing:0.02em; margin-bottom:8px;}
+  .section-head h2{font-family:'Syne',sans-serif; font-size:26px; font-weight:700; line-height:1.15;}
+  .section-head p{color:var(--sub); font-size:13.5px; margin-top:10px;}
+
+  section{padding:52px 0;}
+  section.divider{border-top:1px solid var(--line);}
+  #download{padding-bottom:64px;}
+
+  /* FEATURE GRID */
+  .grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;}
+  .card{
+    background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:22px;
+    cursor:pointer; transition:border-color .2s, transform .2s, background .2s; position:relative;
+  }
+  .card:hover{border-color:rgba(255,255,255,0.22); background:var(--panel-2); transform:translateY(-2px);}
+  .card .card-head{display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;}
+  .card .ic{width:38px; height:38px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:15px;}
+  .card .try-badge{
+    font-size:11px; font-weight:700; color:#b79bfb; background:rgba(139,92,246,0.12);
+    padding:4px 8px; border-radius:6px; display:flex; align-items:center; gap:4px;
+    transition:background .2s, color .2s;
+  }
+  .card:hover .try-badge{background:var(--grad); color:#fff;}
+  .ic-purple{background:rgba(139,92,246,0.16); color:#b79bfb;}
+  .ic-pink{background:rgba(236,72,153,0.16); color:#f592c0;}
+  .ic-orange{background:rgba(249,115,22,0.16); color:#ffab6b;}
+  .ic-green{background:rgba(61,220,151,0.14); color:#59e0a8;}
+  .ic-blue{background:rgba(56,161,255,0.14); color:#7cc0ff;}
+  .ic-red{background:rgba(244,82,122,0.14); color:#ff7f9c;}
+  .card h3{font-size:14.5px; font-weight:700; margin-bottom:6px;}
+  .card p{font-size:12.5px; color:var(--sub); line-height:1.55;}
+
+  /* DOWNLOAD PANEL */
+  .dl-panel{
+    background:linear-gradient(135deg, rgba(139,92,246,0.14), rgba(249,115,22,0.08));
+    border:1px solid rgba(139,92,246,0.25); border-radius:24px; padding:38px;
+    display:grid; grid-template-columns:1.2fr 0.8fr; gap:30px; align-items:center;
+  }
+  .dl-panel h2{font-family:'Syne',sans-serif; font-size:24px; font-weight:700; margin-bottom:10px;}
+  .dl-panel p{color:var(--sub); font-size:13px; max-width:380px;}
+  .dl-meta{display:flex; gap:22px; margin-top:20px; flex-wrap:wrap;}
+  .dl-meta div .v{font-weight:700; font-size:14px;}
+  .dl-meta div .k{font-size:10.5px; color:var(--faint); margin-top:2px;}
+
+  .dl-box{background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:24px;}
+  .dl-box .file{display:flex; align-items:center; gap:12px; margin-bottom:18px;}
+  .dl-box .file .fi{width:38px; height:38px; border-radius:10px; background:rgba(61,220,151,0.14); color:#59e0a8; display:flex; align-items:center; justify-content:center; font-size:15px;}
+  .dl-box .file .fn{font-size:12.5px; font-weight:700;}
+  .dl-box .file .fs{font-size:10.5px; color:var(--faint); margin-top:2px;}
+  .btn-download{
+    width:100%; background:var(--grad); color:#fff; font-weight:700; font-size:14px;
+    padding:15px; border-radius:13px; display:flex; align-items:center; justify-content:center; gap:9px;
+    border:0; cursor:pointer; font-family:inherit; transition:filter .15s, transform .15s;
+    box-shadow:0 14px 28px -10px rgba(236,72,153,0.5);
+  }
+  .btn-download:hover{filter:brightness(1.08); transform:translateY(-1px);}
+  .btn-download:active{transform:scale(0.98);}
+  .dl-note{font-size:10.5px; color:var(--faint); text-align:center; margin-top:12px; line-height:1.5;}
+
+  /* SUPPORT CARD */
+  .support-card{
+    background:linear-gradient(135deg, rgba(139,92,246,0.14), rgba(249,115,22,0.08));
+    border:1px solid rgba(139,92,246,0.25); border-radius:22px; padding:32px; text-align:center;
+  }
+  .support-card .orb{
+    width:48px; height:48px; margin:0 auto 16px; border-radius:14px; background:var(--grad);
+    display:flex; align-items:center; justify-content:center; font-size:19px; color:#fff;
+    box-shadow:0 14px 30px -12px rgba(236,72,153,0.5);
+  }
+  .support-card h2{font-family:'Syne',sans-serif; font-size:21px; font-weight:700; margin-bottom:10px;}
+  .support-card p{font-size:13px; color:var(--sub); max-width:380px; margin:0 auto 22px; line-height:1.6;}
+  .btn-support{
+    display:inline-flex; align-items:center; gap:9px; background:var(--grad); color:#fff;
+    font-weight:700; font-size:13.5px; padding:14px 28px; border-radius:13px;
+    box-shadow:0 14px 28px -12px rgba(139,92,246,0.5); transition:transform .15s;
+  }
+  .btn-support:hover{transform:translateY(-2px);}
+  .support-methods{display:flex; justify-content:center; gap:10px; margin-top:20px;}
+  .support-methods .m{
+    width:38px; height:38px; border-radius:11px; background:var(--panel-2); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; color:var(--sub); font-size:14px;
+    cursor:pointer; transition:background .15s, color .15s;
+  }
+  .support-methods .m:hover{background:rgba(255,255,255,0.1); color:#fff;}
+
+  /* FOOTER LINKS */
+  .footer-links{display:flex; flex-direction:column; gap:12px; margin-bottom:26px;}
+  .flink{
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    background:var(--panel); border:1px solid var(--line); border-radius:999px;
+    padding:15px 20px; font-size:13px; font-weight:600; color:var(--text);
+    transition:background .2s, border-color .2s;
+  }
+  .flink:hover{background:var(--panel-2); border-color:rgba(255,255,255,0.15);}
+  .flink svg{width:17px; height:17px; flex-shrink:0;}
+  .foot-credit{text-align:center; font-size:11.5px; color:var(--sub); margin-bottom:8px;}
+  .foot-credit strong{background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .foot-legal{text-align:center; font-size:10.5px; color:var(--faint); line-height:1.6; max-width:420px; margin:0 auto;}
+  .to-top{
+    position:fixed; right:20px; bottom:20px; width:44px; height:44px; border-radius:50%;
+    background:var(--panel); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 10px 24px -10px rgba(0,0,0,0.6); color:var(--text); z-index:90;
+    transition:background .2s, transform .2s; cursor:pointer;
+  }
+  .to-top:hover{background:var(--panel-2); transform:translateY(-2px);}
+  .to-top svg{width:16px; height:16px;}
+
+  footer{padding:46px 0 90px; margin-top:6px; border-top:1px solid var(--line);}
+
+  /* Modals */
+  .modal-backdrop{
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75);
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); z-index:100;
+    align-items:center; justify-content:center; padding:20px;
+  }
+  .modal-backdrop.open{display:flex;}
+  .modal-card{
+    background:#160f24; border:1px solid var(--line); border-radius:24px;
+    max-width:440px; width:100%; padding:28px; position:relative;
+    box-shadow:0 25px 60px rgba(0,0,0,0.8); animation:popIn .2s cubic-bezier(0.16,1,0.3,1);
+  }
+  @keyframes popIn{from{transform:scale(0.95); opacity:0;}to{transform:scale(1); opacity:1;}}
+  .modal-close{
+    position:absolute; top:18px; right:18px; background:none; border:none;
+    color:var(--sub); font-size:22px; cursor:pointer; line-height:1;
+  }
+  .m-icon{
+    width:52px; height:52px; border-radius:15px; background:var(--grad);
+    margin:0 auto 14px; display:flex; align-items:center; justify-content:center; font-size:22px; color:#fff;
+  }
+  .p-track{height:8px; background:rgba(255,255,255,0.08); border-radius:99px; overflow:hidden; margin:20px 0 10px;}
+  .p-fill{height:100%; width:0%; background:var(--grad); border-radius:99px; transition:width .12s;}
+
+  /* Interactive Feature Dialog Components */
+  .feat-ctrl-row{
+    display:flex; justify-content:space-between; align-items:center; padding:12px 14px;
+    background:rgba(255,255,255,0.04); border-radius:12px; margin-bottom:8px;
+  }
+  .feat-tog{
+    width:44px; height:26px; border-radius:99px; background:#383145; position:relative;
+    cursor:pointer; transition:background .2s;
+  }
+  .feat-tog.on{background:#30d158;}
+  .feat-tog::after{
+    content:""; position:absolute; top:2px; left:2px; width:22px; height:22px;
+    border-radius:50%; background:#fff; transition:transform .2s;
+  }
+  .feat-tog.on::after{transform:translateX(18px);}
+  
+  .opt-pill{
+    padding:8px 12px; border-radius:10px; font-size:12.5px; font-weight:600; cursor:pointer;
+    background:rgba(255,255,255,0.05); color:var(--sub); transition:all .15s; border:1px solid transparent;
+  }
+  .opt-pill.active{background:rgba(139,92,246,0.2); color:#b79bfb; border-color:rgba(139,92,246,0.4);}
+  .opt-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin:14px 0;}
+
+  /* Waveform equalizer */
+  .eq-bar{width:4px; border-radius:2px; background:#59e0a8; animation:bounce 0.8s ease-in-out infinite alternate;}
+  @keyframes bounce{from{height:6px;}to{height:24px;}}
+
+  /* Toast Notification */
+  .toast{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(80px);
+    background:rgba(26,17,40,0.95); border:1px solid rgba(255,255,255,0.15);
+    backdrop-filter:blur(16px); color:#fff; padding:10px 22px; border-radius:999px;
+    font-size:13.5px; font-weight:600; box-shadow:0 12px 30px rgba(0,0,0,0.6);
+    z-index:200; opacity:0; pointer-events:none; transition:all .3s cubic-bezier(0.16,1,0.3,1);
+  }
+  .toast.show{transform:translateX(-50%) translateY(0); opacity:1;}
+
+  @media (max-width:760px){
+    .hero{grid-template-columns:1fr;}
+    h1{font-size:32px;}
+    .grid{grid-template-columns:repeat(2,1fr);}
+    .dl-panel{grid-template-columns:1fr;}
+  }
+  @media (max-width:480px){
+    .grid{grid-template-columns:1fr;}
+    .hero-stats{gap:18px;}
+    #download{padding-bottom:80px;}
+    footer{padding-top:56px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap" id="top">
+  <!-- NAV -->
+  <nav>
+    <a href="#top" class="brand">
+      <div class="mark"><i class="fa-brands fa-telegram"></i></div>
+      MRTelegram
+    </a>
+    <div style="display:flex; align-items:center; gap:8px;">
+      <button class="nav-cta" onclick="openDonateModal('upi')" style="background:rgba(236,72,153,0.12); border-color:rgba(236,72,153,0.35); color:#f592c0;">
+        <i class="fa-solid fa-heart" style="color:#ec4899;"></i> Support &amp; Donate
+      </button>
+      <button class="nav-cta" onclick="openDownloadModal()">
+        <i class="fa-solid fa-download"></i> Get APK
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <div class="eyebrow"><i class="fa-solid fa-bolt"></i> MRTelegram · V1.0</div>
+      <h1>Telegram iPhone, restyled <em>the way you want it.</em></h1>
+      <p class="lead">An iOS look for Telegram on Android, plus extra settings for your chat list, conversations, privacy and downloads, all in one build.</p>
+
+      <div class="hero-stats">
+        <div><div class="num">30+</div><div class="lbl">extra settings</div></div>
+        <div><div class="num">68.4 MB</div><div class="lbl">install size</div></div>
+        <div><div class="num">Android 8+</div><div class="lbl">compatibility</div></div>
+      </div>
+
+      <div class="dl-row">
+        <button class="btn-primary" onclick="openDownloadModal()">
+          <i class="fa-solid fa-download"></i> Download APK
+        </button>
+        <button class="btn-secondary" onclick="openDonateModal('upi')" style="cursor:pointer; border-color:rgba(236,72,153,0.35); color:#f592c0;">
+          <i class="fa-solid fa-heart" style="color:#ec4899;"></i> Support &amp; Donate (Try)
+        </button>
+        <a href="#features" class="btn-secondary">
+          <i class="fa-solid fa-list-check"></i> See all features
+        </a>
+      </div>
+    </div>
+
+    <!-- HERO VISUAL -->
+    <div class="hero-visual">
+      <div class="hv-head">
+        <div class="hv-icon"><i class="fa-brands fa-telegram"></i></div>
+        <div>
+          <div class="name">MRTelegram</div>
+          <div class="ver" id="masterCustomState">Enable customizations · On</div>
+        </div>
+      </div>
+      <div class="hv-bars">
+        <div class="hv-bar" onclick="openDonateModal('upi')" style="background:rgba(236,72,153,0.1); border-color:rgba(236,72,153,0.3); color:#f592c0;">
+          <i class="fa-solid fa-heart" style="color:#ec4899;"></i> Rakshittips Support &amp; Donate
+          <span class="tick" style="font-size:10.5px; background:rgba(236,72,153,0.2); color:#f592c0; padding:2px 8px; border-radius:6px; font-weight:700;">Try Dialog &rarr;</span>
+        </div>
+        <div class="hv-bar" onclick="tryHeroSetting('general')">
+          <i class="fa-solid fa-sliders"></i> General Settings 
+          <span class="tick"><i class="fa-solid fa-chevron-right" style="font-size:11px;color:var(--faint)"></i></span>
+        </div>
+        <div class="hv-bar" onclick="tryHeroSetting('home')">
+          <i class="fa-solid fa-house"></i> Home Screen 
+          <span class="tick"><i class="fa-solid fa-chevron-right" style="font-size:11px;color:var(--faint)"></i></span>
+        </div>
+        <div class="hv-bar" onclick="tryHeroSetting('conversation')">
+          <i class="fa-solid fa-comments"></i> Conversation Screen 
+          <span class="tick"><i class="fa-solid fa-chevron-right" style="font-size:11px;color:var(--faint)"></i></span>
+        </div>
+        <div class="hv-bar" onclick="tryHeroSetting('privacy')">
+          <i class="fa-solid fa-lock"></i> Privacy and Security 
+          <span class="tick"><i class="fa-solid fa-chevron-right" style="font-size:11px;color:var(--faint)"></i></span>
+        </div>
+        <div class="hv-bar" onclick="tryHeroSetting('notifications')">
+          <i class="fa-solid fa-bell"></i> Notification preferences 
+          <span class="tick"><i class="fa-solid fa-chevron-right" style="font-size:11px;color:var(--faint)"></i></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES (Click any card to try it!) -->
+  <section id="features" class="divider">
+    <div class="section-head">
+      <div class="kicker">FEATURES</div>
+      <h2>Everything the settings screens give you</h2>
+      <p>Click any card below to test and try that exact tool live in your browser!</p>
+    </div>
+
+    <div class="grid">
+      <!-- 1 -->
+      <div class="card" onclick="openToolTry('style')">
+        <div class="card-head">
+          <div class="ic ic-blue"><i class="fa-brands fa-apple"></i></div>
+          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+        <h3>iOS interface style</h3>
+        <p>Switch between Telegram (default) and iOS. Screens not yet adapted keep the official look.</p>
+      </div>
+
+      <!-- 2 -->
+      <div class="card" onclick="openToolTry('font')">
+        <div class="card-head">
+          <div class="ic ic-purple"><i class="fa-solid fa-font"></i></div>
+          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+        <h3>App font</h3>
+        <p>Pick iOS, SF Pro Text, Samsung One UI, Linotte, Rubrik, Expletus Sans or your system font.</p>
+      </div>
+
+      <!-- 3 -->
+      <div class="card" onclick="openToolTry('speed')">
+        <div class="card-head">
+          <div class="ic ic-green"><i class="fa-solid fa-gauge-high"></i></div>
+          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+        <h3>Faster downloads and uploads</h3>
+        <p>Transfers files in parallel, with a download acceleration level you choose.</p>
+      </div>
+
+      <!-- 4 -->
+      <div class="card" onclick="openToolTry('home')">
+        <div class="card-head">
+          <div class="ic ic-orange"><i class="fa-solid fa-house"></i></div>
+          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+        <h3>Home screen</h3>
+        <p>Hide the All folder or search bar, change folder style, and show two or three lines per chat.</p>
+      </div>
+
+      <!-- 5 -->
+      <div class="card" onclick="openToolTry('checks')">
+        <div class="card-head">
+          <div class="ic ic-pink"><i class="fa-solid fa-check-double"></i></div>
+          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+        <h3>Hide read checks in channels</h3>
+        <p>Removes sent and read checks in channels only. Chats and groups stay normal.</p>
+      </div>
+
+      <!-- 6 -->
+      <div class="card" onclick="openToolTry('conv')">
+        <div class="card-head">
+          <div class="ic ic-blue"><i class="fa-solid fa-comments"></i></div>
+          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+        <h3>Conversation screen</h3>
+        <p>iOS-style header, input bar, search circle and context menu, plus translation and system emojis.</p>
+      </div>
+
+      <!-- 7 -->
+      <div class="card" onclick="openToolTry('stickers')">
+        <div class="card-head">
+          <div class="ic ic-purple"><i class="fa-regular fa-face-smile"></i></div>
+          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+        <h3>Stickers and bubbles</h3>
+        <p>Resize stickers with a live preview and choose your bubble style.</p>
+      </div>
+
+      <!-- 8 -->
+      <div class="card" onclick="openToolTry('voice')">
+        <div class="card-head">
+          <div class="ic ic-green"><i class="fa-solid fa-microphone"></i></div>
+          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+        <h3>Voice messages</h3>
+        <p>Reduces noise and echo and evens out volume while you record.</p>
+      </div>
+
+      <!-- 9 -->
+      <div class="card" onclick="openToolTry('antidelete')">
+        <div class="card-head">
+          <div class="ic ic-red"><i class="fa-solid fa-trash-can-arrow-up"></i></div>
+          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+        <h3>View deleted messages</h3>
+        <p>Keeps messages deleted after you received them and marks them as deleted on your phone.</p>
+      </div>
+
+      <!-- 10 -->
+      <div class="card" onclick="openToolTry('phone')">
+        <div class="card-head">
+          <div class="ic ic-orange"><i class="fa-solid fa-eye-slash"></i></div>
+          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+        <h3>Hide phone number</h3>
+        <p>Hides your number inside the MRTelegram interface. Telegram privacy settings do not change.</p>
+      </div>
+
+      <!-- 11 -->
+      <div class="card" onclick="openToolTry('premium')">
+        <div class="card-head">
+          <div class="ic ic-pink"><i class="fa-solid fa-star"></i></div>
+          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+        <h3>Local Premium</h3>
+        <p>Treats your account as Premium inside the app, so interface premium features work without a subscription.</p>
+      </div>
+
+      <!-- 12 -->
+      <div class="card" onclick="openToolTry('notif')">
+        <div class="card-head">
+          <div class="ic ic-green"><i class="fa-solid fa-bell"></i></div>
+          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+        <h3>Notification preferences</h3>
+        <p>Permanent notification and a status list for permission, push service and battery optimization.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD PANEL -->
+  <section id="download" class="divider">
+    <div class="dl-panel">
+      <div>
+        <h2>Ready to install</h2>
+        <p>One APK, installed like any other app. Log in with your Telegram number as usual.</p>
+        <div class="dl-meta">
+          <div><div class="v">V1.0</div><div class="k">version</div></div>
+          <div><div class="v">68.4 MB</div><div class="k">file size</div></div>
+          <div><div class="v">Android 8+</div><div class="k">requires</div></div>
+        </div>
+      </div>
+
+      <div class="dl-box">
+        <div class="file">
+          <div class="fi"><i class="fa-solid fa-file-arrow-down"></i></div>
+          <div>
+            <div class="fn">MRTelegram V1.0.apk</div>
+            <div class="fs">68.4 MB · Updated recently</div>
+          </div>
+        </div>
+        <button class="btn-download" onclick="openDownloadModal()">
+          <i class="fa-solid fa-download"></i> Download APK
+        </button>
+        <div class="dl-note">For on-time messages, open Notification preferences, allow notifications and set battery optimization to Unrestricted.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUPPORT CARD -->
+  <section id="support" class="divider">
+    <div class="support-card">
+      <div class="orb"><i class="fa-solid fa-heart"></i></div>
+      <h2>Donate please!</h2>
+      <p>MRTelegram is completely free and ad-free. Your support helps keep servers and regular updates running.</p>
+      <button class="btn-support" onclick="openDonateModal('upi')" style="cursor:pointer; border:none; font-family:inherit;">
+        <i class="fa-solid fa-mug-hot"></i> Support the project
+      </button>
+      <div class="support-methods">
+        <div class="m" onclick="openDonateModal('upi')" title="UPI / QR Code"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+        <div class="m" onclick="openDonateModal('stars')" title="Telegram Stars"><i class="fa-brands fa-telegram"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-links">
+      <a href="https://rakshittips.github.io/Rakshittips/index.html" target="_blank" rel="noopener noreferrer" class="flink">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.6 2.8 4 6.1 4 9.5s-1.4 6.7-4 9.5c-2.6-2.8-4-6.1-4-9.5s1.4-6.7 4-9.5Z"/></svg>
+        Rakshittips! Official Site
+      </a>
+      <a href="https://github.com/Rakshittips" target="_blank" rel="noopener noreferrer" class="flink">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.98 5.24.98 11.5c0 5 3.24 9.24 7.75 10.74.57.1.78-.25.78-.55v-2.16c-3.15.68-3.82-1.35-3.82-1.35-.52-1.31-1.26-1.66-1.26-1.66-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.17 1.74 1.17 1.01 1.73 2.65 1.23 3.3.94.1-.73.4-1.23.72-1.51-2.51-.29-5.15-1.26-5.15-5.6 0-1.24.44-2.25 1.17-3.04-.12-.29-.51-1.45.11-3.02 0 0 .96-.31 3.14 1.16a10.9 10.9 0 0 1 5.72 0c2.18-1.47 3.13-1.16 3.13-1.16.63 1.57.24 2.73.12 3.02.73.79 1.17 1.8 1.17 3.04 0 4.35-2.65 5.31-5.17 5.59.41.36.77 1.06.77 2.14v3.17c0 .3.2.66.79.55A10.52 10.52 0 0 0 23.02 11.5C23.02 5.24 18.27.5 12 .5Z"/></svg>
+        GitHub Repository
+      </a>
+      <a href="https://t.me/Mr_Rakshit_2_0" target="_blank" rel="noopener noreferrer" class="flink">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 3.3 2.6 10.9c-1.2.5-1.2 1.2-.2 1.5l4.9 1.5 1.9 5.9c.2.6.4.8.9.8.4 0 .6-.2.9-.5l2.2-2.1 4.6 3.4c.8.5 1.4.2 1.6-.8l3-14c.3-1.2-.4-1.7-1.5-1.3ZM8.4 14.1l9.2-8.2c.4-.4-.1-.6-.6-.2l-11.3 7.1-.9-.3 12.6-4.8-8 5.6"/></svg>
+        Developer Channel (@Mr_Rakshit_2_0)
+      </a>
+    </div>
+
+    <div class="foot-credit">Crafted with care by <strong>Rakshittips!</strong></div>
+    <div class="foot-legal">© 2026 Rakshittips. MRTelegram is an independent community project and is not affiliated with Telegram.</div>
+  </footer>
+
+  <!-- FLOATING SUPPORT & DONATE PILL -->
+  <button onclick="openDonateModal('upi')" style="position:fixed; left:20px; bottom:20px; z-index:90; background:#130c20; border:1px solid rgba(236,72,153,0.4); color:#f592c0; font-size:12px; font-weight:700; padding:10px 16px; border-radius:30px; display:flex; align-items:center; gap:8px; cursor:pointer; box-shadow:0 10px 25px rgba(236,72,153,0.3); font-family:inherit;">
+    <i class="fa-solid fa-heart" style="color:#ec4899;"></i> Support &amp; Donate (Try)
+  </button>
+
+  <a href="#top" class="to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </a>
+</div>
+
+<!-- DOWNLOAD PROGRESS MODAL -->
+<div class="modal-backdrop" id="dlModal" onclick="closeModalOnBackdrop(event)">
+  <div class="modal-card" style="text-align:center;">
+    <button class="modal-close" onclick="closeDownloadModal()">&times;</button>
+    <div class="m-icon"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+    <h3 style="font-family:'Syne',sans-serif; font-size:20px; font-weight:700; margin-bottom:4px;">Downloading MRTelegram</h3>
+    <p style="font-size:12.5px; color:var(--sub);" id="mStatus">Fetching official build from secure mirror...</p>
+
+    <div class="p-track">
+      <div class="p-fill" id="pFill"></div>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; font-size:11.5px; color:var(--faint); font-family:monospace; margin-bottom:18px;">
+      <span id="mSize">0 MB / 68.4 MB</span>
+      <span id="mPct">0%</span>
+    </div>
+
+    <button id="mActionBtn" class="btn-primary" style="width:100%; justify-content:center; pointer-events:none; opacity:0.6;" onclick="saveApkFile()">
+      Downloading...
+    </button>
+  </div>
+</div>
+
+<!-- INTERACTIVE "TRY THIS FEATURE" MODAL -->
+<div class="modal-backdrop" id="tryModal" onclick="closeTryOnBackdrop(event)">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeTryModal()">&times;</button>
+    
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+      <div id="tryIconBox" style="width:40px; height:40px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:16px;"></div>
+      <div>
+        <h3 id="tryTitle" style="font-size:17px; font-weight:700;">Feature Test</h3>
+        <p id="trySub" style="font-size:11.5px; color:var(--faint);">MRTelegram Live Simulator</p>
+      </div>
+    </div>
+
+    <!-- Dynamic Interactive Body -->
+    <div id="tryBody" style="margin-bottom:20px;"></div>
+
+    <button class="btn-primary" style="width:100%; justify-content:center; font-size:13.5px; padding:12px;" onclick="closeTryModal()">
+      Apply &amp; Done
+    </button>
+  </div>
+</div>
+
+<!-- RAKSHITTIPS SUPPORT & DONATE DIALOG -->
+<div class="modal-backdrop" id="donateModal" onclick="closeDonateOnBackdrop(event)">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeDonateModal()">&times;</button>
+    
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+      <div style="width:44px; height:44px; border-radius:12px; background:var(--grad); display:flex; align-items:center; justify-content:center; font-size:18px; color:#fff;">
+        <i class="fa-solid fa-mug-hot"></i>
+      </div>
+      <div>
+        <h3 style="font-family:'Syne',sans-serif; font-size:18px; font-weight:700;">Rakshittips Support &amp; Donate</h3>
+        <p style="font-size:11.5px; color:var(--faint);">Fueling independent MRTelegram updates</p>
+      </div>
+    </div>
+
+    <!-- Tabs: UPI and Telegram Stars only -->
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:8px; background:var(--panel-2); padding:6px; border-radius:12px; margin-bottom:16px;">
+      <button class="opt-pill active" onclick="setHtmlDonateMethod('upi')" id="tab-upi" style="text-align:center; padding:9px 6px; font-size:12px; border:none; font-family:inherit;">
+        <i class="fa-solid fa-indian-rupee-sign"></i> UPI / QR
+      </button>
+      <button class="opt-pill" onclick="setHtmlDonateMethod('stars')" id="tab-stars" style="text-align:center; padding:9px 6px; font-size:12px; border:none; font-family:inherit;">
+        <i class="fa-solid fa-star" style="color:#facc15;"></i> Telegram Stars
+      </button>
+    </div>
+
+    <!-- Tab Dynamic Body -->
+    <div id="donateBody" style="margin-bottom:16px;"></div>
+
+    <!-- Simulation Test Button -->
+    <button class="btn-secondary" style="width:100%; justify-content:center; font-size:12.5px; padding:11px; margin-bottom:10px; cursor:pointer;" onclick="simulateHtmlDonation()">
+      <i class="fa-solid fa-heart" style="color:#ec4899;"></i> Try Test Donation Simulator
+    </button>
+
+    <a href="https://rakshittips.github.io/Rakshittips/DonateSupport.html" target="_blank" rel="noopener noreferrer" style="display:block; text-align:center; font-size:11px; color:var(--sub); text-decoration:none;">
+      Open official page (DonateSupport.html) &rarr;
+    </a>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">Notification</div>
+
+<script>
+  var toastTimer;
+  function showToast(msg) {
+    var el = document.getElementById("toast");
+    el.textContent = msg;
+    el.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ el.classList.remove("show"); }, 2400);
+  }
+
+  // Hero Card Click to Open Group Settings
+  function tryHeroSetting(type) {
+    if(type === 'general') openToolTry('style');
+    else if(type === 'home') openToolTry('home');
+    else if(type === 'conversation') openToolTry('conv');
+    else if(type === 'privacy') openToolTry('antidelete');
+    else if(type === 'notifications') openToolTry('notif');
+  }
+
+  // Interactive Live Tool Tester
+  function openToolTry(toolId) {
+    var modal = document.getElementById("tryModal");
+    var title = document.getElementById("tryTitle");
+    var iconBox = document.getElementById("tryIconBox");
+    var body = document.getElementById("tryBody");
+
+    modal.classList.add("open");
+
+    if (toolId === 'style') {
+      iconBox.className = "ic-blue";
+      iconBox.innerHTML = '<i class="fa-brands fa-apple"></i>';
+      title.textContent = "iOS Interface Style";
+      body.innerHTML = `
+        <p style="font-size:13px; color:var(--sub); margin-bottom:12px;">Choose your client visual presentation:</p>
+        <div class="opt-grid">
+          <div class="opt-pill active" onclick="setOpt(this, 'Applied iOS 18 liquid theme')"><i class="fa-brands fa-apple"></i> iOS 18 Fluid</div>
+          <div class="opt-pill" onclick="setOpt(this, 'Applied Telegram default theme')"><i class="fa-brands fa-telegram"></i> Telegram Default</div>
+        </div>
+        <div class="feat-ctrl-row">
+          <span style="font-size:13px; font-weight:600;">Enable spring bounce physics</span>
+          <div class="feat-tog on" onclick="this.classList.toggle('on'); showToast('Spring bounce physics updated');"></div>
+        </div>
+      `;
+    } 
+    else if (toolId === 'font') {
+      iconBox.className = "ic-purple";
+      iconBox.innerHTML = '<i class="fa-solid fa-font"></i>';
+      title.textContent = "App Font Preview";
+      body.innerHTML = `
+        <div style="background:#0e0817; border:1px solid var(--line); border-radius:12px; padding:12px; margin-bottom:12px; text-align:center;">
+          <div id="fontSample" style="font-size:16px; font-weight:700; color:#fff;">Cupertino SF Pro Display</div>
+          <div style="font-size:11px; color:var(--faint); margin-top:2px;">Sample: 35,702 messages · 10:42 AM</div>
+        </div>
+        <div class="opt-grid">
+          <div class="opt-pill active" onclick="setAppFont(this, 'SF Pro Display')">SF Pro (iOS)</div>
+          <div class="opt-pill" onclick="setAppFont(this, 'Samsung One UI')">One UI 6</div>
+          <div class="opt-pill" onclick="setAppFont(this, 'Linotte')">Linotte</div>
+          <div class="opt-pill" onclick="setAppFont(this, 'Rubrik')">Rubrik Sans</div>
+        </div>
+      `;
+    }
+    else if (toolId === 'speed') {
+      iconBox.className = "ic-green";
+      iconBox.innerHTML = '<i class="fa-solid fa-gauge-high"></i>';
+      title.textContent = "Turbo Speed Accelerator";
+      body.innerHTML = `
+        <div class="feat-ctrl-row">
+          <div><b style="font-size:13px;">Parallel Download Streams</b><div style="font-size:11px; color:var(--faint);">Chunks per file</div></div>
+          <span style="color:#59e0a8; font-weight:700; font-size:14px;">16x Turbo</span>
+        </div>
+        <div class="feat-ctrl-row">
+          <div><b style="font-size:13px;">Upload Fastlane Buffer</b><div style="font-size:11px; color:var(--faint);">Reduces chunk delays</div></div>
+          <div class="feat-tog on" onclick="this.classList.toggle('on'); showToast('Upload Fastlane updated');"></div>
+        </div>
+        <div style="background:rgba(89,224,168,0.1); border:1px solid rgba(89,224,168,0.3); border-radius:10px; padding:10px; font-size:12px; color:#59e0a8; text-align:center;">
+          <i class="fa-solid fa-bolt"></i> Benchmarked: <strong>94.2 MB/s</strong> transfer rate active
+        </div>
+      `;
+    }
+    else if (toolId === 'home') {
+      iconBox.className = "ic-orange";
+      iconBox.innerHTML = '<i class="fa-solid fa-house"></i>';
+      title.textContent = "Home Screen Customizer";
+      body.innerHTML = `
+        <div class="feat-ctrl-row">
+          <span style="font-size:13px; font-weight:600;">Hide "All" folder tab</span>
+          <div class="feat-tog on" onclick="this.classList.toggle('on'); showToast('Hide All folder updated');"></div>
+        </div>
+        <div class="feat-ctrl-row">
+          <span style="font-size:13px; font-weight:600;">Hide search box bar</span>
+          <div class="feat-tog" onclick="this.classList.toggle('on'); showToast('Search box visibility updated');"></div>
+        </div>
+        <div class="feat-ctrl-row">
+          <span style="font-size:13px; font-weight:600;">Chat row layout</span>
+          <span style="font-size:12px; font-weight:700; color:#ffab6b;">2 Lines (Compact)</span>
+        </div>
+      `;
+    }
+    else if (toolId === 'checks') {
+      iconBox.className = "ic-pink";
+      iconBox.innerHTML = '<i class="fa-solid fa-check-double"></i>';
+      title.textContent = "Channel Stealth Reading";
+      body.innerHTML = `
+        <div style="background:#1a1128; border-radius:12px; padding:14px; margin-bottom:12px;">
+          <div style="font-size:11px; color:var(--faint); margin-bottom:6px;">Live Channel Post Preview:</div>
+          <div style="background:#28183c; border-radius:10px; padding:10px; font-size:13px; display:flex; justify-content:space-between; align-items:flex-end;">
+            <span>MRTelegram update v10.8.2 is live!</span>
+            <span id="checkIconDemo" style="color:var(--faint); font-size:11px;"><i class="fa-solid fa-eye-slash"></i> Hidden</span>
+          </div>
+        </div>
+        <div class="feat-ctrl-row">
+          <span style="font-size:13px; font-weight:600;">Hide read checks in channels</span>
+          <div class="feat-tog on" onclick="toggleChannelChecks(this)"></div>
+        </div>
+      `;
+    }
+    else if (toolId === 'conv') {
+      iconBox.className = "ic-blue";
+      iconBox.innerHTML = '<i class="fa-solid fa-comments"></i>';
+      title.textContent = "Conversation Experience";
+      body.innerHTML = `
+        <div class="feat-ctrl-row">
+          <span style="font-size:13px; font-weight:600;">iOS-style rounded input bar</span>
+          <div class="feat-tog on" onclick="this.classList.toggle('on'); showToast('Input bar style updated');"></div>
+        </div>
+        <div class="feat-ctrl-row">
+          <span style="font-size:13px; font-weight:600;">Cupertino haptic context menu</span>
+          <div class="feat-tog on" onclick="this.classList.toggle('on'); showToast('Context menu style updated');"></div>
+        </div>
+        <div class="feat-ctrl-row">
+          <span style="font-size:13px; font-weight:600;">Instant bubble translator</span>
+          <div class="feat-tog on" onclick="this.classList.toggle('on'); showToast('Translation button active');"></div>
+        </div>
+      `;
+    }
+    else if (toolId === 'stickers') {
+      iconBox.className = "ic-purple";
+      iconBox.innerHTML = '<i class="fa-regular fa-face-smile"></i>';
+      title.textContent = "Stickers & Bubble Resizer";
+      body.innerHTML = `
+        <div style="text-align:center; padding:14px; background:#0e0817; border-radius:12px; margin-bottom:14px;">
+          <span id="stickerPreview" style="font-size:32px; display:inline-block; transition:transform 0.15s;">🎉</span>
+          <div style="font-size:11px; color:var(--faint); margin-top:6px;">Preview Size: <span id="stickerPx" style="color:#b79bfb; font-weight:700;">14</span></div>
+        </div>
+        <label style="font-size:12px; color:var(--sub); display:block; margin-bottom:6px;">Resize Slider (10 to 22):</label>
+        <input type="range" min="10" max="22" value="14" style="width:100%; accent-color:#8b5cf6;" oninput="updateStickerSize(this.value)">
+      `;
+    }
+    else if (toolId === 'voice') {
+      iconBox.className = "ic-green";
+      iconBox.innerHTML = '<i class="fa-solid fa-microphone"></i>';
+      title.textContent = "Voice Message Optimizer";
+      body.innerHTML = `
+        <div style="background:#1a1128; border-radius:12px; padding:14px; display:flex; align-items:center; gap:12px; margin-bottom:12px;">
+          <button onclick="playVoiceTest(this)" style="width:36px; height:36px; border-radius:50%; background:#59e0a8; border:none; color:#000; display:flex; align-items:center; justify-content:center; cursor:pointer;"><i class="fa-solid fa-play"></i></button>
+          <div style="display:flex; align-items:center; gap:3px; height:24px; flex:1;">
+            <div class="eq-bar" style="animation-delay:0.1s"></div>
+            <div class="eq-bar" style="animation-delay:0.3s"></div>
+            <div class="eq-bar" style="animation-delay:0.2s"></div>
+            <div class="eq-bar" style="animation-delay:0.5s"></div>
+            <div class="eq-bar" style="animation-delay:0.4s"></div>
+            <div class="eq-bar" style="animation-delay:0.2s"></div>
+          </div>
+          <span style="font-size:12px; font-mono; color:#59e0a8;">0:14</span>
+        </div>
+        <div class="feat-ctrl-row">
+          <span style="font-size:13px; font-weight:600;">Studio Noise Suppression</span>
+          <div class="feat-tog on" onclick="this.classList.toggle('on'); showToast('Studio noise suppression toggled');"></div>
+        </div>
+      `;
+    }
+    else if (toolId === 'antidelete') {
+      iconBox.className = "ic-red";
+      iconBox.innerHTML = '<i class="fa-solid fa-trash-can-arrow-up"></i>';
+      title.textContent = "Anti-Delete Message Guard";
+      body.innerHTML = `
+        <div style="background:#1c0f1a; border:1px solid rgba(244,82,122,0.3); border-radius:12px; padding:12px; margin-bottom:12px;">
+          <div style="font-size:11px; color:#ff7f9c; font-weight:700; margin-bottom:4px;"><i class="fa-solid fa-shield-halved"></i> Preserved Revoked Chat:</div>
+          <div style="font-size:13px; color:#fff;">"Hey, let's meet at 8pm!"</div>
+          <div style="font-size:10px; color:#ff7f9c; margin-top:4px;">Deleted by sender · Saved locally on phone</div>
+        </div>
+        <div class="feat-ctrl-row">
+          <span style="font-size:13px; font-weight:600;">Keep revoked messages</span>
+          <div class="feat-tog on" onclick="this.classList.toggle('on'); showToast('Anti-Delete guard active');"></div>
+        </div>
+      `;
+    }
+    else if (toolId === 'phone') {
+      iconBox.className = "ic-orange";
+      iconBox.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+      title.textContent = "Phone Number Privacy";
+      body.innerHTML = `
+        <div style="background:#1a1128; border-radius:12px; padding:14px; text-align:center; margin-bottom:12px;">
+          <div style="font-size:11px; color:var(--faint);">Interface Display Number:</div>
+          <div id="phoneMaskDisplay" style="font-size:17px; font-weight:700; color:#ffab6b; margin-top:4px;">••••••••••••••</div>
+        </div>
+        <div class="feat-ctrl-row">
+          <span style="font-size:13px; font-weight:600;">Hide number inside UI</span>
+          <div class="feat-tog on" onclick="togglePhoneMask(this)"></div>
+        </div>
+      `;
+    }
+    else if (toolId === 'premium') {
+      iconBox.className = "ic-pink";
+      iconBox.innerHTML = '<i class="fa-solid fa-star"></i>';
+      title.textContent = "Local Premium Unlock";
+      body.innerHTML = `
+        <div style="background:rgba(236,72,153,0.1); border:1px solid rgba(236,72,153,0.3); border-radius:12px; padding:12px; margin-bottom:12px;">
+          <div style="font-weight:700; font-size:13px; color:#f592c0;"><i class="fa-solid fa-crown"></i> Premium Features Active:</div>
+          <div style="font-size:11.5px; color:var(--sub); margin-top:4px;">• 4GB Upload file badges<br>• Custom animated emoji reactions<br>• Zero download limits</div>
+        </div>
+        <div class="feat-ctrl-row">
+          <span style="font-size:13px; font-weight:600;">Treat account as Local Premium</span>
+          <div class="feat-tog on" onclick="this.classList.toggle('on'); showToast('Local Premium toggled');"></div>
+        </div>
+      `;
+    }
+    else if (toolId === 'notif') {
+      iconBox.className = "ic-green";
+      iconBox.innerHTML = '<i class="fa-solid fa-bell"></i>';
+      title.textContent = "Notification Diagnostics";
+      body.innerHTML = `
+        <div class="feat-ctrl-row" onclick="cycleStatus(this, 'Notification Permission')">
+          <span style="font-size:13px; font-weight:600;">Notification Permission</span>
+          <span class="opt-pill active">Allowed</span>
+        </div>
+        <div class="feat-ctrl-row" onclick="cycleStatus(this, 'Push Background Daemon')">
+          <span style="font-size:13px; font-weight:600;">Push Daemon</span>
+          <span class="opt-pill active">Active</span>
+        </div>
+        <div class="feat-ctrl-row" onclick="cycleStatus(this, 'Battery Optimization')">
+          <span style="font-size:13px; font-weight:600;">Battery Optimization</span>
+          <span class="opt-pill active">Unrestricted</span>
+        </div>
+      `;
+    }
+  }
+
+  function closeTryModal() {
+    document.getElementById("tryModal").classList.remove("open");
+  }
+  function closeTryOnBackdrop(e) {
+    if (e.target === document.getElementById("tryModal")) closeTryModal();
+  }
+
+  // Interactive callbacks
+  function setOpt(el, toastText) {
+    el.parentNode.querySelectorAll(".opt-pill").forEach(p => p.classList.remove("active"));
+    el.classList.add("active");
+    showToast(toastText);
+  }
+
+  function setAppFont(el, fontName) {
+    el.parentNode.querySelectorAll(".opt-pill").forEach(p => p.classList.remove("active"));
+    el.classList.add("active");
+    document.getElementById("fontSample").textContent = fontName;
+    showToast("Font changed to " + fontName);
+  }
+
+  function updateStickerSize(val) {
+    document.getElementById("stickerPx").textContent = val;
+    var scale = val / 14;
+    document.getElementById("stickerPreview").style.transform = "scale(" + scale + ")";
+  }
+
+  function toggleChannelChecks(tog) {
+    tog.classList.toggle("on");
+    var isHidden = tog.classList.contains("on");
+    var demo = document.getElementById("checkIconDemo");
+    if(isHidden) {
+      demo.innerHTML = '<i class="fa-solid fa-eye-slash"></i> Hidden';
+      demo.style.color = "var(--faint)";
+      showToast("Channel read checks: Hidden");
+    } else {
+      demo.innerHTML = '<i class="fa-solid fa-check-double" style="color:#59e0a8"></i> Read';
+      demo.style.color = "#59e0a8";
+      showToast("Channel read checks: Visible");
+    }
+  }
+
+  function togglePhoneMask(tog) {
+    tog.classList.toggle("on");
+    var isMasked = tog.classList.contains("on");
+    document.getElementById("phoneMaskDisplay").textContent = isMasked ? "••••••••••••••" : "+1 (555) 019-2834";
+    showToast("Phone number display: " + (isMasked ? "Masked" : "Revealed"));
+  }
+
+  function playVoiceTest(btn) {
+    showToast("Playing 0:14 studio noise-canceled voice note sample...");
+  }
+
+  function cycleStatus(row, name) {
+    var pill = row.querySelector(".opt-pill");
+    if(pill.textContent === "Allowed" || pill.textContent === "Active" || pill.textContent === "Unrestricted") {
+      pill.textContent = "Disabled";
+      pill.classList.remove("active");
+      showToast(name + ": Disabled");
+    } else {
+      pill.textContent = "Allowed";
+      pill.classList.add("active");
+      showToast(name + ": Enabled");
+    }
+  }
+
+  // Download simulation
+  var dlTimer = null;
+  function openDownloadModal() {
+    var modal = document.getElementById("dlModal");
+    var fill = document.getElementById("pFill");
+    var size = document.getElementById("mSize");
+    var pct = document.getElementById("mPct");
+    var status = document.getElementById("mStatus");
+    var btn = document.getElementById("mActionBtn");
+
+    modal.classList.add("open");
+    fill.style.width = "0%";
+    pct.textContent = "0%";
+    size.textContent = "0 MB / 68.4 MB";
+    status.textContent = "Connecting to high-speed CDN server...";
+    btn.style.pointerEvents = "none";
+    btn.style.opacity = "0.6";
+    btn.textContent = "Downloading...";
+
+    var current = 0;
+    clearInterval(dlTimer);
+    dlTimer = setInterval(function(){
+      current += Math.floor(Math.random() * 12) + 6;
+      if (current >= 100) {
+        current = 100;
+        clearInterval(dlTimer);
+        fill.style.width = "100%";
+        pct.textContent = "100%";
+        size.textContent = "68.4 MB / 68.4 MB";
+        status.textContent = "APK package verified (SHA256 signature valid)";
+        btn.style.pointerEvents = "auto";
+        btn.style.opacity = "1";
+        btn.textContent = "Save MRTelegram V1.0.apk";
+      } else {
+        fill.style.width = current + "%";
+        pct.textContent = current + "%";
+        var mb = ((current / 100) * 68.4).toFixed(1);
+        size.textContent = mb + " MB / 68.4 MB";
+        if (current > 50) status.textContent = "Downloading MRTelegram V1.0 (arm64-v8a)...";
+      }
+    }, 110);
+  }
+
+  function closeDownloadModal() {
+    clearInterval(dlTimer);
+    document.getElementById("dlModal").classList.remove("open");
+  }
+
+  function closeModalOnBackdrop(e) {
+    if (e.target === document.getElementById("dlModal")) closeDownloadModal();
+  }
+
+  function saveApkFile() {
+    var content = "MRTelegram Android Client APK V1.0\nPackage: org.telegram.mrtelegram\nBuild: arm64-v8a\nDeveloper: Rakshittips\nChannel: https://t.me/Mr_Rakshit_2_0\nSHA256: 7f83b12c8a92e105d4508ecbb71e271a0670d8a1e2bf656096dfdb3a19";
+    var blob = new Blob([content], { type: "application/vnd.android.package-archive" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "MRTelegram-V1.0.apk";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    closeDownloadModal();
+    showToast("MRTelegram-V1.0.apk saved to Downloads folder!");
+  }
+
+  // Rakshittips Support & Donate Dialog Logic
+  var currentDonateMethod = 'upi';
+  var currentDonateAmt = 100;
+
+  function openDonateModal(method) {
+    document.getElementById("donateModal").classList.add("open");
+    setHtmlDonateMethod(method || 'upi');
+  }
+
+  function closeDonateModal() {
+    document.getElementById("donateModal").classList.remove("open");
+  }
+
+  function closeDonateOnBackdrop(e) {
+    if (e.target === document.getElementById("donateModal")) closeDonateModal();
+  }
+
+  function setHtmlDonateMethod(method) {
+    currentDonateMethod = method || 'upi';
+    var tabs = ['upi', 'stars'];
+    tabs.forEach(function(t) {
+      var el = document.getElementById("tab-" + t);
+      if(el) {
+        if(t === currentDonateMethod) el.classList.add("active");
+        else el.classList.remove("active");
+      }
+    });
+
+    var body = document.getElementById("donateBody");
+    if (currentDonateMethod === 'upi') {
+      body.innerHTML = `
+        <div style="background:#120a1f; border:1px solid var(--line); border-radius:14px; padding:14px; text-align:center; margin-bottom:12px;">
+          <div style="width:120px; height:120px; margin:0 auto 8px; background:#fff; padding:6px; border-radius:10px; display:flex; align-items:center; justify-content:center;">
+            <svg viewBox="0 0 100 100" style="width:100%; height:100%;">
+              <rect width="100" height="100" fill="white"/>
+              <rect x="5" y="5" width="28" height="28" fill="black"/>
+              <rect x="8" y="8" width="22" height="22" fill="white"/>
+              <rect x="12" y="12" width="14" height="14" fill="black"/>
+              <rect x="67" y="5" width="28" height="28" fill="black"/>
+              <rect x="70" y="8" width="22" height="22" fill="white"/>
+              <rect x="74" y="12" width="14" height="14" fill="black"/>
+              <rect x="5" y="67" width="28" height="28" fill="black"/>
+              <rect x="8" y="70" width="22" height="22" fill="white"/>
+              <rect x="12" y="74" width="14" height="14" fill="black"/>
+              <rect x="38" y="38" width="24" height="24" fill="black" rx="3"/>
+              <rect x="43" y="43" width="14" height="14" fill="white"/>
+              <rect x="47" y="47" width="6" height="6" fill="black"/>
+              <rect x="38" y="10" width="8" height="8" fill="black"/>
+              <rect x="42" y="24" width="14" height="6" fill="black"/>
+              <rect x="68" y="40" width="22" height="8" fill="black"/>
+              <rect x="38" y="68" width="10" height="10" fill="black"/>
+              <rect x="42" y="86" width="22" height="6" fill="black"/>
+            </svg>
+          </div>
+          <div style="font-size:11px; color:var(--sub);">Scan with GPay, PhonePe, Paytm, BHIM</div>
+        </div>
+        <div style="background:var(--panel-2); border:1px solid var(--line); border-radius:10px; padding:10px 12px; display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <div>
+            <div style="font-size:9.5px; color:var(--faint); text-transform:uppercase; font-weight:700;">UPI ID</div>
+            <div style="font-size:13px; font-weight:700; color:#fff; font-family:monospace;">rakshit@upi</div>
+          </div>
+          <button onclick="copyHtmlText('rakshit@upi', 'UPI ID')" class="opt-pill active" style="border:none; cursor:pointer;">
+            <i class="fa-regular fa-copy"></i> Copy
+          </button>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-bottom:12px;">
+          <button class="opt-pill active" onclick="selectDonateAmt(50, this)" style="border:none; text-align:center;">₹50</button>
+          <button class="opt-pill" onclick="selectDonateAmt(100, this)" style="border:none; text-align:center;">₹100</button>
+          <button class="opt-pill" onclick="selectDonateAmt(250, this)" style="border:none; text-align:center;">₹250</button>
+          <button class="opt-pill" onclick="selectDonateAmt(500, this)" style="border:none; text-align:center;">₹500</button>
+        </div>
+        <a id="upiPayLink" href="upi://pay?pa=rakshit@upi&pn=Rakshittips&am=100&cu=INR" class="btn-primary" style="width:100%; justify-content:center; padding:12px; font-size:13px;">
+          <i class="fa-solid fa-bolt"></i> Pay via UPI App
+        </a>
+      `;
+    } else if (currentDonateMethod === 'stars') {
+      body.innerHTML = `
+        <div style="background:#120a1f; border:1px solid var(--line); border-radius:14px; padding:16px; text-align:center; margin-bottom:12px;">
+          <div style="font-size:28px; color:#facc15; margin-bottom:4px;"><i class="fa-solid fa-star"></i></div>
+          <div style="font-weight:700; font-size:14px; color:#fff;">Telegram Stars</div>
+          <div style="font-size:11.5px; color:var(--sub); margin-top:2px;">Donate directly in Telegram to @Mr_Rakshit_2_0</div>
+        </div>
+        <a href="https://t.me/Mr_Rakshit_2_0" target="_blank" rel="noopener noreferrer" class="btn-primary" style="width:100%; justify-content:center; padding:12px; font-size:13px; background:#229ed9;">
+          <i class="fa-brands fa-telegram"></i> Send Stars via Telegram
+        </a>
+      `;
+    }
+  }
+
+  function selectDonateAmt(amt, btn) {
+    currentDonateAmt = amt;
+    btn.parentNode.querySelectorAll(".opt-pill").forEach(function(b){ b.classList.remove("active"); });
+    btn.classList.add("active");
+    var link = document.getElementById("upiPayLink");
+    if(link) {
+      link.href = "upi://pay?pa=rakshit@upi&pn=Rakshittips&am=" + amt + "&cu=INR";
+      link.innerHTML = '<i class="fa-solid fa-bolt"></i> Pay ₹' + amt + ' via UPI App';
+    }
+  }
+
+  function copyHtmlText(str, label) {
+    if(navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(str);
+      showToast(label + " copied to clipboard!");
+    } else {
+      showToast(label + " copied!");
+    }
+  }
+
+  function simulateHtmlDonation() {
+    showToast("Processing test simulation...");
+    setTimeout(function() {
+      var body = document.getElementById("donateBody");
+      var txnId = "TXN-RAKSHIT-" + Math.floor(100000 + Math.random() * 900000);
+      var timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      var methodLabel = currentDonateMethod === 'stars' ? (currentDonateAmt + ' ⭐ Stars') : (currentDonateMethod === 'paypal' ? ('$' + currentDonateAmt + ' USD') : ('₹' + currentDonateAmt + ' INR'));
+
+      body.innerHTML = `
+        <div style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); border-radius:14px; padding:16px; text-align:center; margin-bottom:12px;">
+          <div style="width:48px; height:48px; border-radius:14px; background:rgba(16,185,129,0.2); color:#59e0a8; display:flex; align-items:center; justify-content:center; margin:0 auto 8px; font-size:22px;">
+            <i class="fa-solid fa-check-double"></i>
+          </div>
+          <div style="font-weight:700; color:#fff; font-size:15px;">Test Donation Successful!</div>
+          <div style="font-size:11.5px; color:#59e0a8; margin-top:2px;"><i class="fa-solid fa-sparkles"></i> Verified by Rakshittips Gateway (Simulator)</div>
+        </div>
+        <div style="background:#120a1f; border:1px solid var(--line); border-radius:12px; padding:12px; font-size:12px; margin-bottom:12px;">
+          <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.05);">
+            <span style="color:var(--faint);">Amount</span>
+            <span style="font-weight:700; color:#fff; font-family:monospace;">` + methodLabel + `</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.05);">
+            <span style="color:var(--faint);">Channel</span>
+            <span style="font-weight:600; color:#fff; text-transform:uppercase;">` + currentDonateMethod + `</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.05);">
+            <span style="color:var(--faint);">Txn Reference</span>
+            <span style="font-family:monospace; color:#f592c0;">` + txnId + `</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; padding:4px 0;">
+            <span style="color:var(--faint);">Timestamp</span>
+            <span style="color:var(--faint);">` + timeStr + `</span>
+          </div>
+        </div>
+        <button class="btn-secondary" style="width:100%; justify-content:center; padding:10px; font-size:12px; cursor:pointer;" onclick="setHtmlDonateMethod(currentDonateMethod)">
+          Test Another Method
+        </button>
+      `;
+      showToast("❤️ Simulated donation verified! Rakshittips thanks you!");
+    }, 600);
+  }
+</script>
+</body>
+</html>

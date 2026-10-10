@@ -1,0 +1,6 @@
+{
+  "name": "MRTelegram Download",
+  "description": "Official download portal for MRTelegram featuring iOS design on Android, App Store style info strip, grouped settings, install guide, and user reviews.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
