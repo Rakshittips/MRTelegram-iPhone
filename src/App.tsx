@@ -41,8 +41,7 @@ import {
   CheckCheck,
   FileDown,
   Layers,
-  Heart,
-  Globe
+  Heart
 } from 'lucide-react';
 
 export default function App() {
@@ -113,9 +112,10 @@ export default function App() {
   // Rakshittips Support & Donate Dialog state
   const [isDonateOpen, setIsDonateOpen] = useState(false);
   const [donateMethod, setDonateMethod] = useState<'upi' | 'stars'>('upi');
-  const [donateAmount, setDonateAmount] = useState<number>(100);
+  const [donateAmount, setDonateAmount] = useState<number>(20);
   const [customAmount, setCustomAmount] = useState<string>('');
   const [isSimulatingDonation, setIsSimulatingDonation] = useState(false);
+  const [isAboutMeOpen, setIsAboutMeOpen] = useState(false);
   const [donationSuccessReceipt, setDonationSuccessReceipt] = useState<{
     amount: number | string;
     method: string;
@@ -190,7 +190,7 @@ export default function App() {
   };
 
   const saveApkFile = () => {
-    const content = `MRTelegram Android Client APK V1.0\nPackage: org.telegram.mrtelegram\nBuild: arm64-v8a\nDeveloper: Rakshittips\nChannel: https://t.me/Mr_Rakshit_2_0\nSHA256: 7f83b12c8a92e105d4508ecbb71e271a0670d8a1e2bf656096dfdb3a19`;
+    const content = `MRTelegram Android Client APK V1.0\nPackage: org.telegram.mrtelegram\nBuild: arm64-v8a\nDeveloper: Rakshittips\nSHA256: 7f83b12c8a92e105d4508ecbb71e271a0670d8a1e2bf656096dfdb3a19`;
     const blob = new Blob([content], { type: 'application/vnd.android.package-archive' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -262,26 +262,21 @@ export default function App() {
         {/* NAV */}
         <nav className="flex items-center justify-between py-6">
           <a href="#top" className="flex items-center gap-2.5 font-bold text-base font-['Syne',sans-serif]">
-            <div className="w-8.5 h-8.5 rounded-[10px] bg-gradient-to-tr from-[#8b5cf6] via-[#ec4899] to-[#f97316] flex items-center justify-center text-sm text-white shadow-md">
-              <i className="fa-brands fa-telegram"></i>
-            </div>
+            <img
+              src="/assets/aistudio/skygram_icon_foregroun_d_d937c502.png"
+              alt="MRTelegram"
+              className="w-9 h-9 rounded-full shadow-[0_4px_14px_rgba(30,77,239,0.5)] object-cover select-none transition-transform hover:scale-105 border border-blue-500/30"
+            />
             <span className="tracking-tight text-lg">MRTelegram</span>
           </a>
 
           <div className="flex items-center gap-2 sm:gap-3">
             <button
               onClick={() => openDonateDialog('upi')}
-              className="text-[12px] sm:text-[12.5px] font-semibold bg-gradient-to-r from-[#ec4899]/15 to-[#8b5cf6]/15 hover:from-[#ec4899]/25 hover:to-[#8b5cf6]/25 border border-[#ec4899]/35 hover:border-[#ec4899]/60 px-3 sm:px-3.5 py-2 rounded-full flex items-center gap-1.5 cursor-pointer text-[#f592c0] hover:text-white transition-all shadow-sm active:scale-95"
+              className="text-[12px] sm:text-[12.5px] font-semibold bg-gradient-to-r from-[#ec4899]/15 to-[#8b5cf6]/15 hover:from-[#ec4899]/25 hover:to-[#8b5cf6]/25 border border-[#ec4899]/35 hover:border-[#ec4899]/60 px-3.5 sm:px-4 py-2 rounded-full flex items-center gap-1.5 cursor-pointer text-[#f592c0] hover:text-white transition-all shadow-sm active:scale-95"
             >
               <Heart className="w-3.5 h-3.5 text-[#ec4899] fill-[#ec4899]" />
               <span>Support &amp; Donate</span>
-            </button>
-
-            <button
-              onClick={openDownloadModal}
-              className="text-[12px] sm:text-[12.5px] font-semibold border border-white/12 hover:bg-white/8 px-3.5 sm:px-4 py-2 rounded-full flex items-center gap-1.5 cursor-pointer text-[#f3eefb] transition-colors shadow-sm active:scale-95"
-            >
-              <Download className="w-3.5 h-3.5 text-[#59e0a8]" /> Get APK
             </button>
           </div>
         </nav>
@@ -352,9 +347,11 @@ export default function App() {
 
               <div className="flex items-center justify-between relative mb-1">
                 <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-[13px] bg-gradient-to-tr from-[#8b5cf6] via-[#ec4899] to-[#f97316] flex items-center justify-center text-[19px] text-white shadow-md">
-                    <i className="fa-brands fa-telegram"></i>
-                  </div>
+                  <img
+                    src="/assets/aistudio/skygram_icon_foregroun_d_d937c502.png"
+                    alt="MRTelegram"
+                    className="w-11 h-11 rounded-full shadow-[0_4px_16px_rgba(30,77,239,0.5)] object-cover select-none border border-blue-500/30"
+                  />
                   <div>
                     <div className="font-bold text-[15px] text-white">MRTelegram</div>
                     <div className="text-[11px] text-[#5e5573]">
@@ -754,9 +751,11 @@ export default function App() {
             <div className="md:col-span-5">
               <div className="bg-[#130c20] border border-white/10 rounded-[20px] p-6 shadow-xl">
                 <div className="flex items-center gap-3 mb-4.5">
-                  <div className="w-10 h-10 rounded-[11px] bg-emerald-500/15 text-[#59e0a8] flex items-center justify-center text-[16px]">
-                    <FileDown className="w-5 h-5" />
-                  </div>
+                  <img
+                    src="/assets/aistudio/skygram_icon_foregroun_d_d937c502.png"
+                    alt="MRTelegram"
+                    className="w-11 h-11 rounded-full object-cover shadow-md shadow-blue-500/30 border border-blue-500/30"
+                  />
                   <div>
                     <div className="text-[13px] font-bold text-white">MRTelegram V1.0.apk</div>
                     <div className="text-[10.5px] text-[#5e5573] mt-0.5">68.4 MB · SHA256 verified</div>
@@ -819,42 +818,61 @@ export default function App() {
                 <span>Telegram Stars</span>
               </button>
             </div>
+
+            {/* RAKSHITTIPS BY DEVELOPER CARD (Screenshot 3) */}
+            <div className="mt-8 bg-white text-gray-900 rounded-[28px] p-6 sm:p-7 shadow-2xl border border-white/20 text-left relative overflow-hidden">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4.5 mb-5">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#8b5cf6] via-[#ec4899] to-[#f97316] flex items-center justify-center text-white text-2xl shadow-lg shadow-pink-500/25 shrink-0">
+                  <i className="fa-solid fa-robot"></i>
+                </div>
+                <div>
+                  <h3 className="text-xl sm:text-[22px] font-bold text-[#111827] font-['Syne',sans-serif] tracking-tight">
+                    Rakshittips by Developer
+                  </h3>
+                  <div className="inline-flex items-center gap-1.5 text-[11.5px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-300 px-3 py-0.5 rounded-full mt-1.5 mb-1 shadow-xs">
+                    <span>✓ Rakshit Dhakariya</span>
+                  </div>
+                  <p className="text-[12.5px] text-gray-600 leading-relaxed font-medium">
+                    Solo Developer • Android Mods, iOS Experience Ports &amp; Open Utilities
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 pt-2 border-t border-gray-100">
+                <button
+                  onClick={() => setIsAboutMeOpen(true)}
+                  className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 text-xs font-semibold px-4 py-2.5 rounded-full transition-all cursor-pointer shadow-xs active:scale-95"
+                >
+                  <User className="w-3.5 h-3.5 text-[#ec4899]" />
+                  <span>About Me</span>
+                </button>
+
+                <a
+                  href="https://youtube.com/@rakshittips"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 text-xs font-semibold px-4 py-2.5 rounded-full transition-all shadow-xs active:scale-95"
+                >
+                  <i className="fa-brands fa-youtube text-[#ff0000] text-sm"></i>
+                  <span>YouTube</span>
+                </a>
+
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 text-xs font-semibold px-4 py-2.5 rounded-full transition-all shadow-xs active:scale-95"
+                >
+                  <i className="fa-brands fa-instagram text-[#e1306c] text-sm"></i>
+                  <span>Instagram</span>
+                </a>
+              </div>
+            </div>
           </div>
         </section>
 
         {/* FOOTER */}
-        <footer className="pt-11 pb-22 border-t border-white/8">
-          <div className="flex flex-col gap-3 mb-6.5">
-            <a
-              href="https://rakshittips.github.io/Rakshittips/index.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2.5 bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-white/15 rounded-full py-3.5 px-5 text-[13px] font-semibold text-[#f3eefb] transition-all"
-            >
-              <Globe className="w-4 h-4 text-[#7cc0ff]" />
-              <span>Rakshittips! Official Site</span>
-            </a>
-
-            <a
-              href="https://github.com/Rakshittips"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2.5 bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-white/15 rounded-full py-3.5 px-5 text-[13px] font-semibold text-[#f3eefb] transition-all"
-            >
-              <i className="fa-brands fa-github text-base"></i>
-              <span>GitHub Repository</span>
-            </a>
-
-            <a
-              href="https://t.me/Mr_Rakshit_2_0"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2.5 bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-white/15 rounded-full py-3.5 px-5 text-[13px] font-semibold text-[#f3eefb] transition-all"
-            >
-              <i className="fa-brands fa-telegram text-base text-[#229ed9]"></i>
-              <span>Developer Channel (@Mr_Rakshit_2_0)</span>
-            </a>
-          </div>
+        <footer className="pt-10 pb-20 border-t border-white/8">
 
           <div className="text-center text-[11.5px] text-[#9a8fb3] mb-2">
             Crafted with care by{' '}
@@ -1670,9 +1688,11 @@ export default function App() {
               &times;
             </button>
 
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#8b5cf6] via-[#ec4899] to-[#f97316] mx-auto mb-4 flex items-center justify-center text-2xl text-white shadow-lg shadow-pink-500/20">
-              <Download className="w-6 h-6" />
-            </div>
+            <img
+              src="/assets/aistudio/skygram_icon_foregroun_d_d937c502.png"
+              alt="MRTelegram Icon"
+              className="w-16 h-16 rounded-full mx-auto mb-4 object-cover shadow-xl shadow-blue-500/40 border border-blue-500/40 select-none"
+            />
 
             <h3 className="text-xl font-bold text-white mb-1 font-['Syne',sans-serif]">
               Downloading MRTelegram
@@ -1713,7 +1733,7 @@ export default function App() {
       )}
 
       {/* ============================================================== */}
-      {/* RAKSHITTIPS SUPPORT & DONATE DIALOG */}
+      {/* RAKSHITTIPS SUPPORT & DONATE DIALOG (Screenshot 2) */}
       {/* ============================================================== */}
       {isDonateOpen && (
         <div
@@ -1722,37 +1742,37 @@ export default function App() {
           }}
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
         >
-          <div className="bg-[#160f24] border border-[#8b5cf6]/30 rounded-3xl max-w-[460px] w-full p-6 sm:p-7 shadow-2xl relative max-h-[92vh] overflow-y-auto">
+          <div className="bg-[#f8f9fc] text-gray-900 border border-white/40 rounded-[32px] max-w-[460px] w-full p-5 sm:p-6 shadow-2xl relative max-h-[92vh] overflow-y-auto">
             <button
               onClick={() => setIsDonateOpen(false)}
-              className="absolute top-4 right-4 text-[#9a8fb3] hover:text-white text-xl cursor-pointer w-8 h-8 rounded-full flex items-center justify-center bg-white/5"
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-xl cursor-pointer w-8 h-8 rounded-full flex items-center justify-center bg-gray-200/60 transition-colors z-10"
             >
               &times;
             </button>
 
             {/* Header */}
-            <div className="flex items-center gap-3.5 mb-5">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#8b5cf6] via-[#ec4899] to-[#f97316] flex items-center justify-center text-xl text-white shadow-lg shadow-pink-500/20">
-                <i className="fa-solid fa-mug-hot"></i>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-[#8b5cf6] via-[#ec4899] to-[#f97316] flex items-center justify-center text-lg text-white shadow-md shadow-pink-500/20 shrink-0">
+                <Heart className="w-5 h-5 fill-white" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-white font-['Syne',sans-serif]">
+                <h3 className="text-lg font-bold text-gray-900 font-['Syne',sans-serif] leading-tight">
                   Rakshittips Support &amp; Donate
                 </h3>
-                <p className="text-[11.5px] text-[#9a8fb3]">
-                  100% Free &amp; Ad-Free · Support server costs
+                <p className="text-[11.5px] text-gray-500 font-medium">
+                  100% Free &amp; Ad-Free · Mod &amp; Server Support
                 </p>
               </div>
             </div>
 
-            {/* Payment Method Selector Tabs: UPI and Telegram Stars only */}
-            <div className="grid grid-cols-2 gap-2 p-1 bg-[#10091c] border border-white/8 rounded-xl mb-5 text-[12px] font-semibold">
+            {/* Payment Method Selector Tabs: UPI and Telegram Stars */}
+            <div className="grid grid-cols-2 gap-2 p-1 bg-gray-200/70 border border-gray-200 rounded-2xl mb-4 text-[12px] font-semibold">
               <button
                 onClick={() => setDonateMethod('upi')}
-                className={`py-2.5 rounded-lg flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                className={`py-2 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer ${
                   donateMethod === 'upi'
-                    ? 'bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] text-white shadow-md'
-                    : 'text-[#9a8fb3] hover:text-white'
+                    ? 'bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] text-white shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
                 <i className="fa-solid fa-indian-rupee-sign text-xs"></i>
@@ -1761,13 +1781,13 @@ export default function App() {
 
               <button
                 onClick={() => setDonateMethod('stars')}
-                className={`py-2.5 rounded-lg flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                className={`py-2 rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer ${
                   donateMethod === 'stars'
-                    ? 'bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] text-white shadow-md'
-                    : 'text-[#9a8fb3] hover:text-white'
+                    ? 'bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] text-white shadow-sm'
+                    : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
-                <i className="fa-solid fa-star text-xs text-yellow-400"></i>
+                <i className="fa-solid fa-star text-xs text-yellow-500"></i>
                 <span>Telegram Stars</span>
               </button>
             </div>
@@ -1776,59 +1796,59 @@ export default function App() {
             {donationSuccessReceipt ? (
               <div className="space-y-4 animate-in zoom-in-95 duration-200">
                 <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-5 text-center">
-                  <div className="w-14 h-14 rounded-2xl bg-emerald-500/20 text-[#59e0a8] mx-auto flex items-center justify-center text-2xl mb-3 shadow-lg shadow-emerald-500/20">
+                  <div className="w-14 h-14 rounded-2xl bg-emerald-500/20 text-[#059669] mx-auto flex items-center justify-center text-2xl mb-3 shadow-lg shadow-emerald-500/20">
                     <CheckCheck className="w-8 h-8" />
                   </div>
-                  <div className="font-bold text-white text-base font-['Syne',sans-serif]">
+                  <div className="font-bold text-gray-900 text-base font-['Syne',sans-serif]">
                     Test Donation Successful!
                   </div>
-                  <div className="text-xs text-[#59e0a8] mt-1 font-semibold flex items-center justify-center gap-1">
+                  <div className="text-xs text-emerald-600 mt-1 font-semibold flex items-center justify-center gap-1">
                     <Sparkles className="w-3.5 h-3.5" />
                     Verified by Rakshittips Gateway (Simulator)
                   </div>
                 </div>
 
-                <div className="bg-[#120a1f] border border-white/10 rounded-2xl p-4.5 space-y-2.5 text-xs">
-                  <div className="flex justify-between items-center py-1 border-b border-white/5">
-                    <span className="text-[#9a8fb3]">Amount</span>
-                    <span className="font-bold text-white font-mono text-sm">
+                <div className="bg-white border border-gray-200 rounded-2xl p-4.5 space-y-2.5 text-xs shadow-xs">
+                  <div className="flex justify-between items-center py-1 border-b border-gray-100">
+                    <span className="text-gray-500">Amount</span>
+                    <span className="font-bold text-gray-900 font-mono text-sm">
                       {donateMethod === 'stars'
                         ? `${donationSuccessReceipt.amount} ⭐ Stars`
                         : `₹${donationSuccessReceipt.amount} INR`}
                     </span>
                   </div>
-                  <div className="flex justify-between items-center py-1 border-b border-white/5">
-                    <span className="text-[#9a8fb3]">Payment Channel</span>
-                    <span className="font-semibold text-white">{donationSuccessReceipt.method}</span>
+                  <div className="flex justify-between items-center py-1 border-b border-gray-100">
+                    <span className="text-gray-500">Payment Channel</span>
+                    <span className="font-semibold text-gray-900">{donationSuccessReceipt.method}</span>
                   </div>
-                  <div className="flex justify-between items-center py-1 border-b border-white/5">
-                    <span className="text-[#9a8fb3]">Transaction Reference</span>
-                    <span className="font-mono text-[#f592c0] font-semibold">{donationSuccessReceipt.txnId}</span>
+                  <div className="flex justify-between items-center py-1 border-b border-gray-100">
+                    <span className="text-gray-500">Transaction Reference</span>
+                    <span className="font-mono text-[#db2777] font-semibold">{donationSuccessReceipt.txnId}</span>
                   </div>
-                  <div className="flex justify-between items-center py-1 border-b border-white/5">
-                    <span className="text-[#9a8fb3]">Timestamp</span>
-                    <span className="text-[#9a8fb3]">{donationSuccessReceipt.date}</span>
+                  <div className="flex justify-between items-center py-1 border-b border-gray-100">
+                    <span className="text-gray-500">Timestamp</span>
+                    <span className="text-gray-600">{donationSuccessReceipt.date}</span>
                   </div>
                   <div className="flex justify-between items-center py-1">
-                    <span className="text-[#9a8fb3]">Project Supported</span>
-                    <span className="font-semibold text-[#59e0a8]">MRTelegram V1.0 (Rakshittips)</span>
+                    <span className="text-gray-500">Project Supported</span>
+                    <span className="font-semibold text-emerald-600">MRTelegram V1.0 (Rakshittips)</span>
                   </div>
                 </div>
 
-                <div className="bg-[#1a1128] border border-white/8 rounded-xl p-3 text-center text-xs text-[#9a8fb3]">
+                <div className="bg-gray-100 border border-gray-200 rounded-xl p-3 text-center text-xs text-gray-600">
                   ❤️ Rakshittips thanks you! Donations support continuous updates, high-speed CDN servers, and keeping the app 100% ad-free.
                 </div>
 
                 <div className="flex gap-2.5 pt-2">
                   <button
                     onClick={() => setDonationSuccessReceipt(null)}
-                    className="flex-1 bg-white/10 hover:bg-white/15 text-white font-bold text-xs py-3 rounded-xl cursor-pointer transition-colors"
+                    className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold text-xs py-3 rounded-xl cursor-pointer transition-colors"
                   >
-                    Test Another Method
+                    Test Another Amount
                   </button>
                   <button
                     onClick={() => setIsDonateOpen(false)}
-                    className="flex-1 bg-gradient-to-r from-[#8b5cf6] via-[#ec4899] to-[#f97316] text-white font-bold text-xs py-3 rounded-xl cursor-pointer transition-all hover:brightness-110"
+                    className="flex-1 bg-gradient-to-r from-[#8b5cf6] via-[#ec4899] to-[#f97316] text-white font-bold text-xs py-3 rounded-xl cursor-pointer transition-all hover:brightness-110 shadow-md"
                   >
                     Close Dialog
                   </button>
@@ -1836,12 +1856,20 @@ export default function App() {
               </div>
             ) : (
               <>
-                {/* TAB CONTENT: UPI */}
+                {/* TAB CONTENT: UPI (Exact Match to Screenshot 2) */}
                 {donateMethod === 'upi' && (
                   <div className="space-y-4 animate-in fade-in duration-150">
-                    {/* QR Code Card */}
-                    <div className="bg-[#120a1f] border border-white/8 rounded-2xl p-4 text-center">
-                      <div className="w-36 h-36 mx-auto bg-white p-2.5 rounded-xl shadow-md mb-2.5 flex items-center justify-center">
+                    {/* Top White QR Card */}
+                    <div className="bg-white rounded-[26px] p-5 shadow-xs border border-gray-200/80 text-center relative">
+                      {/* Viewfinder QR Code Container */}
+                      <div className="relative w-44 h-44 mx-auto mb-3.5 bg-white p-2.5 rounded-2xl border border-gray-100 shadow-xs flex items-center justify-center">
+                        {/* Viewfinder corner brackets */}
+                        <div className="absolute top-1 left-1 w-4 h-4 border-t-2 border-l-2 border-gray-400 rounded-tl pointer-events-none"></div>
+                        <div className="absolute top-1 right-1 w-4 h-4 border-t-2 border-r-2 border-gray-400 rounded-tr pointer-events-none"></div>
+                        <div className="absolute bottom-1 left-1 w-4 h-4 border-b-2 border-l-2 border-gray-400 rounded-bl pointer-events-none"></div>
+                        <div className="absolute bottom-1 right-1 w-4 h-4 border-b-2 border-r-2 border-gray-400 rounded-br pointer-events-none"></div>
+
+                        {/* Vector QR Code */}
                         <svg viewBox="0 0 100 100" className="w-full h-full text-black">
                           <rect width="100" height="100" fill="white" />
                           <rect x="5" y="5" width="28" height="28" fill="black" />
@@ -1874,85 +1902,238 @@ export default function App() {
                           <rect x="72" y="70" width="12" height="18" fill="black" />
                           <rect x="86" y="80" width="6" height="12" fill="black" />
                         </svg>
+
+                        {/* Scanner viewfinder badge on bottom-right of QR */}
+                        <div className="absolute bottom-2.5 right-2.5 w-5 h-5 rounded bg-white border border-gray-300 text-gray-700 flex items-center justify-center text-[10px] shadow-xs">
+                          <i className="fa-solid fa-expand"></i>
+                        </div>
                       </div>
-                      <div className="text-[11px] text-[#9a8fb3]">Scan with GPay, PhonePe, Paytm, BHIM</div>
+
+                      {/* UPI ID Field */}
+                      <div className="text-left mb-3">
+                        <div className="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-1 pl-1">
+                          UPI ID
+                        </div>
+                        <div className="bg-[#f0f7ff] border border-[#bae6fd] rounded-xl px-4 py-2.5 flex items-center justify-between shadow-xs">
+                          <span className="text-sm font-bold text-[#0284c7] font-mono tracking-wide">
+                            rakshitdhakariya6@oksbi
+                          </span>
+                          <button
+                            onClick={() => copyToClipboard('rakshitdhakariya6@oksbi', 'UPI ID')}
+                            className="text-[#0284c7] hover:text-[#0369a1] text-xs font-semibold p-1 cursor-pointer transition-colors"
+                            title="Copy UPI ID"
+                          >
+                            <Copy className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Works With Badges */}
+                      <div className="flex items-center gap-1.5 flex-wrap mb-4 text-xs">
+                        <span className="text-gray-500 font-medium text-[11px] mr-1">Works with</span>
+                        <span className="bg-[#5f259f] text-white text-[11px] font-bold px-3 py-0.5 rounded-full shadow-xs">
+                          PhonePe
+                        </span>
+                        <span className="bg-white border border-gray-300 text-gray-700 text-[11px] font-bold px-3 py-0.5 rounded-full shadow-xs">
+                          GPay
+                        </span>
+                        <span className="bg-[#003366] text-white text-[11px] font-bold px-3 py-0.5 rounded-full shadow-xs">
+                          BHIM
+                        </span>
+                        <span className="bg-[#00b9f5] text-white text-[11px] font-bold px-3 py-0.5 rounded-full shadow-xs">
+                          Paytm
+                        </span>
+                      </div>
+
+                      {/* 3 Action Pill Buttons */}
+                      <div className="grid grid-cols-3 gap-2">
+                        <button
+                          onClick={() => copyToClipboard('rakshitdhakariya6@oksbi', 'UPI ID')}
+                          className="bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 text-xs font-semibold py-2 px-2 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer shadow-xs active:scale-95 transition-all"
+                        >
+                          <Copy className="w-3.5 h-3.5 text-gray-600" />
+                          <span>Copy ID</span>
+                        </button>
+                        <a
+                          href={`upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshittips&am=${customAmount || donateAmount}&cu=INR`}
+                          className="bg-[#fdf2f8] hover:bg-[#fce7f3] border border-[#f472b6]/50 text-[#db2777] text-xs font-bold py-2 px-2 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer shadow-xs active:scale-95 transition-all"
+                        >
+                          <Zap className="w-3.5 h-3.5 text-[#ec4899] fill-[#ec4899]" />
+                          <span>Open in UPI app</span>
+                        </a>
+                        <button
+                          onClick={() => showToast('Scan the QR code with PhonePe, GPay, Paytm or BHIM')}
+                          className="bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 text-xs font-semibold py-2 px-2 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer shadow-xs active:scale-95 transition-all"
+                        >
+                          <i className="fa-solid fa-qrcode text-gray-600 text-xs"></i>
+                          <span>Scan / Pay</span>
+                        </button>
+                      </div>
                     </div>
 
-                    {/* UPI ID Copy Field */}
-                    <div className="bg-[#1a1128] border border-white/10 rounded-xl p-3 flex items-center justify-between">
-                      <div>
-                        <div className="text-[10px] text-[#5e5573] uppercase tracking-wider font-semibold">UPI ID</div>
-                        <div className="text-sm font-bold text-white font-mono">rakshit@upi</div>
+                    {/* CHOOSE AN AMOUNT SECTION (Screenshot 2) */}
+                    <div className="text-left">
+                      <div className="text-[11.5px] font-bold text-gray-700 uppercase tracking-wider mb-2">
+                        CHOOSE AN AMOUNT
                       </div>
-                      <button
-                        onClick={() => copyToClipboard('rakshit@upi', 'UPI ID')}
-                        className="bg-white/10 hover:bg-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-lg flex items-center gap-1.5 cursor-pointer transition-colors"
+
+                      {/* Quick Pills */}
+                      <div className="flex items-center gap-1.5 flex-wrap mb-3">
+                        <span className="text-[11.5px] text-gray-500 font-medium mr-0.5">Quick:</span>
+                        {[20, 50, 100, 500, 1000].map((amt) => {
+                          const isSelected = !customAmount && donateAmount === amt;
+                          return (
+                            <button
+                              key={amt}
+                              onClick={() => {
+                                setDonateAmount(amt);
+                                setCustomAmount('');
+                              }}
+                              className={`text-xs px-3 py-1 rounded-full font-bold transition-all cursor-pointer shadow-xs active:scale-95 ${
+                                isSelected
+                                  ? 'bg-gradient-to-r from-[#ec4899] to-[#f43f5e] text-white shadow-md'
+                                  : 'bg-white border border-gray-200 text-gray-700 hover:border-gray-300'
+                              }`}
+                            >
+                              ₹{amt}
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      {/* Tier Cards Stack */}
+                      <div className="space-y-2 mb-3">
+                        {/* Tier 1: ₹99 */}
+                        <button
+                          onClick={() => {
+                            setDonateAmount(99);
+                            setCustomAmount('');
+                          }}
+                          className={`w-full text-left p-3.5 rounded-2xl border transition-all cursor-pointer shadow-xs flex items-center justify-between ${
+                            !customAmount && donateAmount === 99
+                              ? 'bg-purple-50/70 border-[#8b5cf6] ring-1 ring-[#8b5cf6]'
+                              : 'bg-white border-gray-200 hover:border-gray-300'
+                          }`}
+                        >
+                          <div>
+                            <div className="text-lg font-extrabold text-gray-900 font-['Syne',sans-serif]">₹99</div>
+                            <div className="text-[11.5px] text-gray-500 font-medium mt-0.5">Coffee &amp; Server Fuel</div>
+                          </div>
+                          {!customAmount && donateAmount === 99 && (
+                            <div className="w-5 h-5 rounded-full bg-[#8b5cf6] text-white flex items-center justify-center text-[10px]">
+                              <Check className="w-3 h-3 stroke-[3]" />
+                            </div>
+                          )}
+                        </button>
+
+                        {/* Tier 2: ₹299 */}
+                        <button
+                          onClick={() => {
+                            setDonateAmount(299);
+                            setCustomAmount('');
+                          }}
+                          className={`w-full text-left p-3.5 rounded-2xl border transition-all cursor-pointer shadow-xs flex items-center justify-between ${
+                            !customAmount && donateAmount === 299
+                              ? 'bg-pink-50/70 border-[#ec4899] ring-1 ring-[#ec4899]'
+                              : 'bg-white border-gray-200 hover:border-gray-300'
+                          }`}
+                        >
+                          <div>
+                            <div className="text-lg font-extrabold text-gray-900 font-['Syne',sans-serif]">₹299</div>
+                            <div className="text-[11.5px] text-gray-500 font-medium mt-0.5">Mod Tool Maintenance</div>
+                          </div>
+                          {!customAmount && donateAmount === 299 && (
+                            <div className="w-5 h-5 rounded-full bg-[#ec4899] text-white flex items-center justify-center text-[10px]">
+                              <Check className="w-3 h-3 stroke-[3]" />
+                            </div>
+                          )}
+                        </button>
+
+                        {/* Tier 3: ₹799 */}
+                        <button
+                          onClick={() => {
+                            setDonateAmount(799);
+                            setCustomAmount('');
+                          }}
+                          className={`w-full text-left p-3.5 rounded-2xl border transition-all cursor-pointer shadow-xs flex items-center justify-between ${
+                            !customAmount && donateAmount === 799
+                              ? 'bg-orange-50/70 border-[#f97316] ring-1 ring-[#f97316]'
+                              : 'bg-white border-gray-200 hover:border-gray-300'
+                          }`}
+                        >
+                          <div>
+                            <div className="text-lg font-extrabold text-gray-900 font-['Syne',sans-serif]">₹799</div>
+                            <div className="text-[11.5px] text-gray-500 font-medium mt-0.5">Full Feature Patron</div>
+                          </div>
+                          {!customAmount && donateAmount === 799 && (
+                            <div className="w-5 h-5 rounded-full bg-[#f97316] text-white flex items-center justify-center text-[10px]">
+                              <Check className="w-3 h-3 stroke-[3]" />
+                            </div>
+                          )}
+                        </button>
+
+                        {/* Custom Amount Card */}
+                        <div className={`p-3 rounded-2xl border bg-white transition-all flex items-center gap-2.5 shadow-xs ${
+                          customAmount ? 'border-[#8b5cf6] ring-1 ring-[#8b5cf6]' : 'border-gray-200'
+                        }`}>
+                          <span className="text-sm font-bold text-gray-600 pl-1">₹</span>
+                          <input
+                            type="number"
+                            placeholder="Enter custom amount"
+                            value={customAmount}
+                            onChange={(e) => {
+                              setCustomAmount(e.target.value);
+                            }}
+                            className="w-full text-sm font-semibold text-gray-900 placeholder:text-gray-400 focus:outline-none bg-transparent"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Large Main Button: ⚡ Donate ₹{selectedAmount} */}
+                      <a
+                        href={`upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshittips&am=${customAmount || donateAmount}&cu=INR`}
+                        className="w-full bg-gradient-to-r from-[#8b5cf6] via-[#ec4899] to-[#f97316] text-white font-extrabold text-sm py-4 rounded-full flex items-center justify-center gap-2 shadow-[0_12px_24px_-8px_rgba(236,72,153,0.55)] hover:brightness-110 active:scale-98 transition-all"
                       >
-                        <Copy className="w-3.5 h-3.5" /> Copy
+                        <Zap className="w-4 h-4 fill-white" />
+                        <span>Donate ₹{customAmount || donateAmount}</span>
+                      </a>
+
+                      {/* Try Test Simulator Button */}
+                      <button
+                        onClick={handleSimulateDonation}
+                        disabled={isSimulatingDonation}
+                        className="w-full mt-2.5 text-center text-xs font-bold text-[#ec4899] hover:text-[#db2777] py-2 flex items-center justify-center gap-1.5 cursor-pointer transition-colors"
+                      >
+                        {isSimulatingDonation ? (
+                          <span className="flex items-center gap-1.5">
+                            <i className="fa-solid fa-spinner fa-spin"></i> Processing test receipt...
+                          </span>
+                        ) : (
+                          <>
+                            <Heart className="w-3.5 h-3.5 fill-[#ec4899]" />
+                            <span>Try Test Simulator (Instant Receipt)</span>
+                          </>
+                        )}
                       </button>
                     </div>
-
-                    {/* Amount presets & Custom Amount */}
-                    <div>
-                      <div className="flex justify-between items-center mb-2">
-                        <label className="text-xs text-white font-medium">Select Amount</label>
-                        <span className="text-[11px] text-[#9a8fb3]">Or custom amount below</span>
-                      </div>
-                      <div className="grid grid-cols-4 gap-2 mb-2.5">
-                        {[50, 100, 250, 500].map((amt) => (
-                          <button
-                            key={amt}
-                            onClick={() => {
-                              setDonateAmount(amt);
-                              setCustomAmount('');
-                            }}
-                            className={`py-2 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
-                              donateAmount === amt && !customAmount
-                                ? 'bg-[#ec4899]/20 border-[#ec4899] text-[#f592c0]'
-                                : 'bg-[#1a1128] border-white/8 text-[#9a8fb3] hover:text-white'
-                            }`}
-                          >
-                            ₹{amt}
-                          </button>
-                        ))}
-                      </div>
-
-                      <div className="flex items-center gap-2 bg-[#1a1128] border border-white/10 rounded-xl px-3 py-2">
-                        <span className="text-xs text-[#9a8fb3] font-semibold">Custom ₹</span>
-                        <input
-                          type="number"
-                          placeholder="e.g. 1000"
-                          value={customAmount}
-                          onChange={(e) => setCustomAmount(e.target.value)}
-                          className="bg-transparent text-white text-xs font-mono w-full focus:outline-none"
-                        />
-                      </div>
-                    </div>
-
-                    <a
-                      href={`upi://pay?pa=rakshit@upi&pn=Rakshittips&am=${customAmount || donateAmount}&cu=INR`}
-                      className="w-full bg-gradient-to-r from-[#8b5cf6] via-[#ec4899] to-[#f97316] text-white font-bold text-xs py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-lg hover:brightness-110 active:scale-98 transition-all"
-                    >
-                      <i className="fa-solid fa-bolt"></i> Pay ₹{customAmount || donateAmount} via UPI App
-                    </a>
                   </div>
                 )}
 
                 {/* TAB CONTENT: TELEGRAM STARS */}
                 {donateMethod === 'stars' && (
                   <div className="space-y-4 animate-in fade-in duration-150">
-                    <div className="bg-[#120a1f] border border-white/8 rounded-2xl p-5 text-center">
-                      <div className="w-12 h-12 rounded-xl bg-yellow-500/15 text-yellow-400 mx-auto flex items-center justify-center text-2xl mb-2.5">
+                    <div className="bg-white border border-gray-200 rounded-2xl p-5 text-center shadow-xs">
+                      <div className="w-12 h-12 rounded-xl bg-yellow-500/15 text-yellow-500 mx-auto flex items-center justify-center text-2xl mb-2.5">
                         <i className="fa-solid fa-star"></i>
                       </div>
-                      <div className="font-bold text-white text-sm">Telegram Stars Donation</div>
-                      <div className="text-xs text-[#9a8fb3] mt-0.5">Direct Telegram in-app balance transfer</div>
+                      <div className="font-bold text-gray-900 text-sm">Telegram Stars Donation</div>
+                      <div className="text-xs text-gray-500 mt-0.5">Direct Telegram in-app balance transfer</div>
                     </div>
 
                     <div>
                       <div className="flex justify-between items-center mb-2">
-                        <label className="text-xs text-white font-medium">Select Stars Amount</label>
-                        <span className="text-[11px] text-[#9a8fb3]">Or custom stars</span>
+                        <label className="text-xs text-gray-700 font-semibold">Select Stars Amount</label>
+                        <span className="text-[11px] text-gray-500">Or custom stars</span>
                       </div>
                       <div className="grid grid-cols-4 gap-2 mb-2.5">
                         {[50, 100, 250, 500].map((amt) => (
@@ -1962,10 +2143,10 @@ export default function App() {
                               setDonateAmount(amt);
                               setCustomAmount('');
                             }}
-                            className={`py-2 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
+                            className={`py-2 rounded-xl text-xs font-bold transition-all cursor-pointer border shadow-xs ${
                               donateAmount === amt && !customAmount
-                                ? 'bg-yellow-500/20 border-yellow-500 text-yellow-400'
-                                : 'bg-[#1a1128] border-white/8 text-[#9a8fb3] hover:text-white'
+                                ? 'bg-yellow-500/20 border-yellow-500 text-yellow-700'
+                                : 'bg-white border-gray-200 text-gray-700 hover:text-gray-900'
                             }`}
                           >
                             {amt} ⭐
@@ -1973,61 +2154,117 @@ export default function App() {
                         ))}
                       </div>
 
-                      <div className="flex items-center gap-2 bg-[#1a1128] border border-white/10 rounded-xl px-3 py-2">
-                        <span className="text-xs text-yellow-400 font-semibold">Custom ⭐</span>
+                      <div className="flex items-center gap-2 bg-white border border-gray-200 rounded-xl px-3 py-2 shadow-xs">
+                        <span className="text-xs text-yellow-600 font-semibold">Custom ⭐</span>
                         <input
                           type="number"
                           placeholder="e.g. 1000"
                           value={customAmount}
                           onChange={(e) => setCustomAmount(e.target.value)}
-                          className="bg-transparent text-white text-xs font-mono w-full focus:outline-none"
+                          className="bg-transparent text-gray-900 text-xs font-mono w-full focus:outline-none"
                         />
                       </div>
                     </div>
 
                     <a
-                      href="https://t.me/Mr_Rakshit_2_0"
+                      href="https://t.me"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full bg-[#229ed9] hover:bg-[#1e8bc2] text-white font-bold text-xs py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-lg transition-all"
                     >
-                      <i className="fa-brands fa-telegram"></i> Send {customAmount || donateAmount} Stars to @Mr_Rakshit_2_0
+                      <i className="fa-brands fa-telegram"></i> Send {customAmount || donateAmount} Stars in Telegram
                     </a>
+
+                    <button
+                      onClick={handleSimulateDonation}
+                      disabled={isSimulatingDonation}
+                      className="w-full text-center text-xs font-bold text-yellow-600 hover:text-yellow-700 py-1.5 flex items-center justify-center gap-1.5 cursor-pointer transition-colors"
+                    >
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span>Simulate Stars Donation Receipt</span>
+                    </button>
                   </div>
                 )}
-
-                {/* INTERACTIVE TRY & SIMULATE DONATION BUTTON */}
-                <div className="mt-5 pt-4 border-t border-white/8 flex flex-col gap-2">
-                  <button
-                    onClick={handleSimulateDonation}
-                    disabled={isSimulatingDonation}
-                    className="w-full bg-gradient-to-r from-[#8b5cf6]/20 via-[#ec4899]/25 to-[#f97316]/20 hover:from-[#8b5cf6]/30 hover:via-[#ec4899]/35 hover:to-[#f97316]/30 text-white font-bold text-xs py-3.5 rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all border border-[#ec4899]/40 hover:border-[#ec4899]/70 shadow-lg active:scale-98"
-                  >
-                    {isSimulatingDonation ? (
-                      <span className="flex items-center gap-2">
-                        <i className="fa-solid fa-spinner fa-spin text-[#f592c0]"></i> Processing test simulation...
-                      </span>
-                    ) : (
-                      <>
-                        <Heart className="w-4 h-4 text-[#ec4899] fill-[#ec4899]" />
-                        <span>Try Test Donation Simulator</span>
-                      </>
-                    )}
-                  </button>
-
-                  <a
-                    href="https://rakshittips.github.io/Rakshittips/DonateSupport.html"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-center text-[11px] text-[#9a8fb3] hover:text-white transition-colors py-1 flex items-center justify-center gap-1"
-                  >
-                    <span>Open official web page (DonateSupport.html)</span>
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
-                </div>
               </>
             )}
 
+          </div>
+        </div>
+      )}
+
+      {/* ABOUT ME MODAL (Rakshittips Developer Bio - Screenshot 3) */}
+      {isAboutMeOpen && (
+        <div
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setIsAboutMeOpen(false);
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
+        >
+          <div className="bg-white text-gray-900 border border-gray-100 rounded-[30px] max-w-[440px] w-full p-6 sm:p-7 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <button
+              onClick={() => setIsAboutMeOpen(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-xl cursor-pointer w-8 h-8 rounded-full flex items-center justify-center bg-gray-100 transition-colors"
+            >
+              &times;
+            </button>
+
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#8b5cf6] via-[#ec4899] to-[#f97316] flex items-center justify-center text-white text-2xl shadow-lg shadow-pink-500/25 shrink-0">
+                <i className="fa-solid fa-robot"></i>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-gray-900 font-['Syne',sans-serif]">
+                  Rakshit Dhakariya
+                </h3>
+                <div className="inline-flex items-center gap-1.5 text-[11px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-300 px-2.5 py-0.5 rounded-full mt-1 shadow-xs">
+                  <span>✓ Verified Solo Developer</span>
+                </div>
+                <div className="text-[11.5px] text-gray-500 font-medium mt-0.5">
+                  @Rakshittips · Android Specialist
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-3 text-xs text-gray-600 leading-relaxed bg-[#f8f9fc] p-4 rounded-2xl border border-gray-100 mb-5">
+              <p>
+                Hey there! I'm <strong>Rakshit Dhakariya</strong>, a solo independent developer and Android modder behind the <strong>Rakshittips</strong> ecosystem.
+              </p>
+              <p>
+                My flagship project, <strong>MRTelegram V1.0</strong>, brings the fluid iOS design language to Android alongside 30+ custom features: floating pills, unthrottled downloads, advanced stealth privacy, and custom theme overrides.
+              </p>
+              <p>
+                All my tools and mods are created to be 100% free, privacy-first, and completely ad-free for the global community.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 mb-4">
+              <a
+                href="https://youtube.com/@rakshittips"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 bg-red-50 hover:bg-red-100 text-red-600 font-bold text-xs py-2.5 px-3 rounded-xl border border-red-200 transition-colors"
+              >
+                <i className="fa-brands fa-youtube text-base text-red-500"></i>
+                <span>YouTube</span>
+              </a>
+
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 bg-pink-50 hover:bg-pink-100 text-[#e1306c] font-bold text-xs py-2.5 px-3 rounded-xl border border-pink-200 transition-colors"
+              >
+                <i className="fa-brands fa-instagram text-base text-[#e1306c]"></i>
+                <span>Instagram</span>
+              </a>
+            </div>
+
+            <button
+              onClick={() => setIsAboutMeOpen(false)}
+              className="w-full bg-gray-900 hover:bg-black text-white font-bold text-xs py-3 rounded-xl cursor-pointer transition-colors"
+            >
+              Close
+            </button>
           </div>
         </div>
       )}
