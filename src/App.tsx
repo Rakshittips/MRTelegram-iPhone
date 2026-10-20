@@ -41,8 +41,10 @@ import {
   CheckCheck,
   FileDown,
   Layers,
-  Heart
+  Heart,
 } from 'lucide-react';
+
+const APP_ICON = './assets/aistudio/skygram_icon_foregroun_d_d937c502.png';
 
 export default function App() {
   // Master customizations toggle in Hero Card
@@ -263,7 +265,7 @@ export default function App() {
         <nav className="flex items-center justify-between py-6">
           <a href="#top" className="flex items-center gap-2.5 font-bold text-base font-['Syne',sans-serif]">
             <img
-              src="/assets/aistudio/skygram_icon_foregroun_d_d937c502.png"
+              src={APP_ICON}
               alt="MRTelegram"
               className="w-9 h-9 rounded-full shadow-[0_4px_14px_rgba(30,77,239,0.5)] object-cover select-none transition-transform hover:scale-105 border border-blue-500/30"
             />
@@ -348,7 +350,7 @@ export default function App() {
               <div className="flex items-center justify-between relative mb-1">
                 <div className="flex items-center gap-3">
                   <img
-                    src="/assets/aistudio/skygram_icon_foregroun_d_d937c502.png"
+                    src={APP_ICON}
                     alt="MRTelegram"
                     className="w-11 h-11 rounded-full shadow-[0_4px_16px_rgba(30,77,239,0.5)] object-cover select-none border border-blue-500/30"
                   />
@@ -752,7 +754,7 @@ export default function App() {
               <div className="bg-[#130c20] border border-white/10 rounded-[20px] p-6 shadow-xl">
                 <div className="flex items-center gap-3 mb-4.5">
                   <img
-                    src="/assets/aistudio/skygram_icon_foregroun_d_d937c502.png"
+                    src={APP_ICON}
                     alt="MRTelegram"
                     className="w-11 h-11 rounded-full object-cover shadow-md shadow-blue-500/30 border border-blue-500/30"
                   />
@@ -1689,7 +1691,7 @@ export default function App() {
             </button>
 
             <img
-              src="/assets/aistudio/skygram_icon_foregroun_d_d937c502.png"
+              src={APP_ICON}
               alt="MRTelegram Icon"
               className="w-16 h-16 rounded-full mx-auto mb-4 object-cover shadow-xl shadow-blue-500/40 border border-blue-500/40 select-none"
             />
