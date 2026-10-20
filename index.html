@@ -16,6 +16,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+      (function() {
+        // If served statically on GitHub Pages or file: protocol where Vite server is not compiling /src/main.tsx
+        var isGitHub = window.location.hostname.includes('github.io') || window.location.protocol === 'file:';
+        var isDevServer = window.location.port === '3000' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        // When not in Vite dev mode and not already built, forward instantly to standalone page
+        if (isGitHub && !isDevServer) {
+          window.location.replace('./mrtelegram-download.html' + window.location.search + window.location.hash);
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

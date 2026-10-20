@@ -46,6 +46,17 @@ import {
 
 const APP_ICON = './assets/aistudio/skygram_icon_foregroun_d_d937c502.png';
 
+const handleIconError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  const target = e.currentTarget;
+  if (!target.dataset.triedPublic) {
+    target.dataset.triedPublic = 'true';
+    target.src = './public/assets/aistudio/skygram_icon_foregroun_d_d937c502.png';
+  } else if (!target.dataset.triedRoot) {
+    target.dataset.triedRoot = 'true';
+    target.src = './mrtelegram_icon.jpg';
+  }
+};
+
 export default function App() {
   // Master customizations toggle in Hero Card
   const [masterCustomOn, setMasterCustomOn] = useState(true);
@@ -266,6 +277,7 @@ export default function App() {
           <a href="#top" className="flex items-center gap-2.5 font-bold text-base font-['Syne',sans-serif]">
             <img
               src={APP_ICON}
+              onError={handleIconError}
               alt="MRTelegram"
               className="w-9 h-9 rounded-full shadow-[0_4px_14px_rgba(30,77,239,0.5)] object-cover select-none transition-transform hover:scale-105 border border-blue-500/30"
             />
@@ -351,6 +363,7 @@ export default function App() {
                 <div className="flex items-center gap-3">
                   <img
                     src={APP_ICON}
+                    onError={handleIconError}
                     alt="MRTelegram"
                     className="w-11 h-11 rounded-full shadow-[0_4px_16px_rgba(30,77,239,0.5)] object-cover select-none border border-blue-500/30"
                   />
@@ -755,6 +768,7 @@ export default function App() {
                 <div className="flex items-center gap-3 mb-4.5">
                   <img
                     src={APP_ICON}
+                    onError={handleIconError}
                     alt="MRTelegram"
                     className="w-11 h-11 rounded-full object-cover shadow-md shadow-blue-500/30 border border-blue-500/30"
                   />
@@ -1692,6 +1706,7 @@ export default function App() {
 
             <img
               src={APP_ICON}
+              onError={handleIconError}
               alt="MRTelegram Icon"
               className="w-16 h-16 rounded-full mx-auto mb-4 object-cover shadow-xl shadow-blue-500/40 border border-blue-500/40 select-none"
             />
