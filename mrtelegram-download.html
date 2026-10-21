@@ -1105,32 +1105,13 @@
         <div style="background:#ffffff; border:1px solid #e5e7eb; border-radius:22px; padding:18px; text-align:center; margin-bottom:14px; box-shadow:0 1px 3px rgba(0,0,0,0.05); position:relative;">
           <!-- Viewfinder QR -->
           <div style="position:relative; width:160px; height:160px; margin:0 auto 12px; background:#fff; padding:8px; border-radius:14px; border:1px solid #f3f4f6; display:flex; align-items:center; justify-content:center;">
-            <div style="position:absolute; top:4px; left:4px; width:14px; height:14px; border-top:2px solid #9ca3af; border-left:2px solid #9ca3af; border-top-left-radius:3px;"></div>
-            <div style="position:absolute; top:4px; right:4px; width:14px; height:14px; border-top:2px solid #9ca3af; border-right:2px solid #9ca3af; border-top-right-radius:3px;"></div>
-            <div style="position:absolute; bottom:4px; left:4px; width:14px; height:14px; border-bottom:2px solid #9ca3af; border-left:2px solid #9ca3af; border-bottom-left-radius:3px;"></div>
-            <div style="position:absolute; bottom:4px; right:4px; width:14px; height:14px; border-bottom:2px solid #9ca3af; border-right:2px solid #9ca3af; border-bottom-right-radius:3px;"></div>
+            <div style="position:absolute; top:4px; left:4px; width:14px; height:14px; border-top:2px solid #9ca3af; border-left:2px solid #9ca3af; border-top-left-radius:3px; z-index:2;"></div>
+            <div style="position:absolute; top:4px; right:4px; width:14px; height:14px; border-top:2px solid #9ca3af; border-right:2px solid #9ca3af; border-top-right-radius:3px; z-index:2;"></div>
+            <div style="position:absolute; bottom:4px; left:4px; width:14px; height:14px; border-bottom:2px solid #9ca3af; border-left:2px solid #9ca3af; border-bottom-left-radius:3px; z-index:2;"></div>
+            <div style="position:absolute; bottom:4px; right:4px; width:14px; height:14px; border-bottom:2px solid #9ca3af; border-right:2px solid #9ca3af; border-bottom-right-radius:3px; z-index:2;"></div>
             
-            <svg viewBox="0 0 100 100" style="width:100%; height:100%;">
-              <rect width="100" height="100" fill="white"/>
-              <rect x="5" y="5" width="28" height="28" fill="black"/>
-              <rect x="8" y="8" width="22" height="22" fill="white"/>
-              <rect x="12" y="12" width="14" height="14" fill="black"/>
-              <rect x="67" y="5" width="28" height="28" fill="black"/>
-              <rect x="70" y="8" width="22" height="22" fill="white"/>
-              <rect x="74" y="12" width="14" height="14" fill="black"/>
-              <rect x="5" y="67" width="28" height="28" fill="black"/>
-              <rect x="8" y="70" width="22" height="22" fill="white"/>
-              <rect x="12" y="74" width="14" height="14" fill="black"/>
-              <rect x="38" y="38" width="24" height="24" fill="black" rx="3"/>
-              <rect x="43" y="43" width="14" height="14" fill="white"/>
-              <rect x="47" y="47" width="6" height="6" fill="black"/>
-              <rect x="38" y="10" width="8" height="8" fill="black"/>
-              <rect x="42" y="24" width="14" height="6" fill="black"/>
-              <rect x="68" y="40" width="22" height="8" fill="black"/>
-              <rect x="38" y="68" width="10" height="10" fill="black"/>
-              <rect x="42" y="86" width="22" height="6" fill="black"/>
-            </svg>
-            <div style="position:absolute; bottom:8px; right:8px; width:18px; height:18px; background:#fff; border:1px solid #d1d5db; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:9px; color:#4b5563;">
+            <img id="upiQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&margin=4&data=upi%3A%2F%2Fpay%3Fpa%3Drakshitdhakariya6%40oksbi%26pn%3DRakshittips%26am%3D20%26cu%3DINR%26tn%3DMRTelegram%2520Support" alt="Scannable UPI QR Code" style="width:100%; height:100%; object-fit:contain; border-radius:8px;" />
+            <div style="position:absolute; bottom:8px; right:8px; width:18px; height:18px; background:#fff; border:1px solid #d1d5db; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:9px; color:#4b5563; z-index:2;">
               <i class="fa-solid fa-expand"></i>
             </div>
           </div>
@@ -1157,10 +1138,10 @@
             <button onclick="copyHtmlText('rakshitdhakariya6@oksbi', 'UPI ID')" style="background:#fff; border:1px solid #d1d5db; color:#1f2937; padding:7px; border-radius:10px; font-size:11px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:4px;">
               <i class="fa-regular fa-copy"></i> Copy ID
             </button>
-            <a id="upiAppBtn" href="upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshittips&am=20&cu=INR" style="background:#fdf2f8; border:1px solid #f472b6; color:#db2777; padding:7px; border-radius:10px; font-size:11px; font-weight:700; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:4px;">
+            <a id="upiAppBtn" href="upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshittips&am=20&cu=INR&tn=MRTelegram%20Support" style="background:#fdf2f8; border:1px solid #f472b6; color:#db2777; padding:7px; border-radius:10px; font-size:11px; font-weight:700; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:4px;">
               <i class="fa-solid fa-bolt"></i> Open UPI
             </a>
-            <button onclick="showToast('Scan QR code with PhonePe, GPay, Paytm or BHIM')" style="background:#fff; border:1px solid #d1d5db; color:#1f2937; padding:7px; border-radius:10px; font-size:11px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:4px;">
+            <button onclick="openUpiAppDirect()" style="background:#fff; border:1px solid #d1d5db; color:#1f2937; padding:7px; border-radius:10px; font-size:11px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:4px;">
               <i class="fa-solid fa-qrcode"></i> Scan/Pay
             </button>
           </div>
@@ -1171,42 +1152,51 @@
 
           <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-bottom:12px;">
             <span style="font-size:11px; color:#6b7280; font-weight:600;">Quick:</span>
-            <button class="html-quick-btn active" onclick="selectDonateAmt(20, this)" style="border:none; padding:4px 10px; border-radius:14px; font-size:11.5px; font-weight:700; cursor:pointer; background:linear-gradient(135deg,#ec4899,#f43f5e); color:#fff;">₹20</button>
-            <button class="html-quick-btn" onclick="selectDonateAmt(50, this)" style="border:1px solid #e5e7eb; padding:4px 10px; border-radius:14px; font-size:11.5px; font-weight:700; cursor:pointer; background:#fff; color:#374151;">₹50</button>
-            <button class="html-quick-btn" onclick="selectDonateAmt(100, this)" style="border:1px solid #e5e7eb; padding:4px 10px; border-radius:14px; font-size:11.5px; font-weight:700; cursor:pointer; background:#fff; color:#374151;">₹100</button>
-            <button class="html-quick-btn" onclick="selectDonateAmt(500, this)" style="border:1px solid #e5e7eb; padding:4px 10px; border-radius:14px; font-size:11.5px; font-weight:700; cursor:pointer; background:#fff; color:#374151;">₹500</button>
-            <button class="html-quick-btn" onclick="selectDonateAmt(1000, this)" style="border:1px solid #e5e7eb; padding:4px 10px; border-radius:14px; font-size:11.5px; font-weight:700; cursor:pointer; background:#fff; color:#374151;">₹1000</button>
+            <button class="html-quick-btn active" data-quick="20" onclick="selectDonateAmt(20, 'quick')" style="border:none; padding:4px 10px; border-radius:14px; font-size:11.5px; font-weight:700; cursor:pointer; background:linear-gradient(135deg,#ec4899,#f43f5e); color:#fff;">₹20</button>
+            <button class="html-quick-btn" data-quick="50" onclick="selectDonateAmt(50, 'quick')" style="border:1px solid #e5e7eb; padding:4px 10px; border-radius:14px; font-size:11.5px; font-weight:700; cursor:pointer; background:#fff; color:#374151;">₹50</button>
+            <button class="html-quick-btn" data-quick="100" onclick="selectDonateAmt(100, 'quick')" style="border:1px solid #e5e7eb; padding:4px 10px; border-radius:14px; font-size:11.5px; font-weight:700; cursor:pointer; background:#fff; color:#374151;">₹100</button>
+            <button class="html-quick-btn" data-quick="500" onclick="selectDonateAmt(500, 'quick')" style="border:1px solid #e5e7eb; padding:4px 10px; border-radius:14px; font-size:11.5px; font-weight:700; cursor:pointer; background:#fff; color:#374151;">₹500</button>
+            <button class="html-quick-btn" data-quick="1000" onclick="selectDonateAmt(1000, 'quick')" style="border:1px solid #e5e7eb; padding:4px 10px; border-radius:14px; font-size:11.5px; font-weight:700; cursor:pointer; background:#fff; color:#374151;">₹1000</button>
           </div>
 
           <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:14px;">
-            <div onclick="selectDonateAmt(99, null)" style="background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:12px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+            <div class="html-tier-card" data-amt="99" onclick="selectDonateAmt(99, 'tier')" style="background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:12px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; transition:all .2s;">
               <div>
-                <div style="font-size:17px; font-weight:800; color:#111827; font-family:'Syne',sans-serif;">₹99</div>
+                <div style="font-size:17px; font-weight:800; color:#111827; font-family:'Plus Jakarta Sans',system-ui,sans-serif; letter-spacing:-0.3px;">₹99</div>
                 <div style="font-size:11px; color:#6b7280; font-weight:500;">Coffee &amp; Server Fuel</div>
               </div>
+              <div class="tier-check" style="display:none; width:20px; height:20px; border-radius:50%; background:#8b5cf6; color:#fff; font-size:10px; align-items:center; justify-content:center;">
+                <i class="fa-solid fa-check"></i>
+              </div>
             </div>
 
-            <div onclick="selectDonateAmt(299, null)" style="background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:12px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+            <div class="html-tier-card" data-amt="299" onclick="selectDonateAmt(299, 'tier')" style="background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:12px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; transition:all .2s;">
               <div>
-                <div style="font-size:17px; font-weight:800; color:#111827; font-family:'Syne',sans-serif;">₹299</div>
+                <div style="font-size:17px; font-weight:800; color:#111827; font-family:'Plus Jakarta Sans',system-ui,sans-serif; letter-spacing:-0.3px;">₹299</div>
                 <div style="font-size:11px; color:#6b7280; font-weight:500;">Mod Tool Maintenance</div>
               </div>
-            </div>
-
-            <div onclick="selectDonateAmt(799, null)" style="background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:12px; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
-              <div>
-                <div style="font-size:17px; font-weight:800; color:#111827; font-family:'Syne',sans-serif;">₹799</div>
-                <div style="font-size:11px; color:#6b7280; font-weight:500;">Full Feature Patron</div>
+              <div class="tier-check" style="display:none; width:20px; height:20px; border-radius:50%; background:#ec4899; color:#fff; font-size:10px; align-items:center; justify-content:center;">
+                <i class="fa-solid fa-check"></i>
               </div>
             </div>
 
-            <div style="background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:8px 12px; display:flex; align-items:center; gap:8px;">
+            <div class="html-tier-card" data-amt="799" onclick="selectDonateAmt(799, 'tier')" style="background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:12px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; transition:all .2s;">
+              <div>
+                <div style="font-size:17px; font-weight:800; color:#111827; font-family:'Plus Jakarta Sans',system-ui,sans-serif; letter-spacing:-0.3px;">₹799</div>
+                <div style="font-size:11px; color:#6b7280; font-weight:500;">Full Feature Patron</div>
+              </div>
+              <div class="tier-check" style="display:none; width:20px; height:20px; border-radius:50%; background:#f97316; color:#fff; font-size:10px; align-items:center; justify-content:center;">
+                <i class="fa-solid fa-check"></i>
+              </div>
+            </div>
+
+            <div id="customAmtBox" style="background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:8px 12px; display:flex; align-items:center; gap:8px; transition:border-color .2s;">
               <span style="font-weight:700; color:#6b7280; font-size:13px;">₹</span>
               <input type="number" id="htmlCustomAmt" placeholder="Enter custom amount" oninput="onCustomAmtInput(this.value)" style="border:none; outline:none; width:100%; font-size:13px; font-weight:600; color:#111827; background:transparent;">
             </div>
           </div>
 
-          <a id="upiPayLink" href="upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshittips&am=20&cu=INR" class="btn-primary" style="width:100%; justify-content:center; padding:14px; font-size:14px; font-weight:800; border-radius:30px; margin-bottom:8px;">
+          <a id="upiPayLink" href="upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshittips&am=20&cu=INR&tn=MRTelegram%20Support" class="btn-primary" style="width:100%; justify-content:center; padding:14px; font-size:14px; font-weight:800; border-radius:30px; margin-bottom:8px;">
             <i class="fa-solid fa-bolt"></i> Donate ₹20
           </a>
 
@@ -1232,44 +1222,100 @@
     }
   }
 
-  function onCustomAmtInput(val) {
-    var amt = Number(val) || 20;
-    currentDonateAmt = amt;
-    var link = document.getElementById("upiPayLink");
-    if(link) {
-      link.href = "upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshittips&am=" + amt + "&cu=INR";
-      link.innerHTML = '<i class="fa-solid fa-bolt"></i> Donate ₹' + amt;
+  function updateUpiPayElements(amt) {
+    var upiUri = "upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshittips&am=" + amt + "&cu=INR&tn=MRTelegram%20Support";
+    
+    var qrImg = document.getElementById("upiQrImg");
+    if (qrImg) {
+      qrImg.src = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&margin=4&data=" + encodeURIComponent(upiUri);
     }
+
+    var payBtn = document.getElementById("upiPayLink");
+    if (payBtn) {
+      payBtn.href = upiUri;
+      payBtn.innerHTML = '<i class="fa-solid fa-bolt"></i> Donate ₹' + amt;
+    }
+
     var appBtn = document.getElementById("upiAppBtn");
-    if(appBtn) {
-      appBtn.href = "upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshittips&am=" + amt + "&cu=INR";
+    if (appBtn) {
+      appBtn.href = upiUri;
     }
   }
 
-  function selectDonateAmt(amt, btn) {
+  function openUpiAppDirect() {
+    var amt = currentDonateAmt || 20;
+    var upiUri = "upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshittips&am=" + amt + "&cu=INR&tn=MRTelegram%20Support";
+    window.location.href = upiUri;
+    showToast("Opening UPI payment app for ₹" + amt + "...");
+  }
+
+  function onCustomAmtInput(val) {
+    var amt = Number(val) || 20;
     currentDonateAmt = amt;
-    if(btn) {
-      btn.parentNode.querySelectorAll(".html-quick-btn").forEach(function(b){
+
+    // Reset quick buttons
+    document.querySelectorAll(".html-quick-btn").forEach(function(b) {
+      b.style.background = "#fff";
+      b.style.color = "#374151";
+      b.style.border = "1px solid #e5e7eb";
+    });
+
+    // Reset tier cards
+    document.querySelectorAll(".html-tier-card").forEach(function(card) {
+      card.style.borderColor = "#e5e7eb";
+      card.style.background = "#fff";
+      var ch = card.querySelector(".tier-check");
+      if (ch) ch.style.display = "none";
+    });
+
+    // Highlight custom input box
+    var box = document.getElementById("customAmtBox");
+    if (box) {
+      box.style.borderColor = val ? "#8b5cf6" : "#e5e7eb";
+    }
+
+    updateUpiPayElements(amt);
+  }
+
+  function selectDonateAmt(amt, type) {
+    currentDonateAmt = amt;
+
+    // Update Quick buttons
+    document.querySelectorAll(".html-quick-btn").forEach(function(b) {
+      var bAmt = Number(b.getAttribute("data-quick"));
+      if (type === 'quick' && bAmt === amt) {
+        b.style.background = "linear-gradient(135deg,#ec4899,#f43f5e)";
+        b.style.color = "#fff";
+        b.style.border = "none";
+      } else {
         b.style.background = "#fff";
         b.style.color = "#374151";
         b.style.border = "1px solid #e5e7eb";
-      });
-      btn.style.background = "linear-gradient(135deg,#ec4899,#f43f5e)";
-      btn.style.color = "#fff";
-      btn.style.border = "none";
-    }
-    var customInp = document.getElementById("htmlCustomAmt");
-    if(customInp && btn) customInp.value = "";
+      }
+    });
 
-    var link = document.getElementById("upiPayLink");
-    if(link) {
-      link.href = "upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshittips&am=" + amt + "&cu=INR";
-      link.innerHTML = '<i class="fa-solid fa-bolt"></i> Donate ₹' + amt;
-    }
-    var appBtn = document.getElementById("upiAppBtn");
-    if(appBtn) {
-      appBtn.href = "upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshittips&am=" + amt + "&cu=INR";
-    }
+    // Update Tier cards
+    document.querySelectorAll(".html-tier-card").forEach(function(card) {
+      var cAmt = Number(card.getAttribute("data-amt"));
+      var ch = card.querySelector(".tier-check");
+      if (type === 'tier' && cAmt === amt) {
+        card.style.borderColor = "#8b5cf6";
+        card.style.background = "#fbf7ff";
+        if (ch) ch.style.display = "flex";
+      } else {
+        card.style.borderColor = "#e5e7eb";
+        card.style.background = "#fff";
+        if (ch) ch.style.display = "none";
+      }
+    });
+
+    // Clear custom input if quick or tier was clicked
+    var customInp = document.getElementById("htmlCustomAmt");
+    if (customInp) customInp.value = "";
+    var box = document.getElementById("customAmtBox");
+    if (box) box.style.borderColor = "#e5e7eb";
+
+    updateUpiPayElements(amt);
   }
 
   function copyHtmlText(str, label) {

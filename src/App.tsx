@@ -1886,42 +1886,16 @@ export default function App() {
                         <div className="absolute bottom-1 left-1 w-4 h-4 border-b-2 border-l-2 border-gray-400 rounded-bl pointer-events-none"></div>
                         <div className="absolute bottom-1 right-1 w-4 h-4 border-b-2 border-r-2 border-gray-400 rounded-br pointer-events-none"></div>
 
-                        {/* Vector QR Code */}
-                        <svg viewBox="0 0 100 100" className="w-full h-full text-black">
-                          <rect width="100" height="100" fill="white" />
-                          <rect x="5" y="5" width="28" height="28" fill="black" />
-                          <rect x="8" y="8" width="22" height="22" fill="white" />
-                          <rect x="12" y="12" width="14" height="14" fill="black" />
-                          
-                          <rect x="67" y="5" width="28" height="28" fill="black" />
-                          <rect x="70" y="8" width="22" height="22" fill="white" />
-                          <rect x="74" y="12" width="14" height="14" fill="black" />
-
-                          <rect x="5" y="67" width="28" height="28" fill="black" />
-                          <rect x="8" y="70" width="22" height="22" fill="white" />
-                          <rect x="12" y="74" width="14" height="14" fill="black" />
-
-                          <rect x="38" y="10" width="8" height="8" fill="black" />
-                          <rect x="50" y="10" width="8" height="8" fill="black" />
-                          <rect x="42" y="24" width="14" height="6" fill="black" />
-                          <rect x="38" y="38" width="24" height="24" fill="black" rx="3" />
-                          <rect x="43" y="43" width="14" height="14" fill="white" />
-                          <rect x="47" y="47" width="6" height="6" fill="black" />
-
-                          <rect x="10" y="38" width="12" height="6" fill="black" />
-                          <rect x="18" y="48" width="8" height="12" fill="black" />
-                          <rect x="68" y="40" width="22" height="8" fill="black" />
-                          <rect x="75" y="54" width="10" height="8" fill="black" />
-
-                          <rect x="38" y="68" width="10" height="10" fill="black" />
-                          <rect x="52" y="74" width="12" height="8" fill="black" />
-                          <rect x="42" y="86" width="22" height="6" fill="black" />
-                          <rect x="72" y="70" width="12" height="18" fill="black" />
-                          <rect x="86" y="80" width="6" height="12" fill="black" />
-                        </svg>
-
+                        {/* Real Dynamic Scannable UPI QR Code */}
+                        <img
+                          src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&margin=4&data=${encodeURIComponent(
+                            `upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshittips&am=${customAmount || donateAmount}&cu=INR&tn=MRTelegram%20Support`
+                          )}`}
+                          alt="Scannable UPI QR Code"
+                          className="w-full h-full object-contain rounded-lg select-none"
+                        />
                         {/* Scanner viewfinder badge on bottom-right of QR */}
-                        <div className="absolute bottom-2.5 right-2.5 w-5 h-5 rounded bg-white border border-gray-300 text-gray-700 flex items-center justify-center text-[10px] shadow-xs">
+                        <div className="absolute bottom-2.5 right-2.5 w-5 h-5 rounded bg-white border border-gray-300 text-gray-700 flex items-center justify-center text-[10px] shadow-xs z-10">
                           <i className="fa-solid fa-expand"></i>
                         </div>
                       </div>
@@ -1972,14 +1946,18 @@ export default function App() {
                           <span>Copy ID</span>
                         </button>
                         <a
-                          href={`upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshittips&am=${customAmount || donateAmount}&cu=INR`}
+                          href={`upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshittips&am=${customAmount || donateAmount}&cu=INR&tn=MRTelegram%20Support`}
                           className="bg-[#fdf2f8] hover:bg-[#fce7f3] border border-[#f472b6]/50 text-[#db2777] text-xs font-bold py-2 px-2 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer shadow-xs active:scale-95 transition-all"
                         >
                           <Zap className="w-3.5 h-3.5 text-[#ec4899] fill-[#ec4899]" />
-                          <span>Open in UPI app</span>
+                          <span>Open in UPI</span>
                         </a>
                         <button
-                          onClick={() => showToast('Scan the QR code with PhonePe, GPay, Paytm or BHIM')}
+                          onClick={() => {
+                            const upiUri = `upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshittips&am=${customAmount || donateAmount}&cu=INR&tn=MRTelegram%20Support`;
+                            window.location.href = upiUri;
+                            showToast(`Opening UPI payment app for ₹${customAmount || donateAmount}...`);
+                          }}
                           className="bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 text-xs font-semibold py-2 px-2 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer shadow-xs active:scale-95 transition-all"
                         >
                           <i className="fa-solid fa-qrcode text-gray-600 text-xs"></i>
@@ -1988,7 +1966,7 @@ export default function App() {
                       </div>
                     </div>
 
-                    {/* CHOOSE AN AMOUNT SECTION (Screenshot 2) */}
+                    {/* CHOOSE AN AMOUNT SECTION */}
                     <div className="text-left">
                       <div className="text-[11.5px] font-bold text-gray-700 uppercase tracking-wider mb-2">
                         CHOOSE AN AMOUNT
@@ -2033,7 +2011,7 @@ export default function App() {
                           }`}
                         >
                           <div>
-                            <div className="text-lg font-extrabold text-gray-900 font-['Syne',sans-serif]">₹99</div>
+                            <div className="text-lg font-extrabold text-gray-900 font-['Plus_Jakarta_Sans',sans-serif] tracking-tight">₹99</div>
                             <div className="text-[11.5px] text-gray-500 font-medium mt-0.5">Coffee &amp; Server Fuel</div>
                           </div>
                           {!customAmount && donateAmount === 99 && (
@@ -2056,7 +2034,7 @@ export default function App() {
                           }`}
                         >
                           <div>
-                            <div className="text-lg font-extrabold text-gray-900 font-['Syne',sans-serif]">₹299</div>
+                            <div className="text-lg font-extrabold text-gray-900 font-['Plus_Jakarta_Sans',sans-serif] tracking-tight">₹299</div>
                             <div className="text-[11.5px] text-gray-500 font-medium mt-0.5">Mod Tool Maintenance</div>
                           </div>
                           {!customAmount && donateAmount === 299 && (
@@ -2079,7 +2057,7 @@ export default function App() {
                           }`}
                         >
                           <div>
-                            <div className="text-lg font-extrabold text-gray-900 font-['Syne',sans-serif]">₹799</div>
+                            <div className="text-lg font-extrabold text-gray-900 font-['Plus_Jakarta_Sans',sans-serif] tracking-tight">₹799</div>
                             <div className="text-[11.5px] text-gray-500 font-medium mt-0.5">Full Feature Patron</div>
                           </div>
                           {!customAmount && donateAmount === 799 && (
@@ -2108,7 +2086,7 @@ export default function App() {
 
                       {/* Large Main Button: ⚡ Donate ₹{selectedAmount} */}
                       <a
-                        href={`upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshittips&am=${customAmount || donateAmount}&cu=INR`}
+                        href={`upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshittips&am=${customAmount || donateAmount}&cu=INR&tn=MRTelegram%20Support`}
                         className="w-full bg-gradient-to-r from-[#8b5cf6] via-[#ec4899] to-[#f97316] text-white font-extrabold text-sm py-4 rounded-full flex items-center justify-center gap-2 shadow-[0_12px_24px_-8px_rgba(236,72,153,0.55)] hover:brightness-110 active:scale-98 transition-all"
                       >
                         <Zap className="w-4 h-4 fill-white" />
