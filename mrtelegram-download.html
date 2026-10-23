@@ -292,8 +292,8 @@
       MRTelegram
     </a>
     <div style="display:flex; align-items:center; gap:8px;">
-      <button class="nav-cta" onclick="openDonateModal('upi')" style="background:rgba(236,72,153,0.12); border-color:rgba(236,72,153,0.35); color:#f592c0;">
-        <i class="fa-solid fa-heart" style="color:#ec4899;"></i> Support &amp; Donate
+      <button class="nav-cta" onclick="openDownloadModal()">
+        <i class="fa-solid fa-download"></i> Download APK
       </button>
     </div>
   </nav>
@@ -315,9 +315,7 @@
         <button class="btn-primary" onclick="openDownloadModal()">
           <i class="fa-solid fa-download"></i> Download APK
         </button>
-        <button class="btn-secondary" onclick="openDonateModal('upi')" style="cursor:pointer; border-color:rgba(236,72,153,0.35); color:#f592c0;">
-          <i class="fa-solid fa-heart" style="color:#ec4899;"></i> Support &amp; Donate (Try)
-        </button>
+        
         <a href="#features" class="btn-secondary">
           <i class="fa-solid fa-list-check"></i> See all features
         </a>
@@ -334,10 +332,7 @@
         </div>
       </div>
       <div class="hv-bars">
-        <div class="hv-bar" onclick="openDonateModal('upi')" style="background:rgba(236,72,153,0.1); border-color:rgba(236,72,153,0.3); color:#f592c0;">
-          <i class="fa-solid fa-heart" style="color:#ec4899;"></i> Rakshittips Support &amp; Donate
-          <span class="tick" style="font-size:10.5px; background:rgba(236,72,153,0.2); color:#f592c0; padding:2px 8px; border-radius:6px; font-weight:700;">Try Dialog &rarr;</span>
-        </div>
+        
         <div class="hv-bar" onclick="tryHeroSetting('general')">
           <i class="fa-solid fa-sliders"></i> General Settings 
           <span class="tick"><i class="fa-solid fa-chevron-right" style="font-size:11px;color:var(--faint)"></i></span>
@@ -522,22 +517,10 @@
     </div>
   </section>
 
-  <!-- SUPPORT CARD -->
-  <section id="support" class="divider">
-    <div class="support-card">
-      <div class="orb"><i class="fa-solid fa-heart"></i></div>
-      <h2>Donate please!</h2>
-      <p>MRTelegram is completely free and ad-free. Your support helps keep servers and regular updates running.</p>
-      <button class="btn-support" onclick="openDonateModal('upi')" style="cursor:pointer; border:none; font-family:inherit;">
-        <i class="fa-solid fa-mug-hot"></i> Support the project
-      </button>
-      <div class="support-methods">
-        <div class="m" onclick="openDonateModal('upi')" title="UPI / QR Code"><i class="fa-solid fa-indian-rupee-sign"></i></div>
-        <div class="m" onclick="openDonateModal('stars')" title="Telegram Stars"><i class="fa-brands fa-telegram"></i></div>
-      </div>
-
-      <!-- RAKSHITTIPS BY DEVELOPER CARD (Screenshot 3) -->
-      <div style="background:#ffffff; color:#111827; border-radius:26px; padding:24px; margin-top:28px; text-align:left; box-shadow:0 20px 40px rgba(0,0,0,0.35);">
+    <!-- DEVELOPER SECTION -->
+  <section id="developer" class="divider">
+    <!-- RAKSHITTIPS BY DEVELOPER CARD -->
+      <div style="background:#ffffff; color:#111827; border-radius:26px; padding:24px;  text-align:left; box-shadow:0 20px 40px rgba(0,0,0,0.35);">
         <div style="display:flex; align-items:center; gap:16px; margin-bottom:18px;">
           <div style="width:60px; height:60px; border-radius:50%; background:linear-gradient(135deg, #8b5cf6, #ec4899, #f97316); display:flex; align-items:center; justify-content:center; color:#fff; font-size:24px; flex-shrink:0; box-shadow:0 8px 20px rgba(236,72,153,0.3);">
             <i class="fa-solid fa-robot"></i>
@@ -565,7 +548,6 @@
           </a>
         </div>
       </div>
-    </div>
   </section>
 
   <!-- FOOTER -->
@@ -573,11 +555,6 @@
     <div class="foot-credit">Crafted with care by <strong>Rakshittips!</strong></div>
     <div class="foot-legal">© 2026 Rakshittips. MRTelegram is an independent community project and is not affiliated with Telegram.</div>
   </footer>
-
-  <!-- FLOATING SUPPORT & DONATE PILL -->
-  <button onclick="openDonateModal('upi')" style="position:fixed; left:20px; bottom:20px; z-index:90; background:#130c20; border:1px solid rgba(236,72,153,0.4); color:#f592c0; font-size:12px; font-weight:700; padding:10px 16px; border-radius:30px; display:flex; align-items:center; gap:8px; cursor:pointer; box-shadow:0 10px 25px rgba(236,72,153,0.3); font-family:inherit;">
-    <i class="fa-solid fa-heart" style="color:#ec4899;"></i> Support &amp; Donate (Try)
-  </button>
 
   <a href="#top" class="to-top" aria-label="Back to top">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
@@ -626,36 +603,6 @@
     <button class="btn-primary" style="width:100%; justify-content:center; font-size:13.5px; padding:12px;" onclick="closeTryModal()">
       Apply &amp; Done
     </button>
-  </div>
-</div>
-
-<!-- RAKSHITTIPS SUPPORT & DONATE DIALOG (Screenshot 2) -->
-<div class="modal-backdrop" id="donateModal" onclick="closeDonateOnBackdrop(event)">
-  <div class="modal-card" style="background:#f8f9fc; color:#111827; max-width:450px; border-radius:28px; padding:22px; border:1px solid #e5e7eb;">
-    <button class="modal-close" onclick="closeDonateModal()" style="color:#6b7280; background:#e5e7eb; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center;">&times;</button>
-    
-    <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;">
-      <div style="width:42px; height:42px; border-radius:12px; background:var(--grad); display:flex; align-items:center; justify-content:center; font-size:18px; color:#fff; box-shadow:0 6px 16px rgba(236,72,153,0.3);">
-        <i class="fa-solid fa-heart"></i>
-      </div>
-      <div>
-        <h3 style="font-family:'Syne',sans-serif; font-size:18px; font-weight:800; color:#111827;">Rakshittips Support &amp; Donate</h3>
-        <p style="font-size:11.5px; color:#6b7280; font-weight:500;">100% Free &amp; Ad-Free · Mod &amp; Server Support</p>
-      </div>
-    </div>
-
-    <!-- Tabs: UPI and Telegram Stars -->
-    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:6px; background:#e5e7eb; padding:4px; border-radius:14px; margin-bottom:14px;">
-      <button class="opt-pill active" onclick="setHtmlDonateMethod('upi')" id="tab-upi" style="text-align:center; padding:8px 6px; font-size:12px; border:none; font-family:inherit; font-weight:700;">
-        <i class="fa-solid fa-indian-rupee-sign"></i> UPI / QR
-      </button>
-      <button class="opt-pill" onclick="setHtmlDonateMethod('stars')" id="tab-stars" style="text-align:center; padding:8px 6px; font-size:12px; border:none; font-family:inherit; font-weight:700;">
-        <i class="fa-solid fa-star" style="color:#eab308;"></i> Telegram Stars
-      </button>
-    </div>
-
-    <!-- Tab Dynamic Body -->
-    <div id="donateBody" style="margin-bottom:14px;"></div>
   </div>
 </div>
 
@@ -1061,9 +1008,6 @@
     showToast("MRTelegram-V1.0.apk saved to Downloads folder!");
   }
 
-  // Rakshittips Support & Donate Dialog Logic (Screenshot 2)
-  var currentDonateMethod = 'upi';
-  var currentDonateAmt = 20;
 
   function openAboutModal() {
     document.getElementById("aboutModal").classList.add("open");
@@ -1075,299 +1019,6 @@
     if (e.target === document.getElementById("aboutModal")) closeAboutModal();
   }
 
-  function openDonateModal(method) {
-    document.getElementById("donateModal").classList.add("open");
-    setHtmlDonateMethod(method || 'upi');
-  }
-
-  function closeDonateModal() {
-    document.getElementById("donateModal").classList.remove("open");
-  }
-
-  function closeDonateOnBackdrop(e) {
-    if (e.target === document.getElementById("donateModal")) closeDonateModal();
-  }
-
-  function setHtmlDonateMethod(method) {
-    currentDonateMethod = method || 'upi';
-    var tabs = ['upi', 'stars'];
-    tabs.forEach(function(t) {
-      var el = document.getElementById("tab-" + t);
-      if(el) {
-        if(t === currentDonateMethod) el.classList.add("active");
-        else el.classList.remove("active");
-      }
-    });
-
-    var body = document.getElementById("donateBody");
-    if (currentDonateMethod === 'upi') {
-      body.innerHTML = `
-        <div style="background:#ffffff; border:1px solid #e5e7eb; border-radius:22px; padding:18px; text-align:center; margin-bottom:14px; box-shadow:0 1px 3px rgba(0,0,0,0.05); position:relative;">
-          <!-- Viewfinder QR -->
-          <div style="position:relative; width:160px; height:160px; margin:0 auto 12px; background:#fff; padding:8px; border-radius:14px; border:1px solid #f3f4f6; display:flex; align-items:center; justify-content:center;">
-            <div style="position:absolute; top:4px; left:4px; width:14px; height:14px; border-top:2px solid #9ca3af; border-left:2px solid #9ca3af; border-top-left-radius:3px; z-index:2;"></div>
-            <div style="position:absolute; top:4px; right:4px; width:14px; height:14px; border-top:2px solid #9ca3af; border-right:2px solid #9ca3af; border-top-right-radius:3px; z-index:2;"></div>
-            <div style="position:absolute; bottom:4px; left:4px; width:14px; height:14px; border-bottom:2px solid #9ca3af; border-left:2px solid #9ca3af; border-bottom-left-radius:3px; z-index:2;"></div>
-            <div style="position:absolute; bottom:4px; right:4px; width:14px; height:14px; border-bottom:2px solid #9ca3af; border-right:2px solid #9ca3af; border-bottom-right-radius:3px; z-index:2;"></div>
-            
-            <img id="upiQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&margin=4&data=upi%3A%2F%2Fpay%3Fpa%3Drakshitdhakariya6%40oksbi%26pn%3DRakshittips%26am%3D20%26cu%3DINR%26tn%3DMRTelegram%2520Support" alt="Scannable UPI QR Code" style="width:100%; height:100%; object-fit:contain; border-radius:8px;" />
-            <div style="position:absolute; bottom:8px; right:8px; width:18px; height:18px; background:#fff; border:1px solid #d1d5db; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:9px; color:#4b5563; z-index:2;">
-              <i class="fa-solid fa-expand"></i>
-            </div>
-          </div>
-
-          <div style="text-align:left; margin-bottom:10px;">
-            <div style="font-size:9.5px; color:#6b7280; text-transform:uppercase; font-weight:700; margin-bottom:3px; padding-left:2px;">UPI ID</div>
-            <div style="background:#f0f7ff; border:1px solid #bae6fd; border-radius:10px; padding:8px 12px; display:flex; justify-content:space-between; align-items:center;">
-              <div style="font-size:13px; font-weight:700; color:#0284c7; font-family:monospace;">rakshitdhakariya6@oksbi</div>
-              <button onclick="copyHtmlText('rakshitdhakariya6@oksbi', 'UPI ID')" style="background:none; border:none; color:#0284c7; font-size:12px; font-weight:700; cursor:pointer;">
-                <i class="fa-regular fa-copy"></i>
-              </button>
-            </div>
-          </div>
-
-          <div style="display:flex; align-items:center; gap:5px; flex-wrap:wrap; margin-bottom:12px; font-size:11px;">
-            <span style="color:#6b7280; font-weight:600; margin-right:2px;">Works with</span>
-            <span style="background:#5f259f; color:#fff; font-weight:700; padding:2px 8px; border-radius:12px; font-size:10px;">PhonePe</span>
-            <span style="background:#fff; border:1px solid #d1d5db; color:#374151; font-weight:700; padding:2px 8px; border-radius:12px; font-size:10px;">GPay</span>
-            <span style="background:#003366; color:#fff; font-weight:700; padding:2px 8px; border-radius:12px; font-size:10px;">BHIM</span>
-            <span style="background:#00b9f5; color:#fff; font-weight:700; padding:2px 8px; border-radius:12px; font-size:10px;">Paytm</span>
-          </div>
-
-          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px;">
-            <button onclick="copyHtmlText('rakshitdhakariya6@oksbi', 'UPI ID')" style="background:#fff; border:1px solid #d1d5db; color:#1f2937; padding:7px; border-radius:10px; font-size:11px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:4px;">
-              <i class="fa-regular fa-copy"></i> Copy ID
-            </button>
-            <a id="upiAppBtn" href="upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshittips&am=20&cu=INR&tn=MRTelegram%20Support" style="background:#fdf2f8; border:1px solid #f472b6; color:#db2777; padding:7px; border-radius:10px; font-size:11px; font-weight:700; text-decoration:none; display:flex; align-items:center; justify-content:center; gap:4px;">
-              <i class="fa-solid fa-bolt"></i> Open UPI
-            </a>
-            <button onclick="openUpiAppDirect()" style="background:#fff; border:1px solid #d1d5db; color:#1f2937; padding:7px; border-radius:10px; font-size:11px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:4px;">
-              <i class="fa-solid fa-qrcode"></i> Scan/Pay
-            </button>
-          </div>
-        </div>
-
-        <div style="text-align:left;">
-          <div style="font-size:11px; font-weight:800; color:#374151; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px;">CHOOSE AN AMOUNT</div>
-
-          <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-bottom:12px;">
-            <span style="font-size:11px; color:#6b7280; font-weight:600;">Quick:</span>
-            <button class="html-quick-btn active" data-quick="20" onclick="selectDonateAmt(20, 'quick')" style="border:none; padding:4px 10px; border-radius:14px; font-size:11.5px; font-weight:700; cursor:pointer; background:linear-gradient(135deg,#ec4899,#f43f5e); color:#fff;">₹20</button>
-            <button class="html-quick-btn" data-quick="50" onclick="selectDonateAmt(50, 'quick')" style="border:1px solid #e5e7eb; padding:4px 10px; border-radius:14px; font-size:11.5px; font-weight:700; cursor:pointer; background:#fff; color:#374151;">₹50</button>
-            <button class="html-quick-btn" data-quick="100" onclick="selectDonateAmt(100, 'quick')" style="border:1px solid #e5e7eb; padding:4px 10px; border-radius:14px; font-size:11.5px; font-weight:700; cursor:pointer; background:#fff; color:#374151;">₹100</button>
-            <button class="html-quick-btn" data-quick="500" onclick="selectDonateAmt(500, 'quick')" style="border:1px solid #e5e7eb; padding:4px 10px; border-radius:14px; font-size:11.5px; font-weight:700; cursor:pointer; background:#fff; color:#374151;">₹500</button>
-            <button class="html-quick-btn" data-quick="1000" onclick="selectDonateAmt(1000, 'quick')" style="border:1px solid #e5e7eb; padding:4px 10px; border-radius:14px; font-size:11.5px; font-weight:700; cursor:pointer; background:#fff; color:#374151;">₹1000</button>
-          </div>
-
-          <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:14px;">
-            <div class="html-tier-card" data-amt="99" onclick="selectDonateAmt(99, 'tier')" style="background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:12px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; transition:all .2s;">
-              <div>
-                <div style="font-size:17px; font-weight:800; color:#111827; font-family:'Plus Jakarta Sans',system-ui,sans-serif; letter-spacing:-0.3px;">₹99</div>
-                <div style="font-size:11px; color:#6b7280; font-weight:500;">Coffee &amp; Server Fuel</div>
-              </div>
-              <div class="tier-check" style="display:none; width:20px; height:20px; border-radius:50%; background:#8b5cf6; color:#fff; font-size:10px; align-items:center; justify-content:center;">
-                <i class="fa-solid fa-check"></i>
-              </div>
-            </div>
-
-            <div class="html-tier-card" data-amt="299" onclick="selectDonateAmt(299, 'tier')" style="background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:12px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; transition:all .2s;">
-              <div>
-                <div style="font-size:17px; font-weight:800; color:#111827; font-family:'Plus Jakarta Sans',system-ui,sans-serif; letter-spacing:-0.3px;">₹299</div>
-                <div style="font-size:11px; color:#6b7280; font-weight:500;">Mod Tool Maintenance</div>
-              </div>
-              <div class="tier-check" style="display:none; width:20px; height:20px; border-radius:50%; background:#ec4899; color:#fff; font-size:10px; align-items:center; justify-content:center;">
-                <i class="fa-solid fa-check"></i>
-              </div>
-            </div>
-
-            <div class="html-tier-card" data-amt="799" onclick="selectDonateAmt(799, 'tier')" style="background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:12px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; transition:all .2s;">
-              <div>
-                <div style="font-size:17px; font-weight:800; color:#111827; font-family:'Plus Jakarta Sans',system-ui,sans-serif; letter-spacing:-0.3px;">₹799</div>
-                <div style="font-size:11px; color:#6b7280; font-weight:500;">Full Feature Patron</div>
-              </div>
-              <div class="tier-check" style="display:none; width:20px; height:20px; border-radius:50%; background:#f97316; color:#fff; font-size:10px; align-items:center; justify-content:center;">
-                <i class="fa-solid fa-check"></i>
-              </div>
-            </div>
-
-            <div id="customAmtBox" style="background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:8px 12px; display:flex; align-items:center; gap:8px; transition:border-color .2s;">
-              <span style="font-weight:700; color:#6b7280; font-size:13px;">₹</span>
-              <input type="number" id="htmlCustomAmt" placeholder="Enter custom amount" oninput="onCustomAmtInput(this.value)" style="border:none; outline:none; width:100%; font-size:13px; font-weight:600; color:#111827; background:transparent;">
-            </div>
-          </div>
-
-          <a id="upiPayLink" href="upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshittips&am=20&cu=INR&tn=MRTelegram%20Support" class="btn-primary" style="width:100%; justify-content:center; padding:14px; font-size:14px; font-weight:800; border-radius:30px; margin-bottom:8px;">
-            <i class="fa-solid fa-bolt"></i> Donate ₹20
-          </a>
-
-          <button onclick="simulateHtmlDonation()" style="width:100%; background:none; border:none; color:#db2777; font-size:12px; font-weight:700; padding:6px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px;">
-            <i class="fa-solid fa-heart"></i> Try Test Simulator (Instant Receipt)
-          </button>
-        </div>
-      `;
-    } else if (currentDonateMethod === 'stars') {
-      body.innerHTML = `
-        <div style="background:#ffffff; border:1px solid #e5e7eb; border-radius:20px; padding:20px; text-align:center; margin-bottom:14px;">
-          <div style="font-size:32px; color:#facc15; margin-bottom:6px;"><i class="fa-solid fa-star"></i></div>
-          <div style="font-weight:800; font-size:15px; color:#111827;">Telegram Stars</div>
-          <div style="font-size:12px; color:#6b7280; margin-top:2px;">Donate directly in Telegram with Stars</div>
-        </div>
-        <a href="https://t.me" target="_blank" rel="noopener noreferrer" class="btn-primary" style="width:100%; justify-content:center; padding:12px; font-size:13px; background:#229ed9; border-radius:24px; margin-bottom:8px;">
-          <i class="fa-brands fa-telegram"></i> Send Stars via Telegram
-        </a>
-        <button onclick="simulateHtmlDonation()" style="width:100%; background:none; border:none; color:#ca8a04; font-size:12px; font-weight:700; padding:6px; cursor:pointer;">
-          Simulate Stars Donation Receipt
-        </button>
-      `;
-    }
-  }
-
-  function updateUpiPayElements(amt) {
-    var upiUri = "upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshittips&am=" + amt + "&cu=INR&tn=MRTelegram%20Support";
-    
-    var qrImg = document.getElementById("upiQrImg");
-    if (qrImg) {
-      qrImg.src = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&margin=4&data=" + encodeURIComponent(upiUri);
-    }
-
-    var payBtn = document.getElementById("upiPayLink");
-    if (payBtn) {
-      payBtn.href = upiUri;
-      payBtn.innerHTML = '<i class="fa-solid fa-bolt"></i> Donate ₹' + amt;
-    }
-
-    var appBtn = document.getElementById("upiAppBtn");
-    if (appBtn) {
-      appBtn.href = upiUri;
-    }
-  }
-
-  function openUpiAppDirect() {
-    var amt = currentDonateAmt || 20;
-    var upiUri = "upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshittips&am=" + amt + "&cu=INR&tn=MRTelegram%20Support";
-    window.location.href = upiUri;
-    showToast("Opening UPI payment app for ₹" + amt + "...");
-  }
-
-  function onCustomAmtInput(val) {
-    var amt = Number(val) || 20;
-    currentDonateAmt = amt;
-
-    // Reset quick buttons
-    document.querySelectorAll(".html-quick-btn").forEach(function(b) {
-      b.style.background = "#fff";
-      b.style.color = "#374151";
-      b.style.border = "1px solid #e5e7eb";
-    });
-
-    // Reset tier cards
-    document.querySelectorAll(".html-tier-card").forEach(function(card) {
-      card.style.borderColor = "#e5e7eb";
-      card.style.background = "#fff";
-      var ch = card.querySelector(".tier-check");
-      if (ch) ch.style.display = "none";
-    });
-
-    // Highlight custom input box
-    var box = document.getElementById("customAmtBox");
-    if (box) {
-      box.style.borderColor = val ? "#8b5cf6" : "#e5e7eb";
-    }
-
-    updateUpiPayElements(amt);
-  }
-
-  function selectDonateAmt(amt, type) {
-    currentDonateAmt = amt;
-
-    // Update Quick buttons
-    document.querySelectorAll(".html-quick-btn").forEach(function(b) {
-      var bAmt = Number(b.getAttribute("data-quick"));
-      if (type === 'quick' && bAmt === amt) {
-        b.style.background = "linear-gradient(135deg,#ec4899,#f43f5e)";
-        b.style.color = "#fff";
-        b.style.border = "none";
-      } else {
-        b.style.background = "#fff";
-        b.style.color = "#374151";
-        b.style.border = "1px solid #e5e7eb";
-      }
-    });
-
-    // Update Tier cards
-    document.querySelectorAll(".html-tier-card").forEach(function(card) {
-      var cAmt = Number(card.getAttribute("data-amt"));
-      var ch = card.querySelector(".tier-check");
-      if (type === 'tier' && cAmt === amt) {
-        card.style.borderColor = "#8b5cf6";
-        card.style.background = "#fbf7ff";
-        if (ch) ch.style.display = "flex";
-      } else {
-        card.style.borderColor = "#e5e7eb";
-        card.style.background = "#fff";
-        if (ch) ch.style.display = "none";
-      }
-    });
-
-    // Clear custom input if quick or tier was clicked
-    var customInp = document.getElementById("htmlCustomAmt");
-    if (customInp) customInp.value = "";
-    var box = document.getElementById("customAmtBox");
-    if (box) box.style.borderColor = "#e5e7eb";
-
-    updateUpiPayElements(amt);
-  }
-
-  function copyHtmlText(str, label) {
-    if(navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(str);
-      showToast(label + " copied to clipboard!");
-    } else {
-      showToast(label + " copied!");
-    }
-  }
-
-  function simulateHtmlDonation() {
-    showToast("Processing test simulation...");
-    setTimeout(function() {
-      var body = document.getElementById("donateBody");
-      var txnId = "TXN-RAKSHIT-" + Math.floor(100000 + Math.random() * 900000);
-      var timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      var methodLabel = currentDonateMethod === 'stars' ? (currentDonateAmt + ' ⭐ Stars') : ('₹' + currentDonateAmt + ' INR');
-
-      body.innerHTML = `
-        <div style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); border-radius:18px; padding:18px; text-align:center; margin-bottom:14px;">
-          <div style="width:48px; height:48px; border-radius:14px; background:rgba(16,185,129,0.2); color:#059669; display:flex; align-items:center; justify-content:center; margin:0 auto 8px; font-size:22px;">
-            <i class="fa-solid fa-check-double"></i>
-          </div>
-          <div style="font-weight:800; color:#111827; font-size:16px;">Test Donation Successful!</div>
-          <div style="font-size:12px; color:#059669; margin-top:2px; font-weight:700;"><i class="fa-solid fa-sparkles"></i> Verified by Rakshittips Gateway (Simulator)</div>
-        </div>
-        <div style="background:#ffffff; border:1px solid #e5e7eb; border-radius:14px; padding:14px; font-size:12px; margin-bottom:14px;">
-          <div style="display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid #f3f4f6;">
-            <span style="color:#6b7280;">Amount</span>
-            <span style="font-weight:800; color:#111827; font-family:monospace;">` + methodLabel + `</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid #f3f4f6;">
-            <span style="color:#6b7280;">Channel</span>
-            <span style="font-weight:700; color:#111827; text-transform:uppercase;">` + currentDonateMethod + `</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid #f3f4f6;">
-            <span style="color:#6b7280;">Txn Reference</span>
-            <span style="font-family:monospace; color:#db2777; font-weight:700;">` + txnId + `</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; padding:5px 0;">
-            <span style="color:#6b7280;">Timestamp</span>
-            <span style="color:#6b7280;">` + timeStr + `</span>
-          </div>
-        </div>
-        <button class="btn-secondary" style="width:100%; justify-content:center; padding:11px; font-size:12px; cursor:pointer; background:#e5e7eb; color:#1f2937; border-radius:14px;" onclick="setHtmlDonateMethod(currentDonateMethod)">
-          Test Another Amount
-        </button>
-      `;
-      showToast("❤️ Simulated donation verified! Rakshittips thanks you!");
-    }, 600);
-  }
 </script>
 </body>
 </html>
