@@ -18,7 +18,9 @@ import {
   Heart,
   Copy,
   ExternalLink,
+  Sparkles,
 } from 'lucide-react';
+import confetti from 'canvas-confetti';
 
 const APP_ICON = './assets/aistudio/skygram_icon_foregroun_d_d937c502.png';
 const UPI_ID = 'rakshitdhakariya6@oksbi';
@@ -43,6 +45,7 @@ export default function App() {
   const [isDlOpen, setIsDlOpen] = useState(false);
   const [dlProgress, setDlProgress] = useState(0);
   const [dlReady, setDlReady] = useState(false);
+  const [downloadStarted, setDownloadStarted] = useState(false);
 
   // Support & Donate modal state
   const [isDonateOpen, setIsDonateOpen] = useState(false);
@@ -69,10 +72,46 @@ export default function App() {
     setTimeout(() => setCopiedUpi(false), 2000);
   };
 
+  const triggerConfetti = () => {
+    try {
+      // Main celebratory blast
+      confetti({
+        particleCount: 85,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#ec4899', '#8b5cf6', '#f97316', '#59e0a8', '#38bdf8', '#ffd166'],
+        zIndex: 99999,
+      });
+
+      // Side fireworks burst for extra delight
+      setTimeout(() => {
+        confetti({
+          particleCount: 45,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0.2, y: 0.65 },
+          colors: ['#ec4899', '#8b5cf6', '#f97316', '#59e0a8'],
+          zIndex: 99999,
+        });
+        confetti({
+          particleCount: 45,
+          angle: 120,
+          spread: 55,
+          origin: { x: 0.8, y: 0.65 },
+          colors: ['#ec4899', '#8b5cf6', '#f97316', '#59e0a8'],
+          zIndex: 99999,
+        });
+      }, 200);
+    } catch {
+      // Canvas fallback
+    }
+  };
+
   const openDownloadModal = () => {
     setIsDlOpen(true);
     setDlProgress(0);
     setDlReady(false);
+    setDownloadStarted(false);
 
     let p = 0;
     const interval = setInterval(() => {
@@ -100,8 +139,16 @@ export default function App() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
-    setIsDlOpen(false);
-    showToast('MRTelegram-V1.0.apk saved to Downloads folder!');
+    // Trigger celebratory confetti animation in the download modal
+    setDownloadStarted(true);
+    triggerConfetti();
+    showToast('🎉 MRTelegram-V1.0.apk download triggered!');
+
+    // Automatically close modal after user enjoys the confetti celebration
+    setTimeout(() => {
+      setIsDlOpen(false);
+      setDownloadStarted(false);
+    }, 2800);
   };
 
   const scrollToTop = () => {
@@ -796,46 +843,78 @@ export default function App() {
           }}
           className="fixed inset-0 z-50 flex items-center justify-center p-5 bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
         >
-          <div className="bg-[#160f24] border border-white/10 rounded-3xl max-w-[420px] w-full p-7.5 text-center shadow-2xl relative">
+          <div className="bg-[#160f24] border border-white/10 rounded-3xl max-w-[420px] w-full p-7.5 text-center shadow-2xl relative overflow-hidden">
             <button
               onClick={() => setIsDlOpen(false)}
-              className="absolute top-4 right-4 text-[#9a8fb3] hover:text-white text-xl cursor-pointer w-8 h-8 rounded-full flex items-center justify-center bg-white/5"
+              className="absolute top-4 right-4 text-[#9a8fb3] hover:text-white text-xl cursor-pointer w-8 h-8 rounded-full flex items-center justify-center bg-white/5 z-10"
             >
               &times;
             </button>
 
-            <img
-              src={APP_ICON}
-              onError={handleIconError}
-              alt="MRTelegram Icon"
-              className="w-16 h-16 rounded-full mx-auto mb-4 object-cover shadow-xl shadow-blue-500/40 border border-blue-500/40 select-none"
-            />
+            {/* Icon with celebratory pulse when download starts */}
+            <div className={`relative mx-auto mb-4 w-16 h-16 transition-all duration-300 ${downloadStarted ? 'scale-110' : ''}`}>
+              <img
+                src={APP_ICON}
+                onError={handleIconError}
+                alt="MRTelegram Icon"
+                className="w-16 h-16 rounded-full mx-auto object-cover shadow-xl shadow-blue-500/40 border border-blue-500/40 select-none"
+              />
+              {downloadStarted && (
+                <div className="absolute -top-1 -right-1 w-6 h-6 bg-[#59e0a8] text-black font-bold rounded-full flex items-center justify-center text-xs shadow-md animate-bounce">
+                  ✓
+                </div>
+              )}
+            </div>
 
             <h3 className="text-xl font-bold text-white mb-1 font-['Syne',sans-serif]">
-              Downloading MRTelegram
+              {downloadStarted ? 'Download Triggered! 🎉' : 'Downloading MRTelegram'}
             </h3>
             <p className="text-[12.5px] text-[#9a8fb3]">
-              {dlReady ? 'APK package verified (SHA256 signature valid)' : 'Fetching official build from secure mirror...'}
+              {downloadStarted
+                ? 'MRTelegram-V1.0.apk is now downloading to your device!'
+                : dlReady
+                ? 'APK package verified (SHA256 signature valid)'
+                : 'Fetching official build from secure mirror...'}
             </p>
 
             <div className="h-2.5 bg-white/10 rounded-full overflow-hidden my-5">
               <div
-                className="h-full bg-gradient-to-r from-[#8b5cf6] via-[#ec4899] to-[#f97316] rounded-full transition-all duration-120"
+                className={`h-full rounded-full transition-all duration-120 ${
+                  downloadStarted
+                    ? 'bg-gradient-to-r from-[#10b981] to-[#59e0a8]'
+                    : 'bg-gradient-to-r from-[#8b5cf6] via-[#ec4899] to-[#f97316]'
+                }`}
                 style={{ width: `${dlProgress}%` }}
               />
             </div>
 
             <div className="flex justify-between text-[11.5px] text-[#5e5573] font-mono mb-4.5">
               <span>{((dlProgress / 100) * 68.4).toFixed(1)} MB / 68.4 MB</span>
-              <span>{dlProgress}%</span>
+              <span className={downloadStarted ? 'text-[#59e0a8] font-bold' : ''}>
+                {downloadStarted ? 'Complete ✓' : `${dlProgress}%`}
+              </span>
             </div>
 
-            {dlReady ? (
+            {downloadStarted ? (
+              <div className="space-y-2.5">
+                <div className="w-full bg-gradient-to-r from-[#10b981] via-[#059669] to-[#047857] text-white font-bold py-3.5 rounded-2xl text-sm shadow-xl shadow-emerald-500/25 flex items-center justify-center gap-2">
+                  <Check className="w-4 h-4 text-white" />
+                  <span>Download Started! Check Downloads</span>
+                </div>
+                <button
+                  onClick={() => setIsDlOpen(false)}
+                  className="w-full bg-white/10 hover:bg-white/15 text-[#f3eefb] font-medium py-2 rounded-xl text-xs transition-colors cursor-pointer"
+                >
+                  Done
+                </button>
+              </div>
+            ) : dlReady ? (
               <button
                 onClick={saveApkFile}
-                className="w-full bg-gradient-to-r from-[#8b5cf6] via-[#ec4899] to-[#f97316] text-white font-bold py-3.5 rounded-2xl text-sm shadow-xl hover:brightness-110 active:scale-98 transition-all cursor-pointer"
+                className="w-full bg-gradient-to-r from-[#8b5cf6] via-[#ec4899] to-[#f97316] text-white font-bold py-3.5 rounded-2xl text-sm shadow-xl hover:brightness-110 active:scale-98 transition-all cursor-pointer flex items-center justify-center gap-2"
               >
-                Save MRTelegram V1.0.apk
+                <Download className="w-4 h-4" />
+                <span>Save MRTelegram V1.0.apk</span>
               </button>
             ) : (
               <button

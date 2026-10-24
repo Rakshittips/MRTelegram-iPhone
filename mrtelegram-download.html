@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 <style>
   :root{
     --bg:#0a0612;
@@ -714,6 +715,36 @@
     if (e.target === document.getElementById("dlModal")) closeDownloadModal();
   }
 
+  function triggerConfetti() {
+    if (typeof confetti === 'function') {
+      confetti({
+        particleCount: 85,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#ec4899', '#8b5cf6', '#f97316', '#59e0a8', '#38bdf8', '#ffd166'],
+        zIndex: 99999
+      });
+      setTimeout(function() {
+        confetti({
+          particleCount: 45,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0.2, y: 0.65 },
+          colors: ['#ec4899', '#8b5cf6', '#f97316', '#59e0a8'],
+          zIndex: 99999
+        });
+        confetti({
+          particleCount: 45,
+          angle: 120,
+          spread: 55,
+          origin: { x: 0.8, y: 0.65 },
+          colors: ['#ec4899', '#8b5cf6', '#f97316', '#59e0a8'],
+          zIndex: 99999
+        });
+      }, 200);
+    }
+  }
+
   function saveApkFile() {
     var content = "MRTelegram Android Client APK V1.0\nPackage: org.telegram.mrtelegram\nBuild: arm64-v8a\nDeveloper: Rakshittips\nSHA256: 7f83b12c8a92e105d4508ecbb71e271a0670d8a1e2bf656096dfdb3a19";
     var blob = new Blob([content], { type: "application/vnd.android.package-archive" });
@@ -726,8 +757,15 @@
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
-    closeDownloadModal();
-    showToast("MRTelegram-V1.0.apk saved to Downloads folder!");
+    triggerConfetti();
+    var btn = document.getElementById("mActionBtn");
+    btn.style.background = "linear-gradient(135deg, #10b981, #059669)";
+    btn.innerHTML = '<i class="fa-solid fa-check"></i> Download Triggered! 🎉';
+    showToast("🎉 MRTelegram-V1.0.apk download triggered!");
+
+    setTimeout(function() {
+      closeDownloadModal();
+    }, 2800);
   }
 
   function openAboutModal() {
