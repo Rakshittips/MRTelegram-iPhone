@@ -19,6 +19,7 @@ import {
   Copy,
   ExternalLink,
   Sparkles,
+  FileText,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -54,6 +55,45 @@ export default function App() {
 
   // About Me modal state
   const [isAboutMeOpen, setIsAboutMeOpen] = useState(false);
+
+  // README.md modal state
+  const [isReadmeOpen, setIsReadmeOpen] = useState(false);
+
+  const README_CONTENT = `# MRTelegram V1.0 (arm64-v8a)
+Official iOS-styled Telegram Client for Android by Rakshit Dhakariya (@Rakshittips)
+
+## ⚡ Highlights
+- Authentic iOS Liquid physics & Cupertino bar
+- 30+ extra settings (Anti-Delete, Hide Channel Checks, Phone Masking)
+- 16x Parallel Download accelerator
+- Studio voice note noise suppression
+- Local Premium reactions & badges
+
+## 🚀 Installation
+1. Install MRTelegram-V1.0.apk (68.4 MB · arm64-v8a)
+2. Allow Unknown Sources in Android Settings
+3. Set Battery Optimization to Unrestricted in App Info
+4. Login with Telegram OTP code
+
+Support & Donate UPI: rakshitdhakariya6@oksbi`;
+
+  const copyReadme = () => {
+    navigator.clipboard.writeText(README_CONTENT);
+    showToast('README.md copied to clipboard!');
+  };
+
+  const downloadReadme = () => {
+    const blob = new Blob([README_CONTENT], { type: 'text/markdown' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'README.md';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('README.md download started!');
+  };
 
   // Toast notification
   const [toastMsg, setToastMsg] = useState<string | null>(null);
@@ -182,6 +222,15 @@ export default function App() {
           </a>
 
           <div className="flex items-center gap-2 sm:gap-3">
+            <button
+              onClick={() => setIsReadmeOpen(true)}
+              className="text-[12px] sm:text-[12.5px] font-semibold bg-white/10 hover:bg-white/15 border border-white/15 hover:border-white/25 px-3 py-2 rounded-full flex items-center gap-1.5 cursor-pointer text-white transition-all shadow-sm active:scale-95"
+              title="README.md Documentation"
+            >
+              <FileText className="w-3.5 h-3.5 text-[#b79bfb]" />
+              <span>README.md</span>
+            </button>
+
             <button
               onClick={() => setIsDonateOpen(true)}
               className="text-[12px] sm:text-[12.5px] font-semibold bg-[#ec4899]/15 hover:bg-[#ec4899]/25 border border-[#ec4899]/30 hover:border-[#ec4899]/50 px-3.5 sm:px-4 py-2 rounded-full flex items-center gap-1.5 cursor-pointer text-[#f592c0] transition-all shadow-sm active:scale-95"
@@ -684,6 +733,15 @@ export default function App() {
               </button>
 
               <button
+                onClick={() => setIsReadmeOpen(true)}
+                className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 text-xs font-semibold px-4 py-2.5 rounded-full transition-all cursor-pointer shadow-xs active:scale-95"
+                title="View project README.md"
+              >
+                <FileText className="w-3.5 h-3.5 text-[#8b5cf6]" />
+                <span>README.md</span>
+              </button>
+
+              <button
                 onClick={() => setIsDonateOpen(true)}
                 className="inline-flex items-center gap-2 bg-pink-50 hover:bg-pink-100 border border-pink-200 text-[#ec4899] text-xs font-bold px-4 py-2.5 rounded-full transition-all cursor-pointer shadow-xs active:scale-95"
               >
@@ -1012,6 +1070,116 @@ export default function App() {
             >
               Close
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* README.MD MODAL */}
+      {isReadmeOpen && (
+        <div
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setIsReadmeOpen(false);
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
+        >
+          <div className="bg-[#160f24] border border-white/10 rounded-3xl max-w-[560px] w-full p-6 sm:p-7 shadow-2xl relative max-h-[88vh] flex flex-col">
+            <button
+              onClick={() => setIsReadmeOpen(false)}
+              className="absolute top-4 right-4 text-[#9a8fb3] hover:text-white text-xl cursor-pointer w-8 h-8 rounded-full flex items-center justify-center bg-white/5 transition-colors z-10"
+            >
+              &times;
+            </button>
+
+            {/* Header */}
+            <div className="flex items-center gap-3.5 mb-4 shrink-0">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#8b5cf6] to-[#ec4899] flex items-center justify-center text-white text-xl shadow-lg shadow-purple-500/25 shrink-0">
+                <FileText className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h3 className="text-xl font-bold text-white font-['Syne',sans-serif]">
+                    README.md
+                  </h3>
+                  <span className="text-[10.5px] font-mono px-2 py-0.5 rounded-full bg-[#8b5cf6]/20 text-[#b79bfb] border border-[#8b5cf6]/30">
+                    V1.0 Official
+                  </span>
+                </div>
+                <div className="text-xs text-[#9a8fb3]">Documentation &amp; Project Specifications</div>
+              </div>
+            </div>
+
+            {/* Content area */}
+            <div className="flex-1 overflow-y-auto space-y-3 pr-1 text-xs text-[#9a8fb3] leading-relaxed">
+              <div className="p-3.5 bg-[#1a1128] border border-white/8 rounded-2xl">
+                <div className="text-[13px] font-bold text-white mb-1 font-['Syne',sans-serif] flex items-center gap-1.5">
+                  <span>📱</span> Overview
+                </div>
+                <p>
+                  <strong>MRTelegram</strong> delivers authentic iOS fluid animations, Dynamic Island style pill headers, Cupertino context menus, and iOS 18 glass styling to Android.
+                </p>
+              </div>
+
+              <div className="p-3.5 bg-[#1a1128] border border-white/8 rounded-2xl">
+                <div className="text-[13px] font-bold text-white mb-1.5 font-['Syne',sans-serif] flex items-center gap-1.5">
+                  <span>⚡</span> Key Features &amp; Tweaks
+                </div>
+                <ul className="space-y-1.5 list-disc pl-4 text-[11.5px]">
+                  <li><strong className="text-white">iOS Physics &amp; Themes</strong>: Switch seamlessly between iOS 18 liquid aesthetic and Telegram default.</li>
+                  <li><strong className="text-white">Typography</strong>: SF Pro Display (iOS), Samsung One UI 6, Linotte, Rubrik Sans.</li>
+                  <li><strong className="text-white">Anti-Delete</strong>: Messages deleted by sender remain saved locally on your phone.</li>
+                  <li><strong className="text-white">Stealth Reading</strong>: Read channel posts without triggering read checkmarks.</li>
+                  <li><strong className="text-white">Turbo Parallel Streaming</strong>: 16x parallel chunks for unthrottled downloads.</li>
+                  <li><strong className="text-white">Local Premium</strong>: Unlocks interface premium badges, extra reactions, and 4GB limits locally.</li>
+                </ul>
+              </div>
+
+              <div className="p-3.5 bg-[#1a1128] border border-white/8 rounded-2xl">
+                <div className="text-[13px] font-bold text-white mb-1 font-['Syne',sans-serif] flex items-center gap-1.5">
+                  <span>🚀</span> Installation Instructions
+                </div>
+                <ol className="space-y-1 list-decimal pl-4 text-[11.5px]">
+                  <li>Download <code>MRTelegram-V1.0.apk</code> (68.4 MB · arm64-v8a).</li>
+                  <li>Enable <em>Install Unknown Apps</em> permission if prompted by Android.</li>
+                  <li>Log in via your phone number with official Telegram security SMS/OTP.</li>
+                  <li>Set Battery Optimization to <em>Unrestricted</em> in App Info for timely background alerts.</li>
+                </ol>
+              </div>
+
+              <div className="p-3.5 bg-[#1a1128] border border-white/8 rounded-2xl">
+                <div className="text-[13px] font-bold text-white mb-1 font-['Syne',sans-serif] flex items-center gap-1.5">
+                  <span>🔒</span> Security &amp; Privacy
+                </div>
+                <p className="text-[11.5px]">
+                  MRTelegram connects directly to official Telegram MTProto endpoints. No telemetry, third-party trackers, or ads are included. 100% free and open community mod.
+                </p>
+              </div>
+            </div>
+
+            {/* Bottom Actions */}
+            <div className="pt-4 mt-3 border-t border-white/8 flex items-center gap-2 shrink-0">
+              <button
+                onClick={copyReadme}
+                className="flex-1 bg-white/10 hover:bg-white/15 text-white font-bold text-xs py-2.5 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1.5"
+              >
+                <Copy className="w-3.5 h-3.5" />
+                <span>Copy README.md</span>
+              </button>
+
+              <button
+                onClick={downloadReadme}
+                className="flex-1 bg-white/10 hover:bg-white/15 text-white font-bold text-xs py-2.5 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1.5"
+              >
+                <Download className="w-3.5 h-3.5 text-[#b79bfb]" />
+                <span>Download .md</span>
+              </button>
+
+              <button
+                onClick={() => setIsReadmeOpen(false)}
+                className="px-5 bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] hover:brightness-110 text-white font-bold text-xs py-2.5 rounded-xl transition-all cursor-pointer"
+              >
+                Close
+              </button>
+            </div>
           </div>
         </div>
       )}
