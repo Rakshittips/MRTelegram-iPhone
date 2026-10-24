@@ -228,6 +228,9 @@
       MRTelegram
     </a>
     <div style="display:flex; align-items:center; gap:8px;">
+      <button class="nav-cta" onclick="openReadmeModal()" style="border-color:rgba(139,92,246,0.3); color:#b79bfb;">
+        <i class="fa-solid fa-file-lines" style="color:#b79bfb;"></i> README.md
+      </button>
       <button class="nav-cta" onclick="openDonateModal()" style="border-color:rgba(236,72,153,0.3); color:#f592c0; background:rgba(236,72,153,0.12);">
         <i class="fa-solid fa-heart" style="color:#ec4899;"></i> Support &amp; Donate
       </button>
@@ -498,6 +501,9 @@
         <button onclick="openAboutModal()" style="display:inline-flex; align-items:center; gap:6px; background:#fff; border:1px solid #e5e7eb; color:#1f2937; font-size:12px; font-weight:600; padding:8px 14px; border-radius:20px; cursor:pointer;">
           <i class="fa-solid fa-user" style="color:#ec4899;"></i> About Me
         </button>
+        <button onclick="openReadmeModal()" style="display:inline-flex; align-items:center; gap:6px; background:#fff; border:1px solid #e5e7eb; color:#1f2937; font-size:12px; font-weight:600; padding:8px 14px; border-radius:20px; cursor:pointer;">
+          <i class="fa-solid fa-file-lines" style="color:#8b5cf6;"></i> README.md
+        </button>
         <button onclick="openDonateModal()" style="display:inline-flex; align-items:center; gap:6px; background:#fdf2f8; border:1px solid #fbcfe8; color:#db2777; font-size:12px; font-weight:600; padding:8px 14px; border-radius:20px; cursor:pointer;">
           <i class="fa-solid fa-heart" style="color:#ec4899;"></i> Support &amp; Donate
         </button>
@@ -621,6 +627,72 @@
     </button>
 </div>
 
+<!-- README.MD MODAL -->
+<div class="modal-backdrop" id="readmeModal" onclick="closeReadmeOnBackdrop(event)">
+  <div class="modal-card" style="max-width:560px; max-height:88vh; display:flex; flex-direction:column;">
+    <button class="modal-close" onclick="closeReadmeModal()">&times;</button>
+    
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px; flex-shrink:0;">
+      <div style="width:44px; height:44px; border-radius:14px; background:linear-gradient(135deg,#8b5cf6,#ec4899); display:flex; align-items:center; justify-content:center; color:#fff; font-size:20px; box-shadow:0 6px 18px rgba(139,92,246,0.35);">
+        <i class="fa-solid fa-file-lines"></i>
+      </div>
+      <div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <h3 style="font-family:'Syne',sans-serif; font-size:19px; font-weight:700;">README.md</h3>
+          <span style="font-size:10.5px; font-family:monospace; padding:2px 8px; border-radius:99px; background:rgba(139,92,246,0.2); color:#b79bfb; border:1px solid rgba(139,92,246,0.3);">V1.0 Official</span>
+        </div>
+        <p style="font-size:11.5px; color:var(--sub);">Documentation &amp; Project Specifications</p>
+      </div>
+    </div>
+
+    <div style="flex:1; overflow-y:auto; padding-right:4px; font-size:12px; color:var(--sub); line-height:1.6;">
+      <div style="background:var(--panel-2); border:1px solid var(--line); border-radius:14px; padding:14px; margin-bottom:10px;">
+        <div style="font-size:13px; font-weight:700; color:#fff; margin-bottom:4px;">📱 Overview</div>
+        <p><strong>MRTelegram</strong> delivers authentic iOS fluid animations, Dynamic Island style pill headers, Cupertino context menus, and iOS 18 glass styling to Android.</p>
+      </div>
+
+      <div style="background:var(--panel-2); border:1px solid var(--line); border-radius:14px; padding:14px; margin-bottom:10px;">
+        <div style="font-size:13px; font-weight:700; color:#fff; margin-bottom:6px;">⚡ Key Features &amp; Tweaks</div>
+        <ul style="padding-left:18px; font-size:11.5px;">
+          <li><strong style="color:#fff;">iOS Physics &amp; Themes</strong>: Switch between iOS 18 liquid aesthetic and Telegram default.</li>
+          <li><strong style="color:#fff;">Typography</strong>: SF Pro Display (iOS), Samsung One UI 6, Linotte, Rubrik Sans.</li>
+          <li><strong style="color:#fff;">Anti-Delete</strong>: Messages deleted by sender remain saved locally on your phone.</li>
+          <li><strong style="color:#fff;">Stealth Reading</strong>: Read channel posts without triggering read checkmarks.</li>
+          <li><strong style="color:#fff;">Turbo Parallel Streaming</strong>: 16x parallel chunks for unthrottled downloads.</li>
+          <li><strong style="color:#fff;">Local Premium</strong>: Unlocks interface premium badges, extra reactions, and 4GB limits locally.</li>
+        </ul>
+      </div>
+
+      <div style="background:var(--panel-2); border:1px solid var(--line); border-radius:14px; padding:14px; margin-bottom:10px;">
+        <div style="font-size:13px; font-weight:700; color:#fff; margin-bottom:4px;">🚀 Installation Guide</div>
+        <ol style="padding-left:18px; font-size:11.5px;">
+          <li>Download <code>MRTelegram-V1.0.apk</code> (68.4 MB · arm64-v8a).</li>
+          <li>Enable <em>Install Unknown Apps</em> if prompted.</li>
+          <li>Log in via your phone number with official Telegram SMS/OTP.</li>
+          <li>Set Battery Optimization to <em>Unrestricted</em> in App Info for on-time push alerts.</li>
+        </ol>
+      </div>
+
+      <div style="background:var(--panel-2); border:1px solid var(--line); border-radius:14px; padding:14px;">
+        <div style="font-size:13px; font-weight:700; color:#fff; margin-bottom:4px;">🔒 Security &amp; Privacy</div>
+        <p style="font-size:11.5px;">MRTelegram connects directly to official Telegram MTProto endpoints. No telemetry, third-party trackers, or ads are included. 100% free and open community mod.</p>
+      </div>
+    </div>
+
+    <div style="padding-top:12px; margin-top:10px; border-top:1px solid var(--line); display:flex; gap:8px; flex-shrink:0;">
+      <button onclick="copyReadmeText()" class="btn-secondary" style="flex:1; justify-content:center; font-size:12px; padding:10px; border-radius:10px; cursor:pointer;">
+        <i class="fa-solid fa-copy"></i> Copy README.md
+      </button>
+      <button onclick="downloadReadmeFile()" class="btn-secondary" style="flex:1; justify-content:center; font-size:12px; padding:10px; border-radius:10px; cursor:pointer; color:#b79bfb;">
+        <i class="fa-solid fa-download"></i> Download .md
+      </button>
+      <button onclick="closeReadmeModal()" class="btn-primary" style="font-size:12px; padding:10px 18px; border-radius:10px; cursor:pointer;">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- TOAST -->
 <div class="toast" id="toast">Notification</div>
 
@@ -632,6 +704,36 @@
     el.classList.add("show");
     clearTimeout(toastTimer);
     toastTimer = setTimeout(function(){ el.classList.remove("show"); }, 2400);
+  }
+
+  // README.md modal handlers
+  var readmeContent = "# MRTelegram V1.0 (arm64-v8a)\\nOfficial iOS-styled Telegram Client for Android by Rakshit Dhakariya (@Rakshittips)\\n\\nSupport: UPI rakshitdhakariya6@oksbi";
+  function openReadmeModal() {
+    document.getElementById("readmeModal").classList.add("open");
+  }
+  function closeReadmeModal() {
+    document.getElementById("readmeModal").classList.remove("open");
+  }
+  function closeReadmeOnBackdrop(e) {
+    if (e.target === document.getElementById("readmeModal")) closeReadmeModal();
+  }
+  function copyReadmeText() {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(readmeContent);
+    }
+    showToast("README.md copied to clipboard!");
+  }
+  function downloadReadmeFile() {
+    var blob = new Blob([readmeContent], { type: "text/markdown" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "README.md";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast("README.md download started!");
   }
 
   // Support & Donate
