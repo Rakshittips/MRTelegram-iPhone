@@ -19,6 +19,7 @@
     --sub:#9a8fb3;
     --faint:#5e5573;
     --grad:linear-gradient(135deg,#8b5cf6,#ec4899 55%,#f97316);
+    --accent:#59e0a8;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
@@ -61,10 +62,10 @@
   .hero-stats div .num{font-family:'Syne',sans-serif; font-weight:700; font-size:20px;}
   .hero-stats div .lbl{font-size:11px; color:var(--faint); margin-top:2px;}
 
-  .dl-row{display:flex; align-items:center; gap:14px; margin-top:30px; flex-wrap:wrap;}
+  .dl-row{display:flex; align-items:center; gap:12px; margin-top:30px; flex-wrap:wrap;}
   .btn-primary{
     background:var(--grad); color:#fff; font-weight:700; font-size:14px;
-    padding:15px 26px; border-radius:14px; display:inline-flex; align-items:center; gap:10px;
+    padding:15px 24px; border-radius:14px; display:inline-flex; align-items:center; gap:10px;
     box-shadow:0 14px 30px -12px rgba(236,72,153,0.55); border:0; cursor:pointer; font-family:inherit;
     transition:transform .15s ease, filter .15s ease;
   }
@@ -81,17 +82,14 @@
   .hero-visual{background:var(--panel); border:1px solid var(--line); border-radius:26px; padding:26px; position:relative; overflow:hidden;}
   .hero-visual::before{content:''; position:absolute; inset:0; background:radial-gradient(circle at 70% 0%, rgba(139,92,246,0.18), transparent 60%); pointer-events:none;}
   .hv-head{display:flex; align-items:center; gap:12px; position:relative;}
-  .hv-icon{width:44px; height:44px; border-radius:13px; background:var(--grad); display:flex; align-items:center; justify-content:center; font-size:19px; color:#fff;}
   .hv-head .name{font-weight:700; font-size:14.5px;}
   .hv-head .ver{font-size:11px; color:var(--faint);}
   .hv-bars{margin-top:22px; display:flex; flex-direction:column; gap:10px; position:relative;}
   .hv-bar{
     background:var(--panel-2); border:1px solid var(--line); border-radius:11px;
     padding:11px 13px; display:flex; align-items:center; gap:10px; font-size:12px; color:var(--sub);
-    cursor:pointer; transition:background .15s, transform .15s; user-select:none;
+    transition:background .15s; user-select:none;
   }
-  .hv-bar:hover{background:rgba(255,255,255,0.06); color:var(--text);}
-  .hv-bar:active{transform:scale(0.98);}
   .hv-bar i{font-size:13px; color:#b79bfb; width:16px;}
   .hv-bar .tick{margin-left:auto; color:#59e0a8; font-size:12px;}
 
@@ -109,17 +107,11 @@
   .grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:16px;}
   .card{
     background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:22px;
-    cursor:pointer; transition:border-color .2s, transform .2s, background .2s; position:relative;
+    transition:border-color .2s, transform .2s, background .2s; position:relative;
   }
   .card:hover{border-color:rgba(255,255,255,0.22); background:var(--panel-2); transform:translateY(-2px);}
   .card .card-head{display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;}
   .card .ic{width:38px; height:38px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:15px;}
-  .card .try-badge{
-    font-size:11px; font-weight:700; color:#b79bfb; background:rgba(139,92,246,0.12);
-    padding:4px 8px; border-radius:6px; display:flex; align-items:center; gap:4px;
-    transition:background .2s, color .2s;
-  }
-  .card:hover .try-badge{background:var(--grad); color:#fff;}
   .ic-purple{background:rgba(139,92,246,0.16); color:#b79bfb;}
   .ic-pink{background:rgba(236,72,153,0.16); color:#f592c0;}
   .ic-orange{background:rgba(249,115,22,0.16); color:#ffab6b;}
@@ -156,42 +148,7 @@
   .btn-download:active{transform:scale(0.98);}
   .dl-note{font-size:10.5px; color:var(--faint); text-align:center; margin-top:12px; line-height:1.5;}
 
-  /* SUPPORT CARD */
-  .support-card{
-    background:linear-gradient(135deg, rgba(139,92,246,0.14), rgba(249,115,22,0.08));
-    border:1px solid rgba(139,92,246,0.25); border-radius:22px; padding:32px; text-align:center;
-  }
-  .support-card .orb{
-    width:48px; height:48px; margin:0 auto 16px; border-radius:14px; background:var(--grad);
-    display:flex; align-items:center; justify-content:center; font-size:19px; color:#fff;
-    box-shadow:0 14px 30px -12px rgba(236,72,153,0.5);
-  }
-  .support-card h2{font-family:'Syne',sans-serif; font-size:21px; font-weight:700; margin-bottom:10px;}
-  .support-card p{font-size:13px; color:var(--sub); max-width:380px; margin:0 auto 22px; line-height:1.6;}
-  .btn-support{
-    display:inline-flex; align-items:center; gap:9px; background:var(--grad); color:#fff;
-    font-weight:700; font-size:13.5px; padding:14px 28px; border-radius:13px;
-    box-shadow:0 14px 28px -12px rgba(139,92,246,0.5); transition:transform .15s;
-  }
-  .btn-support:hover{transform:translateY(-2px);}
-  .support-methods{display:flex; justify-content:center; gap:10px; margin-top:20px;}
-  .support-methods .m{
-    width:38px; height:38px; border-radius:11px; background:var(--panel-2); border:1px solid var(--line);
-    display:flex; align-items:center; justify-content:center; color:var(--sub); font-size:14px;
-    cursor:pointer; transition:background .15s, color .15s;
-  }
-  .support-methods .m:hover{background:rgba(255,255,255,0.1); color:#fff;}
-
-  /* FOOTER LINKS */
-  .footer-links{display:flex; flex-direction:column; gap:12px; margin-bottom:26px;}
-  .flink{
-    display:flex; align-items:center; justify-content:center; gap:10px;
-    background:var(--panel); border:1px solid var(--line); border-radius:999px;
-    padding:15px 20px; font-size:13px; font-weight:600; color:var(--text);
-    transition:background .2s, border-color .2s;
-  }
-  .flink:hover{background:var(--panel-2); border-color:rgba(255,255,255,0.15);}
-  .flink svg{width:17px; height:17px; flex-shrink:0;}
+  /* FOOTER */
   .foot-credit{text-align:center; font-size:11.5px; color:var(--sub); margin-bottom:8px;}
   .foot-credit strong{background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent;}
   .foot-legal{text-align:center; font-size:10.5px; color:var(--faint); line-height:1.6; max-width:420px; margin:0 auto;}
@@ -224,39 +181,17 @@
     position:absolute; top:18px; right:18px; background:none; border:none;
     color:var(--sub); font-size:22px; cursor:pointer; line-height:1;
   }
-  .m-icon{
-    width:52px; height:52px; border-radius:15px; background:var(--grad);
-    margin:0 auto 14px; display:flex; align-items:center; justify-content:center; font-size:22px; color:#fff;
-  }
   .p-track{height:8px; background:rgba(255,255,255,0.08); border-radius:99px; overflow:hidden; margin:20px 0 10px;}
   .p-fill{height:100%; width:0%; background:var(--grad); border-radius:99px; transition:width .12s;}
 
-  /* Interactive Feature Dialog Components */
-  .feat-ctrl-row{
-    display:flex; justify-content:space-between; align-items:center; padding:12px 14px;
-    background:rgba(255,255,255,0.04); border-radius:12px; margin-bottom:8px;
+  /* Amount selector */
+  .opt-amt{
+    background:rgba(255,255,255,0.05); border:1px solid var(--line); color:var(--sub);
+    padding:8px 4px; border-radius:10px; font-weight:700; font-size:12px; cursor:pointer;
+    transition:all .15s; font-family:inherit;
   }
-  .feat-tog{
-    width:44px; height:26px; border-radius:99px; background:#383145; position:relative;
-    cursor:pointer; transition:background .2s;
-  }
-  .feat-tog.on{background:#30d158;}
-  .feat-tog::after{
-    content:""; position:absolute; top:2px; left:2px; width:22px; height:22px;
-    border-radius:50%; background:#fff; transition:transform .2s;
-  }
-  .feat-tog.on::after{transform:translateX(18px);}
-  
-  .opt-pill{
-    padding:8px 12px; border-radius:10px; font-size:12.5px; font-weight:600; cursor:pointer;
-    background:rgba(255,255,255,0.05); color:var(--sub); transition:all .15s; border:1px solid transparent;
-  }
-  .opt-pill.active{background:rgba(139,92,246,0.2); color:#b79bfb; border-color:rgba(139,92,246,0.4);}
-  .opt-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin:14px 0;}
-
-  /* Waveform equalizer */
-  .eq-bar{width:4px; border-radius:2px; background:#59e0a8; animation:bounce 0.8s ease-in-out infinite alternate;}
-  @keyframes bounce{from{height:6px;}to{height:24px;}}
+  .opt-amt:hover{background:rgba(255,255,255,0.1); color:#fff;}
+  .opt-amt.active{background:var(--grad); color:#fff; border-color:transparent;}
 
   /* Toast Notification */
   .toast{
@@ -292,8 +227,8 @@
       MRTelegram
     </a>
     <div style="display:flex; align-items:center; gap:8px;">
-      <button class="nav-cta" onclick="openDownloadModal()">
-        <i class="fa-solid fa-download"></i> Download APK
+      <button class="nav-cta" onclick="openDonateModal()" style="border-color:rgba(236,72,153,0.3); color:#f592c0; background:rgba(236,72,153,0.12);">
+        <i class="fa-solid fa-heart" style="color:#ec4899;"></i> Support &amp; Donate
       </button>
     </div>
   </nav>
@@ -303,7 +238,7 @@
     <div>
       <div class="eyebrow"><i class="fa-solid fa-bolt"></i> MRTelegram · V1.0</div>
       <h1>Telegram iPhone, restyled <em>the way you want it.</em></h1>
-      <p class="lead">An iOS look for Telegram on Android, plus extra settings for your chat list, conversations, privacy and downloads, all in one build.</p>
+      <p class="lead">An authentic iOS look for Telegram on Android, plus 30+ extra controls for your chat list, conversations, privacy and turbo downloads.</p>
 
       <div class="hero-stats">
         <div><div class="num">30+</div><div class="lbl">extra settings</div></div>
@@ -316,6 +251,10 @@
           <i class="fa-solid fa-download"></i> Download APK
         </button>
         
+        <button onclick="openDonateModal()" class="btn-secondary" style="border-color:rgba(236,72,153,0.3); color:#f592c0; background:rgba(236,72,153,0.12); cursor:pointer;">
+          <i class="fa-solid fa-heart" style="color:#ec4899;"></i> Support &amp; Donate
+        </button>
+
         <a href="#features" class="btn-secondary">
           <i class="fa-solid fa-list-check"></i> See all features
         </a>
@@ -328,159 +267,146 @@
         <img src="./assets/aistudio/skygram_icon_foregroun_d_d937c502.png" onerror="this.onerror=null; this.src='./public/assets/aistudio/skygram_icon_foregroun_d_d937c502.png';" alt="MRTelegram" style="width:44px; height:44px; border-radius:50%; object-fit:cover; box-shadow:0 4px 14px rgba(30,77,239,0.5); border:1px solid rgba(59,130,246,0.3);" />
         <div>
           <div class="name">MRTelegram</div>
-          <div class="ver" id="masterCustomState">Enable customizations · On</div>
+          <div class="ver" id="masterCustomState">Custom settings hub · Active</div>
         </div>
       </div>
       <div class="hv-bars">
-        
-        <div class="hv-bar" onclick="tryHeroSetting('general')">
+        <div class="hv-bar">
           <i class="fa-solid fa-sliders"></i> General Settings 
-          <span class="tick"><i class="fa-solid fa-chevron-right" style="font-size:11px;color:var(--faint)"></i></span>
+          <span class="tick"><i class="fa-solid fa-check" style="font-size:11px;color:var(--accent);"></i></span>
         </div>
-        <div class="hv-bar" onclick="tryHeroSetting('home')">
+        <div class="hv-bar">
           <i class="fa-solid fa-house"></i> Home Screen 
-          <span class="tick"><i class="fa-solid fa-chevron-right" style="font-size:11px;color:var(--faint)"></i></span>
+          <span class="tick"><i class="fa-solid fa-check" style="font-size:11px;color:var(--accent);"></i></span>
         </div>
-        <div class="hv-bar" onclick="tryHeroSetting('conversation')">
+        <div class="hv-bar">
           <i class="fa-solid fa-comments"></i> Conversation Screen 
-          <span class="tick"><i class="fa-solid fa-chevron-right" style="font-size:11px;color:var(--faint)"></i></span>
+          <span class="tick"><i class="fa-solid fa-check" style="font-size:11px;color:var(--accent);"></i></span>
         </div>
-        <div class="hv-bar" onclick="tryHeroSetting('privacy')">
+        <div class="hv-bar">
           <i class="fa-solid fa-lock"></i> Privacy and Security 
-          <span class="tick"><i class="fa-solid fa-chevron-right" style="font-size:11px;color:var(--faint)"></i></span>
+          <span class="tick"><i class="fa-solid fa-check" style="font-size:11px;color:var(--accent);"></i></span>
         </div>
-        <div class="hv-bar" onclick="tryHeroSetting('notifications')">
+        <div class="hv-bar">
           <i class="fa-solid fa-bell"></i> Notification preferences 
-          <span class="tick"><i class="fa-solid fa-chevron-right" style="font-size:11px;color:var(--faint)"></i></span>
+          <span class="tick"><i class="fa-solid fa-check" style="font-size:11px;color:var(--accent);"></i></span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- FEATURES (Click any card to try it!) -->
+  <!-- FEATURES -->
   <section id="features" class="divider">
     <div class="section-head">
       <div class="kicker">FEATURES</div>
       <h2>Everything the settings screens give you</h2>
-      <p>Click any card below to test and try that exact tool live in your browser!</p>
+      <p>Comprehensive overview of customizations, privacy controls, and iOS UI enhancements in MRTelegram.</p>
     </div>
 
     <div class="grid">
       <!-- 1 -->
-      <div class="card" onclick="openToolTry('style')">
+      <div class="card">
         <div class="card-head">
           <div class="ic ic-blue"><i class="fa-brands fa-apple"></i></div>
-          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
         </div>
         <h3>iOS interface style</h3>
-        <p>Switch between Telegram (default) and iOS. Screens not yet adapted keep the official look.</p>
+        <p>Switch between Telegram (default) and iOS fluid physics. Screens not yet adapted keep the official look.</p>
       </div>
 
       <!-- 2 -->
-      <div class="card" onclick="openToolTry('font')">
+      <div class="card">
         <div class="card-head">
           <div class="ic ic-purple"><i class="fa-solid fa-font"></i></div>
-          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
         </div>
         <h3>App font</h3>
         <p>Pick iOS, SF Pro Text, Samsung One UI, Linotte, Rubrik, Expletus Sans or your system font.</p>
       </div>
 
       <!-- 3 -->
-      <div class="card" onclick="openToolTry('speed')">
+      <div class="card">
         <div class="card-head">
           <div class="ic ic-green"><i class="fa-solid fa-gauge-high"></i></div>
-          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
         </div>
         <h3>Faster downloads and uploads</h3>
         <p>Transfers files in parallel, with a download acceleration level you choose.</p>
       </div>
 
       <!-- 4 -->
-      <div class="card" onclick="openToolTry('home')">
+      <div class="card">
         <div class="card-head">
           <div class="ic ic-orange"><i class="fa-solid fa-house"></i></div>
-          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
         </div>
         <h3>Home screen</h3>
         <p>Hide the All folder or search bar, change folder style, and show two or three lines per chat.</p>
       </div>
 
       <!-- 5 -->
-      <div class="card" onclick="openToolTry('checks')">
+      <div class="card">
         <div class="card-head">
           <div class="ic ic-pink"><i class="fa-solid fa-check-double"></i></div>
-          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
         </div>
         <h3>Hide read checks in channels</h3>
         <p>Removes sent and read checks in channels only. Chats and groups stay normal.</p>
       </div>
 
       <!-- 6 -->
-      <div class="card" onclick="openToolTry('conv')">
+      <div class="card">
         <div class="card-head">
           <div class="ic ic-blue"><i class="fa-solid fa-comments"></i></div>
-          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
         </div>
         <h3>Conversation screen</h3>
         <p>iOS-style header, input bar, search circle and context menu, plus translation and system emojis.</p>
       </div>
 
       <!-- 7 -->
-      <div class="card" onclick="openToolTry('stickers')">
+      <div class="card">
         <div class="card-head">
           <div class="ic ic-purple"><i class="fa-regular fa-face-smile"></i></div>
-          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
         </div>
         <h3>Stickers and bubbles</h3>
         <p>Resize stickers with a live preview and choose your bubble style.</p>
       </div>
 
       <!-- 8 -->
-      <div class="card" onclick="openToolTry('voice')">
+      <div class="card">
         <div class="card-head">
           <div class="ic ic-green"><i class="fa-solid fa-microphone"></i></div>
-          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
         </div>
         <h3>Voice messages</h3>
         <p>Reduces noise and echo and evens out volume while you record.</p>
       </div>
 
       <!-- 9 -->
-      <div class="card" onclick="openToolTry('antidelete')">
+      <div class="card">
         <div class="card-head">
           <div class="ic ic-red"><i class="fa-solid fa-trash-can-arrow-up"></i></div>
-          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
         </div>
         <h3>View deleted messages</h3>
         <p>Keeps messages deleted after you received them and marks them as deleted on your phone.</p>
       </div>
 
       <!-- 10 -->
-      <div class="card" onclick="openToolTry('phone')">
+      <div class="card">
         <div class="card-head">
           <div class="ic ic-orange"><i class="fa-solid fa-eye-slash"></i></div>
-          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
         </div>
         <h3>Hide phone number</h3>
         <p>Hides your number inside the MRTelegram interface. Telegram privacy settings do not change.</p>
       </div>
 
       <!-- 11 -->
-      <div class="card" onclick="openToolTry('premium')">
+      <div class="card">
         <div class="card-head">
           <div class="ic ic-pink"><i class="fa-solid fa-star"></i></div>
-          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
         </div>
         <h3>Local Premium</h3>
         <p>Treats your account as Premium inside the app, so interface premium features work without a subscription.</p>
       </div>
 
       <!-- 12 -->
-      <div class="card" onclick="openToolTry('notif')">
+      <div class="card">
         <div class="card-head">
           <div class="ic ic-green"><i class="fa-solid fa-bell"></i></div>
-          <span class="try-badge">Try it <i class="fa-solid fa-arrow-right"></i></span>
         </div>
         <h3>Notification preferences</h3>
         <p>Permanent notification and a status list for permission, push service and battery optimization.</p>
@@ -493,7 +419,8 @@
     <div class="dl-panel">
       <div>
         <h2>Ready to install</h2>
-        <p>One APK, installed like any other app. Log in with your Telegram number as usual.</p>
+        <p>One file, installed like any other Android app. Log in with your Telegram account.</p>
+
         <div class="dl-meta">
           <div><div class="v">V1.0</div><div class="k">version</div></div>
           <div><div class="v">68.4 MB</div><div class="k">file size</div></div>
@@ -517,37 +444,70 @@
     </div>
   </section>
 
-    <!-- DEVELOPER SECTION -->
-  <section id="developer" class="divider">
-    <!-- RAKSHITTIPS BY DEVELOPER CARD -->
-      <div style="background:#ffffff; color:#111827; border-radius:26px; padding:24px;  text-align:left; box-shadow:0 20px 40px rgba(0,0,0,0.35);">
-        <div style="display:flex; align-items:center; gap:16px; margin-bottom:18px;">
-          <div style="width:60px; height:60px; border-radius:50%; background:linear-gradient(135deg, #8b5cf6, #ec4899, #f97316); display:flex; align-items:center; justify-content:center; color:#fff; font-size:24px; flex-shrink:0; box-shadow:0 8px 20px rgba(236,72,153,0.3);">
-            <i class="fa-solid fa-robot"></i>
-          </div>
-          <div>
-            <div style="font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:#111827;">Rakshittips by Developer</div>
-            <div style="display:inline-block; font-size:11px; font-weight:700; color:#059669; background:#ecfdf5; border:1px solid #a7f3d0; padding:2px 10px; border-radius:20px; margin:4px 0;">
-              ✓ Rakshit Dhakariya
-            </div>
-            <div style="font-size:12px; color:#4b5563; font-weight:500;">
-              Solo Developer • Android Mods, iOS Experience Ports &amp; Open Utilities
-            </div>
-          </div>
-        </div>
+  <!-- RAKSHITTIPS SUPPORT & DONATE -->
+  <section id="donate" class="divider">
+    <div style="background:linear-gradient(135deg, rgba(139,92,246,0.14), rgba(236,72,153,0.12)); border:1px solid rgba(236,72,153,0.3); border-radius:26px; padding:36px; text-align:center;">
+      <div style="display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:800; color:#f592c0; background:rgba(236,72,153,0.15); border:1px solid rgba(236,72,153,0.3); padding:4px 12px; border-radius:999px; margin-bottom:12px;">
+        <i class="fa-solid fa-heart" style="color:#ec4899;"></i> Rakshittips Community Support
+      </div>
+      <h2 style="font-family:'Syne',sans-serif; font-size:24px; font-weight:700; margin-bottom:10px;">Rakshittips Support &amp; Donate</h2>
+      <p style="font-size:13.5px; color:var(--sub); max-width:460px; margin:0 auto 20px; line-height:1.6;">
+        MRTelegram is 100% free and ad-free. If this iOS Telegram mod helps your messaging, support developer <strong>Rakshit Dhakariya</strong> directly via UPI!
+      </p>
 
-        <div style="display:flex; flex-wrap:wrap; gap:8px; border-top:1px solid #f3f4f6; padding-top:14px;">
-          <button onclick="openAboutModal()" style="display:inline-flex; align-items:center; gap:6px; background:#fff; border:1px solid #e5e7eb; color:#1f2937; font-size:12px; font-weight:600; padding:8px 14px; border-radius:20px; cursor:pointer;">
-            <i class="fa-solid fa-user" style="color:#ec4899;"></i> About Me
+      <div style="max-width:400px; margin:0 auto 20px; background:#160f24; border:1px solid var(--line); border-radius:18px; padding:18px; text-align:center;">
+        <div style="font-size:10.5px; font-weight:700; color:var(--faint); text-transform:uppercase; letter-spacing:0.04em;">Official UPI ID</div>
+        <div style="font-size:16px; font-weight:700; font-family:monospace; color:#59e0a8; margin:6px 0 14px;">rakshitdhakariya6@oksbi</div>
+        <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+          <button onclick="copyUpiId()" class="btn-primary" style="font-size:12.5px; padding:10px 18px; border-radius:10px;">
+            <i class="fa-solid fa-copy"></i> Copy UPI ID
           </button>
-          <a href="https://youtube.com/@rakshittips" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:6px; background:#fff; border:1px solid #e5e7eb; color:#1f2937; font-size:12px; font-weight:600; padding:8px 14px; border-radius:20px; text-decoration:none;">
-            <i class="fa-brands fa-youtube" style="color:#ef4444;"></i> YouTube
-          </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:6px; background:#fff; border:1px solid #e5e7eb; color:#1f2937; font-size:12px; font-weight:600; padding:8px 14px; border-radius:20px; text-decoration:none;">
-            <i class="fa-brands fa-instagram" style="color:#e1306c;"></i> Instagram
+          <a href="upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshit%20Dhakariya&cu=INR" class="btn-secondary" style="font-size:12.5px; padding:10px 18px; border-radius:10px; color:#59e0a8; border-color:rgba(89,224,168,0.3); background:rgba(89,224,168,0.1);">
+            <i class="fa-solid fa-mobile-screen-button"></i> Pay via UPI
           </a>
         </div>
       </div>
+
+      <button onclick="openDonateModal()" class="btn-secondary" style="cursor:pointer; font-size:12.5px; padding:10px 20px; border-radius:12px;">
+        <i class="fa-solid fa-qrcode" style="color:#ec4899;"></i> Show QR Code &amp; Select Amount
+      </button>
+    </div>
+  </section>
+
+  <!-- DEVELOPER SECTION -->
+  <section id="developer" class="divider">
+    <!-- RAKSHITTIPS BY DEVELOPER CARD -->
+    <div style="background:#ffffff; color:#111827; border-radius:26px; padding:24px; text-align:left; box-shadow:0 20px 40px rgba(0,0,0,0.35);">
+      <div style="display:flex; align-items:center; gap:16px; margin-bottom:18px;">
+        <div style="width:60px; height:60px; border-radius:50%; background:linear-gradient(135deg, #8b5cf6, #ec4899, #f97316); display:flex; align-items:center; justify-content:center; color:#fff; font-size:24px; flex-shrink:0; box-shadow:0 8px 20px rgba(236,72,153,0.3);">
+          <i class="fa-solid fa-robot"></i>
+        </div>
+        <div>
+          <div style="font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:#111827;">Rakshittips by Developer</div>
+          <div style="display:inline-block; font-size:11px; font-weight:700; color:#059669; background:#ecfdf5; border:1px solid #a7f3d0; padding:2px 10px; border-radius:20px; margin:4px 0;">
+            ✓ Rakshit Dhakariya
+          </div>
+          <div style="font-size:12px; color:#4b5563; font-weight:500;">
+            Solo Developer • Android Mods, iOS Experience Ports &amp; Open Utilities
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-wrap:wrap; gap:8px; border-top:1px solid #f3f4f6; padding-top:14px;">
+        <button onclick="openAboutModal()" style="display:inline-flex; align-items:center; gap:6px; background:#fff; border:1px solid #e5e7eb; color:#1f2937; font-size:12px; font-weight:600; padding:8px 14px; border-radius:20px; cursor:pointer;">
+          <i class="fa-solid fa-user" style="color:#ec4899;"></i> About Me
+        </button>
+        <button onclick="openDonateModal()" style="display:inline-flex; align-items:center; gap:6px; background:#fdf2f8; border:1px solid #fbcfe8; color:#db2777; font-size:12px; font-weight:600; padding:8px 14px; border-radius:20px; cursor:pointer;">
+          <i class="fa-solid fa-heart" style="color:#ec4899;"></i> Support &amp; Donate
+        </button>
+        <a href="https://youtube.com/@rakshittips" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:6px; background:#fff; border:1px solid #e5e7eb; color:#1f2937; font-size:12px; font-weight:600; padding:8px 14px; border-radius:20px; text-decoration:none;">
+          <i class="fa-brands fa-youtube" style="color:#ef4444;"></i> YouTube
+        </a>
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:6px; background:#fff; border:1px solid #e5e7eb; color:#1f2937; font-size:12px; font-weight:600; padding:8px 14px; border-radius:20px; text-decoration:none;">
+          <i class="fa-brands fa-instagram" style="color:#e1306c;"></i> Instagram
+        </a>
+      </div>
+    </div>
   </section>
 
   <!-- FOOTER -->
@@ -584,25 +544,51 @@
   </div>
 </div>
 
-<!-- INTERACTIVE "TRY THIS FEATURE" MODAL -->
-<div class="modal-backdrop" id="tryModal" onclick="closeTryOnBackdrop(event)">
-  <div class="modal-card">
-    <button class="modal-close" onclick="closeTryModal()">&times;</button>
+<!-- RAKSHITTIPS SUPPORT & DONATE MODAL -->
+<div class="modal-backdrop" id="donateModal" onclick="closeDonateOnBackdrop(event)">
+  <div class="modal-card" style="text-align:center;">
+    <button class="modal-close" onclick="closeDonateModal()">&times;</button>
     
-    <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
-      <div id="tryIconBox" style="width:40px; height:40px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:16px;"></div>
-      <div>
-        <h3 id="tryTitle" style="font-size:17px; font-weight:700;">Feature Test</h3>
-        <p id="trySub" style="font-size:11.5px; color:var(--faint);">MRTelegram Live Simulator</p>
+    <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:14px;">
+      <div style="width:44px; height:44px; border-radius:14px; background:linear-gradient(135deg,#ec4899,#f97316); display:flex; align-items:center; justify-content:center; color:#fff; font-size:20px; box-shadow:0 6px 18px rgba(236,72,153,0.35);">
+        <i class="fa-solid fa-heart"></i>
+      </div>
+      <div style="text-align:left;">
+        <h3 style="font-family:'Syne',sans-serif; font-size:18px; font-weight:700;">Support &amp; Donate</h3>
+        <p style="font-size:11.5px; color:var(--sub);">Rakshittips (Rakshit Dhakariya)</p>
       </div>
     </div>
 
-    <!-- Dynamic Interactive Body -->
-    <div id="tryBody" style="margin-bottom:20px;"></div>
+    <div style="background:#130c20; border:1px solid var(--line); border-radius:16px; padding:14px; margin-bottom:14px;">
+      <div style="background:#fff; border-radius:12px; padding:10px; display:inline-block; margin-bottom:8px;">
+        <img id="upiQrImg" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi%3A%2F%2Fpay%3Fpa%3Drakshitdhakariya6%40oksbi%26pn%3DRakshit%2520Dhakariya%26am%3D100%26cu%3DINR" alt="UPI QR Code" style="width:140px; height:140px; display:block;" />
+      </div>
+      <div style="font-size:11.5px; font-weight:700; color:#fff;">Scan via GPay, PhonePe, Paytm, BHIM</div>
+      <div style="font-size:11px; font-family:monospace; color:#59e0a8; margin-top:2px;">Amount: <span id="amtLabel">₹100</span></div>
+    </div>
 
-    <button class="btn-primary" style="width:100%; justify-content:center; font-size:13.5px; padding:12px;" onclick="closeTryModal()">
-      Apply &amp; Done
-    </button>
+    <!-- Amount Selector -->
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-bottom:14px;">
+      <button onclick="setDonateAmt(50, this)" class="opt-amt">₹50</button>
+      <button onclick="setDonateAmt(100, this)" class="opt-amt active">₹100</button>
+      <button onclick="setDonateAmt(200, this)" class="opt-amt">₹200</button>
+      <button onclick="setDonateAmt(500, this)" class="opt-amt">₹500</button>
+    </div>
+
+    <!-- UPI ID Copy Bar -->
+    <div style="background:rgba(255,255,255,0.04); border:1px solid var(--line); border-radius:12px; padding:10px 14px; display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+      <div style="text-align:left;">
+        <div style="font-size:9.5px; color:var(--faint); font-weight:700;">UPI ID</div>
+        <div style="font-size:12.5px; font-family:monospace; color:#59e0a8; font-weight:700;">rakshitdhakariya6@oksbi</div>
+      </div>
+      <button onclick="copyUpiId()" class="btn-secondary" style="padding:6px 12px; font-size:11px; border-radius:8px; cursor:pointer;">
+        <i class="fa-solid fa-copy"></i> Copy
+      </button>
+    </div>
+
+    <a id="upiPayLink" href="upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshit%20Dhakariya&am=100&cu=INR" class="btn-primary" style="width:100%; justify-content:center; font-size:13px; padding:12px; border-radius:12px;">
+      <i class="fa-solid fa-bolt"></i> Pay via UPI App
+    </a>
   </div>
 </div>
 
@@ -629,7 +615,10 @@
       <a href="https://youtube.com/@rakshittips" target="_blank" rel="noopener noreferrer" style="text-align:center; padding:9px; background:#fef2f2; color:#ef4444; font-size:12px; font-weight:700; border-radius:10px; text-decoration:none;"><i class="fa-brands fa-youtube"></i> YouTube</a>
       <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" style="text-align:center; padding:9px; background:#fdf2f8; color:#db2777; font-size:12px; font-weight:700; border-radius:10px; text-decoration:none;"><i class="fa-brands fa-instagram"></i> Instagram</a>
     </div>
-    <button onclick="closeAboutModal()" class="btn-primary" style="width:100%; justify-content:center; background:#111827; font-size:12px; padding:10px; cursor:pointer;">Close</button>
+    <button onclick="closeAboutModal(); openDonateModal();" class="btn-primary" style="width:100%; justify-content:center; background:#ec4899; font-size:12px; padding:10px; cursor:pointer; margin-bottom:8px;">
+      <i class="fa-solid fa-heart"></i> Donate &amp; Support (rakshitdhakariya6@oksbi)
+    </button>
+    <button onclick="closeAboutModal()" class="btn-secondary" style="width:100%; justify-content:center; font-size:12px; padding:10px; cursor:pointer;">Close</button>
   </div>
 </div>
 
@@ -646,298 +635,31 @@
     toastTimer = setTimeout(function(){ el.classList.remove("show"); }, 2400);
   }
 
-  // Hero Card Click to Open Group Settings
-  function tryHeroSetting(type) {
-    if(type === 'general') openToolTry('style');
-    else if(type === 'home') openToolTry('home');
-    else if(type === 'conversation') openToolTry('conv');
-    else if(type === 'privacy') openToolTry('antidelete');
-    else if(type === 'notifications') openToolTry('notif');
+  // Support & Donate
+  var currentAmt = 100;
+  function openDonateModal() {
+    document.getElementById("donateModal").classList.add("open");
   }
-
-  // Interactive Live Tool Tester
-  function openToolTry(toolId) {
-    var modal = document.getElementById("tryModal");
-    var title = document.getElementById("tryTitle");
-    var iconBox = document.getElementById("tryIconBox");
-    var body = document.getElementById("tryBody");
-
-    modal.classList.add("open");
-
-    if (toolId === 'style') {
-      iconBox.className = "ic-blue";
-      iconBox.innerHTML = '<i class="fa-brands fa-apple"></i>';
-      title.textContent = "iOS Interface Style";
-      body.innerHTML = `
-        <p style="font-size:13px; color:var(--sub); margin-bottom:12px;">Choose your client visual presentation:</p>
-        <div class="opt-grid">
-          <div class="opt-pill active" onclick="setOpt(this, 'Applied iOS 18 liquid theme')"><i class="fa-brands fa-apple"></i> iOS 18 Fluid</div>
-          <div class="opt-pill" onclick="setOpt(this, 'Applied Telegram default theme')"><i class="fa-brands fa-telegram"></i> Telegram Default</div>
-        </div>
-        <div class="feat-ctrl-row">
-          <span style="font-size:13px; font-weight:600;">Enable spring bounce physics</span>
-          <div class="feat-tog on" onclick="this.classList.toggle('on'); showToast('Spring bounce physics updated');"></div>
-        </div>
-      `;
-    } 
-    else if (toolId === 'font') {
-      iconBox.className = "ic-purple";
-      iconBox.innerHTML = '<i class="fa-solid fa-font"></i>';
-      title.textContent = "App Font Preview";
-      body.innerHTML = `
-        <div style="background:#0e0817; border:1px solid var(--line); border-radius:12px; padding:12px; margin-bottom:12px; text-align:center;">
-          <div id="fontSample" style="font-size:16px; font-weight:700; color:#fff;">Cupertino SF Pro Display</div>
-          <div style="font-size:11px; color:var(--faint); margin-top:2px;">Sample: 35,702 messages · 10:42 AM</div>
-        </div>
-        <div class="opt-grid">
-          <div class="opt-pill active" onclick="setAppFont(this, 'SF Pro Display')">SF Pro (iOS)</div>
-          <div class="opt-pill" onclick="setAppFont(this, 'Samsung One UI')">One UI 6</div>
-          <div class="opt-pill" onclick="setAppFont(this, 'Linotte')">Linotte</div>
-          <div class="opt-pill" onclick="setAppFont(this, 'Rubrik')">Rubrik Sans</div>
-        </div>
-      `;
-    }
-    else if (toolId === 'speed') {
-      iconBox.className = "ic-green";
-      iconBox.innerHTML = '<i class="fa-solid fa-gauge-high"></i>';
-      title.textContent = "Turbo Speed Accelerator";
-      body.innerHTML = `
-        <div class="feat-ctrl-row">
-          <div><b style="font-size:13px;">Parallel Download Streams</b><div style="font-size:11px; color:var(--faint);">Chunks per file</div></div>
-          <span style="color:#59e0a8; font-weight:700; font-size:14px;">16x Turbo</span>
-        </div>
-        <div class="feat-ctrl-row">
-          <div><b style="font-size:13px;">Upload Fastlane Buffer</b><div style="font-size:11px; color:var(--faint);">Reduces chunk delays</div></div>
-          <div class="feat-tog on" onclick="this.classList.toggle('on'); showToast('Upload Fastlane updated');"></div>
-        </div>
-        <div style="background:rgba(89,224,168,0.1); border:1px solid rgba(89,224,168,0.3); border-radius:10px; padding:10px; font-size:12px; color:#59e0a8; text-align:center;">
-          <i class="fa-solid fa-bolt"></i> Benchmarked: <strong>94.2 MB/s</strong> transfer rate active
-        </div>
-      `;
-    }
-    else if (toolId === 'home') {
-      iconBox.className = "ic-orange";
-      iconBox.innerHTML = '<i class="fa-solid fa-house"></i>';
-      title.textContent = "Home Screen Customizer";
-      body.innerHTML = `
-        <div class="feat-ctrl-row">
-          <span style="font-size:13px; font-weight:600;">Hide "All" folder tab</span>
-          <div class="feat-tog on" onclick="this.classList.toggle('on'); showToast('Hide All folder updated');"></div>
-        </div>
-        <div class="feat-ctrl-row">
-          <span style="font-size:13px; font-weight:600;">Hide search box bar</span>
-          <div class="feat-tog" onclick="this.classList.toggle('on'); showToast('Search box visibility updated');"></div>
-        </div>
-        <div class="feat-ctrl-row">
-          <span style="font-size:13px; font-weight:600;">Chat row layout</span>
-          <span style="font-size:12px; font-weight:700; color:#ffab6b;">2 Lines (Compact)</span>
-        </div>
-      `;
-    }
-    else if (toolId === 'checks') {
-      iconBox.className = "ic-pink";
-      iconBox.innerHTML = '<i class="fa-solid fa-check-double"></i>';
-      title.textContent = "Channel Stealth Reading";
-      body.innerHTML = `
-        <div style="background:#1a1128; border-radius:12px; padding:14px; margin-bottom:12px;">
-          <div style="font-size:11px; color:var(--faint); margin-bottom:6px;">Live Channel Post Preview:</div>
-          <div style="background:#28183c; border-radius:10px; padding:10px; font-size:13px; display:flex; justify-content:space-between; align-items:flex-end;">
-            <span>MRTelegram update v10.8.2 is live!</span>
-            <span id="checkIconDemo" style="color:var(--faint); font-size:11px;"><i class="fa-solid fa-eye-slash"></i> Hidden</span>
-          </div>
-        </div>
-        <div class="feat-ctrl-row">
-          <span style="font-size:13px; font-weight:600;">Hide read checks in channels</span>
-          <div class="feat-tog on" onclick="toggleChannelChecks(this)"></div>
-        </div>
-      `;
-    }
-    else if (toolId === 'conv') {
-      iconBox.className = "ic-blue";
-      iconBox.innerHTML = '<i class="fa-solid fa-comments"></i>';
-      title.textContent = "Conversation Experience";
-      body.innerHTML = `
-        <div class="feat-ctrl-row">
-          <span style="font-size:13px; font-weight:600;">iOS-style rounded input bar</span>
-          <div class="feat-tog on" onclick="this.classList.toggle('on'); showToast('Input bar style updated');"></div>
-        </div>
-        <div class="feat-ctrl-row">
-          <span style="font-size:13px; font-weight:600;">Cupertino haptic context menu</span>
-          <div class="feat-tog on" onclick="this.classList.toggle('on'); showToast('Context menu style updated');"></div>
-        </div>
-        <div class="feat-ctrl-row">
-          <span style="font-size:13px; font-weight:600;">Instant bubble translator</span>
-          <div class="feat-tog on" onclick="this.classList.toggle('on'); showToast('Translation button active');"></div>
-        </div>
-      `;
-    }
-    else if (toolId === 'stickers') {
-      iconBox.className = "ic-purple";
-      iconBox.innerHTML = '<i class="fa-regular fa-face-smile"></i>';
-      title.textContent = "Stickers & Bubble Resizer";
-      body.innerHTML = `
-        <div style="text-align:center; padding:14px; background:#0e0817; border-radius:12px; margin-bottom:14px;">
-          <span id="stickerPreview" style="font-size:32px; display:inline-block; transition:transform 0.15s;">🎉</span>
-          <div style="font-size:11px; color:var(--faint); margin-top:6px;">Preview Size: <span id="stickerPx" style="color:#b79bfb; font-weight:700;">14</span></div>
-        </div>
-        <label style="font-size:12px; color:var(--sub); display:block; margin-bottom:6px;">Resize Slider (10 to 22):</label>
-        <input type="range" min="10" max="22" value="14" style="width:100%; accent-color:#8b5cf6;" oninput="updateStickerSize(this.value)">
-      `;
-    }
-    else if (toolId === 'voice') {
-      iconBox.className = "ic-green";
-      iconBox.innerHTML = '<i class="fa-solid fa-microphone"></i>';
-      title.textContent = "Voice Message Optimizer";
-      body.innerHTML = `
-        <div style="background:#1a1128; border-radius:12px; padding:14px; display:flex; align-items:center; gap:12px; margin-bottom:12px;">
-          <button onclick="playVoiceTest(this)" style="width:36px; height:36px; border-radius:50%; background:#59e0a8; border:none; color:#000; display:flex; align-items:center; justify-content:center; cursor:pointer;"><i class="fa-solid fa-play"></i></button>
-          <div style="display:flex; align-items:center; gap:3px; height:24px; flex:1;">
-            <div class="eq-bar" style="animation-delay:0.1s"></div>
-            <div class="eq-bar" style="animation-delay:0.3s"></div>
-            <div class="eq-bar" style="animation-delay:0.2s"></div>
-            <div class="eq-bar" style="animation-delay:0.5s"></div>
-            <div class="eq-bar" style="animation-delay:0.4s"></div>
-            <div class="eq-bar" style="animation-delay:0.2s"></div>
-          </div>
-          <span style="font-size:12px; font-mono; color:#59e0a8;">0:14</span>
-        </div>
-        <div class="feat-ctrl-row">
-          <span style="font-size:13px; font-weight:600;">Studio Noise Suppression</span>
-          <div class="feat-tog on" onclick="this.classList.toggle('on'); showToast('Studio noise suppression toggled');"></div>
-        </div>
-      `;
-    }
-    else if (toolId === 'antidelete') {
-      iconBox.className = "ic-red";
-      iconBox.innerHTML = '<i class="fa-solid fa-trash-can-arrow-up"></i>';
-      title.textContent = "Anti-Delete Message Guard";
-      body.innerHTML = `
-        <div style="background:#1c0f1a; border:1px solid rgba(244,82,122,0.3); border-radius:12px; padding:12px; margin-bottom:12px;">
-          <div style="font-size:11px; color:#ff7f9c; font-weight:700; margin-bottom:4px;"><i class="fa-solid fa-shield-halved"></i> Preserved Revoked Chat:</div>
-          <div style="font-size:13px; color:#fff;">"Hey, let's meet at 8pm!"</div>
-          <div style="font-size:10px; color:#ff7f9c; margin-top:4px;">Deleted by sender · Saved locally on phone</div>
-        </div>
-        <div class="feat-ctrl-row">
-          <span style="font-size:13px; font-weight:600;">Keep revoked messages</span>
-          <div class="feat-tog on" onclick="this.classList.toggle('on'); showToast('Anti-Delete guard active');"></div>
-        </div>
-      `;
-    }
-    else if (toolId === 'phone') {
-      iconBox.className = "ic-orange";
-      iconBox.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
-      title.textContent = "Phone Number Privacy";
-      body.innerHTML = `
-        <div style="background:#1a1128; border-radius:12px; padding:14px; text-align:center; margin-bottom:12px;">
-          <div style="font-size:11px; color:var(--faint);">Interface Display Number:</div>
-          <div id="phoneMaskDisplay" style="font-size:17px; font-weight:700; color:#ffab6b; margin-top:4px;">••••••••••••••</div>
-        </div>
-        <div class="feat-ctrl-row">
-          <span style="font-size:13px; font-weight:600;">Hide number inside UI</span>
-          <div class="feat-tog on" onclick="togglePhoneMask(this)"></div>
-        </div>
-      `;
-    }
-    else if (toolId === 'premium') {
-      iconBox.className = "ic-pink";
-      iconBox.innerHTML = '<i class="fa-solid fa-star"></i>';
-      title.textContent = "Local Premium Unlock";
-      body.innerHTML = `
-        <div style="background:rgba(236,72,153,0.1); border:1px solid rgba(236,72,153,0.3); border-radius:12px; padding:12px; margin-bottom:12px;">
-          <div style="font-weight:700; font-size:13px; color:#f592c0;"><i class="fa-solid fa-crown"></i> Premium Features Active:</div>
-          <div style="font-size:11.5px; color:var(--sub); margin-top:4px;">• 4GB Upload file badges<br>• Custom animated emoji reactions<br>• Zero download limits</div>
-        </div>
-        <div class="feat-ctrl-row">
-          <span style="font-size:13px; font-weight:600;">Treat account as Local Premium</span>
-          <div class="feat-tog on" onclick="this.classList.toggle('on'); showToast('Local Premium toggled');"></div>
-        </div>
-      `;
-    }
-    else if (toolId === 'notif') {
-      iconBox.className = "ic-green";
-      iconBox.innerHTML = '<i class="fa-solid fa-bell"></i>';
-      title.textContent = "Notification Diagnostics";
-      body.innerHTML = `
-        <div class="feat-ctrl-row" onclick="cycleStatus(this, 'Notification Permission')">
-          <span style="font-size:13px; font-weight:600;">Notification Permission</span>
-          <span class="opt-pill active">Allowed</span>
-        </div>
-        <div class="feat-ctrl-row" onclick="cycleStatus(this, 'Push Background Daemon')">
-          <span style="font-size:13px; font-weight:600;">Push Daemon</span>
-          <span class="opt-pill active">Active</span>
-        </div>
-        <div class="feat-ctrl-row" onclick="cycleStatus(this, 'Battery Optimization')">
-          <span style="font-size:13px; font-weight:600;">Battery Optimization</span>
-          <span class="opt-pill active">Unrestricted</span>
-        </div>
-      `;
-    }
+  function closeDonateModal() {
+    document.getElementById("donateModal").classList.remove("open");
   }
-
-  function closeTryModal() {
-    document.getElementById("tryModal").classList.remove("open");
+  function closeDonateOnBackdrop(e) {
+    if (e.target === document.getElementById("donateModal")) closeDonateModal();
   }
-  function closeTryOnBackdrop(e) {
-    if (e.target === document.getElementById("tryModal")) closeTryModal();
+  function setDonateAmt(amt, btn) {
+    currentAmt = amt;
+    document.querySelectorAll(".opt-amt").forEach(function(b){ b.classList.remove("active"); });
+    if(btn) btn.classList.add("active");
+    document.getElementById("amtLabel").textContent = "₹" + amt;
+    document.getElementById("upiQrImg").src = "https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi%3A%2F%2Fpay%3Fpa%3Drakshitdhakariya6%40oksbi%26pn%3DRakshit%2520Dhakariya%26am%3D" + amt + "%26cu%3DINR";
+    document.getElementById("upiPayLink").href = "upi://pay?pa=rakshitdhakariya6@oksbi&pn=Rakshit%20Dhakariya&am=" + amt + "&cu=INR";
   }
-
-  // Interactive callbacks
-  function setOpt(el, toastText) {
-    el.parentNode.querySelectorAll(".opt-pill").forEach(p => p.classList.remove("active"));
-    el.classList.add("active");
-    showToast(toastText);
-  }
-
-  function setAppFont(el, fontName) {
-    el.parentNode.querySelectorAll(".opt-pill").forEach(p => p.classList.remove("active"));
-    el.classList.add("active");
-    document.getElementById("fontSample").textContent = fontName;
-    showToast("Font changed to " + fontName);
-  }
-
-  function updateStickerSize(val) {
-    document.getElementById("stickerPx").textContent = val;
-    var scale = val / 14;
-    document.getElementById("stickerPreview").style.transform = "scale(" + scale + ")";
-  }
-
-  function toggleChannelChecks(tog) {
-    tog.classList.toggle("on");
-    var isHidden = tog.classList.contains("on");
-    var demo = document.getElementById("checkIconDemo");
-    if(isHidden) {
-      demo.innerHTML = '<i class="fa-solid fa-eye-slash"></i> Hidden';
-      demo.style.color = "var(--faint)";
-      showToast("Channel read checks: Hidden");
-    } else {
-      demo.innerHTML = '<i class="fa-solid fa-check-double" style="color:#59e0a8"></i> Read';
-      demo.style.color = "#59e0a8";
-      showToast("Channel read checks: Visible");
+  function copyUpiId() {
+    var upi = "rakshitdhakariya6@oksbi";
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(upi);
     }
-  }
-
-  function togglePhoneMask(tog) {
-    tog.classList.toggle("on");
-    var isMasked = tog.classList.contains("on");
-    document.getElementById("phoneMaskDisplay").textContent = isMasked ? "••••••••••••••" : "+1 (555) 019-2834";
-    showToast("Phone number display: " + (isMasked ? "Masked" : "Revealed"));
-  }
-
-  function playVoiceTest(btn) {
-    showToast("Playing 0:14 studio noise-canceled voice note sample...");
-  }
-
-  function cycleStatus(row, name) {
-    var pill = row.querySelector(".opt-pill");
-    if(pill.textContent === "Allowed" || pill.textContent === "Active" || pill.textContent === "Unrestricted") {
-      pill.textContent = "Disabled";
-      pill.classList.remove("active");
-      showToast(name + ": Disabled");
-    } else {
-      pill.textContent = "Allowed";
-      pill.classList.add("active");
-      showToast(name + ": Enabled");
-    }
+    showToast("UPI ID copied: " + upi);
   }
 
   // Download simulation
@@ -1008,7 +730,6 @@
     showToast("MRTelegram-V1.0.apk saved to Downloads folder!");
   }
 
-
   function openAboutModal() {
     document.getElementById("aboutModal").classList.add("open");
   }
@@ -1018,7 +739,6 @@
   function closeAboutOnBackdrop(e) {
     if (e.target === document.getElementById("aboutModal")) closeAboutModal();
   }
-
 </script>
 </body>
 </html>

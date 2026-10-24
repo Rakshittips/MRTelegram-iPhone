@@ -3,45 +3,26 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Download,
   Check,
   Star,
-  ChevronRight,
-  MessageSquare,
-  Phone,
   User,
-  Settings as SettingsIcon,
   Shield,
   Zap,
   Volume2,
-  Trash2,
   EyeOff,
-  UserCheck,
-  Lock,
-  Moon,
-  Info,
-  Search,
-  Users,
-  X,
-  Battery,
-  Wifi,
-  Radio,
-  Music,
-  Play,
-  Pause,
-  ExternalLink,
   Sliders,
-  Send,
-  ArrowRight,
-  Eye,
   CheckCheck,
-  FileDown,
-  Layers,
+  Heart,
+  Copy,
+  ExternalLink,
 } from 'lucide-react';
 
 const APP_ICON = './assets/aistudio/skygram_icon_foregroun_d_d937c502.png';
+const UPI_ID = 'rakshitdhakariya6@oksbi';
+const DEVELOPER_NAME = 'Rakshit Dhakariya';
 
 const handleIconError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
   const target = e.currentTarget;
@@ -58,67 +39,17 @@ export default function App() {
   // Master customizations toggle in Hero Card
   const [masterCustomOn, setMasterCustomOn] = useState(true);
 
-  // Hero Card setting rows state
-  const [settingRows, setSettingRows] = useState({
-    general: true,
-    home: true,
-    conversation: true,
-    privacy: true,
-    notifications: true,
-  });
-
-  // Active Tool Modal: 'style' | 'font' | 'speed' | 'home' | 'checks' | 'conv' | 'stickers' | 'voice' | 'antidelete' | 'phone' | 'premium' | 'notif' | 'review' | null
-  const [activeTool, setActiveTool] = useState<string | null>(null);
-
-  // Feature Tool States for live testing
-  const [iosThemeStyle, setIosThemeStyle] = useState<'ios18' | 'default'>('ios18');
-  const [springBounce, setSpringBounce] = useState(true);
-
-  const [selectedFont, setSelectedFont] = useState('SF Pro Display');
-
-  const [downloadStreams, setDownloadStreams] = useState(16);
-  const [uploadFastlane, setUploadFastlane] = useState(true);
-  const [isSpeedTesting, setIsSpeedTesting] = useState(false);
-  const [speedBenchmark, setSpeedBenchmark] = useState(94.2);
-
-  const [hideAllFolder, setHideAllFolder] = useState(true);
-  const [hideSearchBox, setHideSearchBox] = useState(false);
-  const [chatRowLines, setChatRowLines] = useState<2 | 3>(2);
-
-  const [channelChecksHidden, setChannelChecksHidden] = useState(true);
-
-  const [iosInputBar, setIosInputBar] = useState(true);
-  const [hapticMenu, setHapticMenu] = useState(true);
-  const [bubbleTranslator, setBubbleTranslator] = useState(true);
-  const [chatMessageInput, setChatMessageInput] = useState('Hello from MRTelegram iOS style!');
-
-  const [stickerSize, setStickerSize] = useState(14);
-  const [selectedStickerEmoji, setSelectedStickerEmoji] = useState('🎉');
-  const [bubbleRadius, setBubbleRadius] = useState<'ios' | 'classic' | 'rounded'>('ios');
-
-  const [isVoicePlaying, setIsVoicePlaying] = useState(false);
-  const [voiceSeconds, setVoiceSeconds] = useState(0);
-  const [studioNoiseSuppression, setStudioNoiseSuppression] = useState(true);
-
-  const [antiDeletePreserved, setAntiDeletePreserved] = useState(true);
-  const [deletedMsgRevoked, setDeletedMsgRevoked] = useState(true);
-
-  const [phoneMasked, setPhoneMasked] = useState(true);
-
-  const [localPremiumActive, setLocalPremiumActive] = useState(true);
-
-  const [diagnostics, setDiagnostics] = useState({
-    permission: true,
-    daemon: true,
-    battery: true,
-    autoStart: true,
-  });
-
   // Download simulation modal state
   const [isDlOpen, setIsDlOpen] = useState(false);
   const [dlProgress, setDlProgress] = useState(0);
   const [dlReady, setDlReady] = useState(false);
 
+  // Support & Donate modal state
+  const [isDonateOpen, setIsDonateOpen] = useState(false);
+  const [donateAmount, setDonateAmount] = useState<number>(100);
+  const [copiedUpi, setCopiedUpi] = useState(false);
+
+  // About Me modal state
   const [isAboutMeOpen, setIsAboutMeOpen] = useState(false);
 
   // Toast notification
@@ -131,15 +62,11 @@ export default function App() {
     }, 2500);
   };
 
-  const copyToClipboard = (text: string, label: string) => {
-    navigator.clipboard.writeText(text);
-    showToast(`${label} copied to clipboard!`);
-  };
-
-  const toggleSettingRow = (key: keyof typeof settingRows, label: string) => {
-    const nextVal = !settingRows[key];
-    setSettingRows((prev) => ({ ...prev, [key]: nextVal }));
-    showToast(`${label}: ${nextVal ? 'Enabled' : 'Disabled'}`);
+  const handleCopyUpi = () => {
+    navigator.clipboard.writeText(UPI_ID);
+    setCopiedUpi(true);
+    showToast(`UPI ID copied: ${UPI_ID}`);
+    setTimeout(() => setCopiedUpi(false), 2000);
   };
 
   const openDownloadModal = () => {
@@ -177,42 +104,6 @@ export default function App() {
     showToast('MRTelegram-V1.0.apk saved to Downloads folder!');
   };
 
-  const runSpeedBenchmark = () => {
-    setIsSpeedTesting(true);
-    setSpeedBenchmark(0);
-    let s = 10;
-    const interval = setInterval(() => {
-      s += Math.floor(Math.random() * 18) + 8;
-      if (s >= 94) {
-        setSpeedBenchmark(+(94.2 + (Math.random() * 1.5 - 0.7)).toFixed(1));
-        setIsSpeedTesting(false);
-        clearInterval(interval);
-        showToast('Speed benchmark test complete: Turbo stream maxed!');
-      } else {
-        setSpeedBenchmark(s);
-      }
-    }, 120);
-  };
-
-  // Voice player timer simulation
-  useEffect(() => {
-    let t: any;
-    if (isVoicePlaying) {
-      t = setInterval(() => {
-        setVoiceSeconds((prev) => {
-          if (prev >= 14) {
-            setIsVoicePlaying(false);
-            return 0;
-          }
-          return prev + 1;
-        });
-      }, 1000);
-    } else {
-      setVoiceSeconds(0);
-    }
-    return () => clearInterval(t);
-  }, [isVoicePlaying]);
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -245,11 +136,11 @@ export default function App() {
 
           <div className="flex items-center gap-2 sm:gap-3">
             <button
-              onClick={openDownloadModal}
-              className="text-[12px] sm:text-[12.5px] font-semibold bg-white/10 hover:bg-white/15 border border-white/15 hover:border-white/25 px-4 py-2 rounded-full flex items-center gap-1.5 cursor-pointer text-white transition-all shadow-sm active:scale-95"
+              onClick={() => setIsDonateOpen(true)}
+              className="text-[12px] sm:text-[12.5px] font-semibold bg-[#ec4899]/15 hover:bg-[#ec4899]/25 border border-[#ec4899]/30 hover:border-[#ec4899]/50 px-3.5 sm:px-4 py-2 rounded-full flex items-center gap-1.5 cursor-pointer text-[#f592c0] transition-all shadow-sm active:scale-95"
             >
-              <Download className="w-3.5 h-3.5 text-[#59e0a8]" />
-              <span>Download APK</span>
+              <Heart className="w-3.5 h-3.5 text-[#ec4899] fill-[#ec4899]" />
+              <span>Support &amp; Donate</span>
             </button>
           </div>
         </nav>
@@ -297,6 +188,13 @@ export default function App() {
                 <Download className="w-4 h-4" /> Download APK
               </button>
 
+              <button
+                onClick={() => setIsDonateOpen(true)}
+                className="bg-[#ec4899]/15 hover:bg-[#ec4899]/25 border border-[#ec4899]/30 text-[#f592c0] font-semibold text-[13px] px-5 py-3.5 rounded-2xl inline-flex items-center gap-2 transition-colors cursor-pointer active:scale-95"
+              >
+                <Heart className="w-4 h-4 fill-[#ec4899]" /> Support &amp; Donate
+              </button>
+
               <a
                 href="#features"
                 className="border border-white/10 hover:bg-white/5 text-[#9a8fb3] hover:text-[#f3eefb] font-semibold text-[13px] px-5 py-3.5 rounded-2xl inline-flex items-center gap-1.5 transition-colors"
@@ -306,7 +204,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* Right Hero Card (Fully Interactive settings group) */}
+          {/* Right Hero Card (Preferences Hub Preview) */}
           <div className="md:col-span-5">
             <div className="bg-[#130c20] border border-white/10 rounded-[26px] p-6.5 relative overflow-hidden shadow-2xl">
               <div className="absolute inset-0 bg-radial from-[#8b5cf6]/20 to-transparent pointer-events-none"></div>
@@ -322,7 +220,7 @@ export default function App() {
                   <div>
                     <div className="font-bold text-[15px] text-white">MRTelegram</div>
                     <div className="text-[11px] text-[#5e5573]">
-                      Custom settings hub · Tap any row to test
+                      Custom settings hub
                     </div>
                   </div>
                 </div>
@@ -345,77 +243,62 @@ export default function App() {
 
               <div className="mt-5 flex flex-col gap-2 relative text-xs text-[#9a8fb3]">
                 {/* Row 1: General */}
-                <div
-                  onClick={() => setActiveTool('style')}
-                  className="bg-[#1a1128] hover:bg-white/8 border border-white/8 rounded-[12px] px-3.5 py-2.5 flex items-center justify-between cursor-pointer transition-all active:scale-98 group"
-                >
+                <div className="bg-[#1a1128] border border-white/8 rounded-[12px] px-3.5 py-2.5 flex items-center justify-between transition-colors">
                   <div className="flex items-center gap-2.5">
                     <i className="fa-solid fa-sliders text-[#b79bfb] w-4 text-center"></i>
-                    <span className="font-semibold text-white group-hover:text-[#b79bfb] transition-colors">General Settings</span>
+                    <span className="font-semibold text-white">General Settings</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[10.5px] text-[#5e5573] font-mono">iOS 18 Liquid</span>
-                    <ChevronRight className="w-3.5 h-3.5 text-[#5e5573]" />
+                    <span className="text-[10.5px] text-[#b79bfb] font-mono">iOS 18 Liquid</span>
+                    <Check className="w-3.5 h-3.5 text-[#59e0a8]" />
                   </div>
                 </div>
 
                 {/* Row 2: Home */}
-                <div
-                  onClick={() => setActiveTool('home')}
-                  className="bg-[#1a1128] hover:bg-white/8 border border-white/8 rounded-[12px] px-3.5 py-2.5 flex items-center justify-between cursor-pointer transition-all active:scale-98 group"
-                >
+                <div className="bg-[#1a1128] border border-white/8 rounded-[12px] px-3.5 py-2.5 flex items-center justify-between transition-colors">
                   <div className="flex items-center gap-2.5">
                     <i className="fa-solid fa-house text-[#ffab6b] w-4 text-center"></i>
-                    <span className="font-semibold text-white group-hover:text-[#ffab6b] transition-colors">Home Screen</span>
+                    <span className="font-semibold text-white">Home Screen</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[10.5px] text-[#5e5573] font-mono">2-Line mode</span>
-                    <ChevronRight className="w-3.5 h-3.5 text-[#5e5573]" />
+                    <span className="text-[10.5px] text-[#ffab6b] font-mono">2-Line mode</span>
+                    <Check className="w-3.5 h-3.5 text-[#59e0a8]" />
                   </div>
                 </div>
 
                 {/* Row 3: Conversation */}
-                <div
-                  onClick={() => setActiveTool('conv')}
-                  className="bg-[#1a1128] hover:bg-white/8 border border-white/8 rounded-[12px] px-3.5 py-2.5 flex items-center justify-between cursor-pointer transition-all active:scale-98 group"
-                >
+                <div className="bg-[#1a1128] border border-white/8 rounded-[12px] px-3.5 py-2.5 flex items-center justify-between transition-colors">
                   <div className="flex items-center gap-2.5">
                     <i className="fa-solid fa-comments text-[#7cc0ff] w-4 text-center"></i>
-                    <span className="font-semibold text-white group-hover:text-[#7cc0ff] transition-colors">Conversation Screen</span>
+                    <span className="font-semibold text-white">Conversation Screen</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[10.5px] text-[#5e5573] font-mono">Cupertino bar</span>
-                    <ChevronRight className="w-3.5 h-3.5 text-[#5e5573]" />
+                    <span className="text-[10.5px] text-[#7cc0ff] font-mono">Cupertino bar</span>
+                    <Check className="w-3.5 h-3.5 text-[#59e0a8]" />
                   </div>
                 </div>
 
                 {/* Row 4: Privacy */}
-                <div
-                  onClick={() => setActiveTool('antidelete')}
-                  className="bg-[#1a1128] hover:bg-white/8 border border-white/8 rounded-[12px] px-3.5 py-2.5 flex items-center justify-between cursor-pointer transition-all active:scale-98 group"
-                >
+                <div className="bg-[#1a1128] border border-white/8 rounded-[12px] px-3.5 py-2.5 flex items-center justify-between transition-colors">
                   <div className="flex items-center gap-2.5">
                     <i className="fa-solid fa-shield-halved text-[#ff7f9c] w-4 text-center"></i>
-                    <span className="font-semibold text-white group-hover:text-[#ff7f9c] transition-colors">Privacy & Security</span>
+                    <span className="font-semibold text-white">Privacy &amp; Security</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-[10.5px] text-[#59e0a8] font-mono">Anti-Delete ON</span>
-                    <ChevronRight className="w-3.5 h-3.5 text-[#5e5573]" />
+                    <Check className="w-3.5 h-3.5 text-[#59e0a8]" />
                   </div>
                 </div>
 
                 {/* Row 5: Notifications */}
-                <div
-                  onClick={() => setActiveTool('notif')}
-                  className="bg-[#1a1128] hover:bg-white/8 border border-white/8 rounded-[12px] px-3.5 py-2.5 flex items-center justify-between cursor-pointer transition-all active:scale-98 group"
-                >
+                <div className="bg-[#1a1128] border border-white/8 rounded-[12px] px-3.5 py-2.5 flex items-center justify-between transition-colors">
                   <div className="flex items-center gap-2.5">
                     <i className="fa-solid fa-bell text-[#59e0a8] w-4 text-center"></i>
-                    <span className="font-semibold text-white group-hover:text-[#59e0a8] transition-colors">Notification Preferences</span>
+                    <span className="font-semibold text-white">Notification Preferences</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-[10.5px] text-[#59e0a8] font-mono">Unrestricted</span>
-                    <ChevronRight className="w-3.5 h-3.5 text-[#5e5573]" />
+                    <Check className="w-3.5 h-3.5 text-[#59e0a8]" />
                   </div>
                 </div>
 
@@ -424,32 +307,24 @@ export default function App() {
           </div>
         </div>
 
-        {/* FEATURES (Interactive Cards with "Try it" Live Modals) */}
+        {/* FEATURES (Feature Showcase Cards) */}
         <section id="features" className="py-13 border-t border-white/8">
           <div className="max-w-[560px] mb-8">
-            <div className="text-[11.5px] font-bold text-[#5e5573] tracking-wider mb-2">FEATURES &amp; LIVE TOOLS</div>
+            <div className="text-[11.5px] font-bold text-[#5e5573] tracking-wider mb-2">FEATURES &amp; CAPABILITIES</div>
             <h2 className="text-2xl sm:text-[28px] font-bold leading-[1.15] text-white font-['Syne',sans-serif]">
               Everything the settings screens give you
             </h2>
             <p className="text-[13.5px] text-[#9a8fb3] mt-2.5">
-              Every card below is 100% interactive. Click any feature to open its real testing simulator and experience the tool firsthand!
+              Comprehensive overview of customizations, privacy controls, and iOS UI enhancements built into MRTelegram.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             
             {/* Card 1: iOS Interface Style */}
-            <div
-              onClick={() => setActiveTool('style')}
-              className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#8b5cf6]/40 rounded-[18px] p-5.5 cursor-pointer transition-all hover:-translate-y-1 group"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <div className="w-9.5 h-9.5 rounded-[11px] bg-blue-500/15 text-[#7cc0ff] flex items-center justify-center text-sm">
-                  <i className="fa-brands fa-apple text-base"></i>
-                </div>
-                <span className="text-[11px] font-bold text-[#b79bfb] bg-purple-500/15 group-hover:bg-gradient-to-r group-hover:from-[#8b5cf6] group-hover:to-[#ec4899] group-hover:text-white px-2.5 py-1 rounded-md flex items-center gap-1 transition-all">
-                  Try tool <ArrowRight className="w-3 h-3" />
-                </span>
+            <div className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#8b5cf6]/40 rounded-[18px] p-5.5 transition-all hover:-translate-y-1">
+              <div className="w-9.5 h-9.5 rounded-[11px] bg-blue-500/15 text-[#7cc0ff] flex items-center justify-center text-sm mb-4">
+                <i className="fa-brands fa-apple text-base"></i>
               </div>
               <h3 className="text-[14.5px] font-bold text-white mb-1.5">iOS interface style</h3>
               <p className="text-[12.5px] text-[#9a8fb3] leading-relaxed">
@@ -458,17 +333,9 @@ export default function App() {
             </div>
 
             {/* Card 2: App font */}
-            <div
-              onClick={() => setActiveTool('font')}
-              className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#8b5cf6]/40 rounded-[18px] p-5.5 cursor-pointer transition-all hover:-translate-y-1 group"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <div className="w-9.5 h-9.5 rounded-[11px] bg-purple-500/15 text-[#b79bfb] flex items-center justify-center text-sm">
-                  <i className="fa-solid fa-font"></i>
-                </div>
-                <span className="text-[11px] font-bold text-[#b79bfb] bg-purple-500/15 group-hover:bg-gradient-to-r group-hover:from-[#8b5cf6] group-hover:to-[#ec4899] group-hover:text-white px-2.5 py-1 rounded-md flex items-center gap-1 transition-all">
-                  Try tool <ArrowRight className="w-3 h-3" />
-                </span>
+            <div className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#8b5cf6]/40 rounded-[18px] p-5.5 transition-all hover:-translate-y-1">
+              <div className="w-9.5 h-9.5 rounded-[11px] bg-purple-500/15 text-[#b79bfb] flex items-center justify-center text-sm mb-4">
+                <i className="fa-solid fa-font"></i>
               </div>
               <h3 className="text-[14.5px] font-bold text-white mb-1.5">App font</h3>
               <p className="text-[12.5px] text-[#9a8fb3] leading-relaxed">
@@ -477,17 +344,9 @@ export default function App() {
             </div>
 
             {/* Card 3: Faster downloads */}
-            <div
-              onClick={() => setActiveTool('speed')}
-              className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#59e0a8]/40 rounded-[18px] p-5.5 cursor-pointer transition-all hover:-translate-y-1 group"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <div className="w-9.5 h-9.5 rounded-[11px] bg-emerald-500/15 text-[#59e0a8] flex items-center justify-center text-sm">
-                  <Zap className="w-4 h-4" />
-                </div>
-                <span className="text-[11px] font-bold text-[#59e0a8] bg-emerald-500/15 group-hover:bg-gradient-to-r group-hover:from-[#10b981] group-hover:to-[#59e0a8] group-hover:text-black px-2.5 py-1 rounded-md flex items-center gap-1 transition-all">
-                  Try tool <ArrowRight className="w-3 h-3" />
-                </span>
+            <div className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#59e0a8]/40 rounded-[18px] p-5.5 transition-all hover:-translate-y-1">
+              <div className="w-9.5 h-9.5 rounded-[11px] bg-emerald-500/15 text-[#59e0a8] flex items-center justify-center text-sm mb-4">
+                <Zap className="w-4 h-4" />
               </div>
               <h3 className="text-[14.5px] font-bold text-white mb-1.5">Faster downloads &amp; uploads</h3>
               <p className="text-[12.5px] text-[#9a8fb3] leading-relaxed">
@@ -496,17 +355,9 @@ export default function App() {
             </div>
 
             {/* Card 4: Home screen */}
-            <div
-              onClick={() => setActiveTool('home')}
-              className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#ffab6b]/40 rounded-[18px] p-5.5 cursor-pointer transition-all hover:-translate-y-1 group"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <div className="w-9.5 h-9.5 rounded-[11px] bg-amber-500/15 text-[#ffab6b] flex items-center justify-center text-sm">
-                  <i className="fa-solid fa-house"></i>
-                </div>
-                <span className="text-[11px] font-bold text-[#ffab6b] bg-amber-500/15 group-hover:bg-gradient-to-r group-hover:from-[#f97316] group-hover:to-[#ffab6b] group-hover:text-black px-2.5 py-1 rounded-md flex items-center gap-1 transition-all">
-                  Try tool <ArrowRight className="w-3 h-3" />
-                </span>
+            <div className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#ffab6b]/40 rounded-[18px] p-5.5 transition-all hover:-translate-y-1">
+              <div className="w-9.5 h-9.5 rounded-[11px] bg-amber-500/15 text-[#ffab6b] flex items-center justify-center text-sm mb-4">
+                <i className="fa-solid fa-house"></i>
               </div>
               <h3 className="text-[14.5px] font-bold text-white mb-1.5">Home screen customizer</h3>
               <p className="text-[12.5px] text-[#9a8fb3] leading-relaxed">
@@ -515,17 +366,9 @@ export default function App() {
             </div>
 
             {/* Card 5: Hide read checks in channels */}
-            <div
-              onClick={() => setActiveTool('checks')}
-              className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#f592c0]/40 rounded-[18px] p-5.5 cursor-pointer transition-all hover:-translate-y-1 group"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <div className="w-9.5 h-9.5 rounded-[11px] bg-pink-500/15 text-[#f592c0] flex items-center justify-center text-sm">
-                  <CheckCheck className="w-4 h-4" />
-                </div>
-                <span className="text-[11px] font-bold text-[#f592c0] bg-pink-500/15 group-hover:bg-gradient-to-r group-hover:from-[#ec4899] group-hover:to-[#f592c0] group-hover:text-white px-2.5 py-1 rounded-md flex items-center gap-1 transition-all">
-                  Try tool <ArrowRight className="w-3 h-3" />
-                </span>
+            <div className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#f592c0]/40 rounded-[18px] p-5.5 transition-all hover:-translate-y-1">
+              <div className="w-9.5 h-9.5 rounded-[11px] bg-pink-500/15 text-[#f592c0] flex items-center justify-center text-sm mb-4">
+                <CheckCheck className="w-4 h-4" />
               </div>
               <h3 className="text-[14.5px] font-bold text-white mb-1.5">Hide read checks in channels</h3>
               <p className="text-[12.5px] text-[#9a8fb3] leading-relaxed">
@@ -534,17 +377,9 @@ export default function App() {
             </div>
 
             {/* Card 6: Conversation screen */}
-            <div
-              onClick={() => setActiveTool('conv')}
-              className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#7cc0ff]/40 rounded-[18px] p-5.5 cursor-pointer transition-all hover:-translate-y-1 group"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <div className="w-9.5 h-9.5 rounded-[11px] bg-blue-500/15 text-[#7cc0ff] flex items-center justify-center text-sm">
-                  <i className="fa-solid fa-comments"></i>
-                </div>
-                <span className="text-[11px] font-bold text-[#7cc0ff] bg-blue-500/15 group-hover:bg-gradient-to-r group-hover:from-[#3b82f6] group-hover:to-[#7cc0ff] group-hover:text-white px-2.5 py-1 rounded-md flex items-center gap-1 transition-all">
-                  Try tool <ArrowRight className="w-3 h-3" />
-                </span>
+            <div className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#7cc0ff]/40 rounded-[18px] p-5.5 transition-all hover:-translate-y-1">
+              <div className="w-9.5 h-9.5 rounded-[11px] bg-blue-500/15 text-[#7cc0ff] flex items-center justify-center text-sm mb-4">
+                <i className="fa-solid fa-comments"></i>
               </div>
               <h3 className="text-[14.5px] font-bold text-white mb-1.5">Conversation screen</h3>
               <p className="text-[12.5px] text-[#9a8fb3] leading-relaxed">
@@ -553,17 +388,9 @@ export default function App() {
             </div>
 
             {/* Card 7: Stickers and bubbles */}
-            <div
-              onClick={() => setActiveTool('stickers')}
-              className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#b79bfb]/40 rounded-[18px] p-5.5 cursor-pointer transition-all hover:-translate-y-1 group"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <div className="w-9.5 h-9.5 rounded-[11px] bg-purple-500/15 text-[#b79bfb] flex items-center justify-center text-sm">
-                  <i className="fa-regular fa-face-smile"></i>
-                </div>
-                <span className="text-[11px] font-bold text-[#b79bfb] bg-purple-500/15 group-hover:bg-gradient-to-r group-hover:from-[#8b5cf6] group-hover:to-[#ec4899] group-hover:text-white px-2.5 py-1 rounded-md flex items-center gap-1 transition-all">
-                  Try tool <ArrowRight className="w-3 h-3" />
-                </span>
+            <div className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#b79bfb]/40 rounded-[18px] p-5.5 transition-all hover:-translate-y-1">
+              <div className="w-9.5 h-9.5 rounded-[11px] bg-purple-500/15 text-[#b79bfb] flex items-center justify-center text-sm mb-4">
+                <i className="fa-regular fa-face-smile"></i>
               </div>
               <h3 className="text-[14.5px] font-bold text-white mb-1.5">Stickers and bubbles</h3>
               <p className="text-[12.5px] text-[#9a8fb3] leading-relaxed">
@@ -572,17 +399,9 @@ export default function App() {
             </div>
 
             {/* Card 8: Voice messages */}
-            <div
-              onClick={() => setActiveTool('voice')}
-              className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#59e0a8]/40 rounded-[18px] p-5.5 cursor-pointer transition-all hover:-translate-y-1 group"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <div className="w-9.5 h-9.5 rounded-[11px] bg-emerald-500/15 text-[#59e0a8] flex items-center justify-center text-sm">
-                  <Volume2 className="w-4 h-4" />
-                </div>
-                <span className="text-[11px] font-bold text-[#59e0a8] bg-emerald-500/15 group-hover:bg-gradient-to-r group-hover:from-[#10b981] group-hover:to-[#59e0a8] group-hover:text-black px-2.5 py-1 rounded-md flex items-center gap-1 transition-all">
-                  Try tool <ArrowRight className="w-3 h-3" />
-                </span>
+            <div className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#59e0a8]/40 rounded-[18px] p-5.5 transition-all hover:-translate-y-1">
+              <div className="w-9.5 h-9.5 rounded-[11px] bg-emerald-500/15 text-[#59e0a8] flex items-center justify-center text-sm mb-4">
+                <Volume2 className="w-4 h-4" />
               </div>
               <h3 className="text-[14.5px] font-bold text-white mb-1.5">Voice messages optimizer</h3>
               <p className="text-[12.5px] text-[#9a8fb3] leading-relaxed">
@@ -591,17 +410,9 @@ export default function App() {
             </div>
 
             {/* Card 9: View deleted messages */}
-            <div
-              onClick={() => setActiveTool('antidelete')}
-              className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#ff7f9c]/40 rounded-[18px] p-5.5 cursor-pointer transition-all hover:-translate-y-1 group"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <div className="w-9.5 h-9.5 rounded-[11px] bg-red-500/15 text-[#ff7f9c] flex items-center justify-center text-sm">
-                  <Shield className="w-4 h-4" />
-                </div>
-                <span className="text-[11px] font-bold text-[#ff7f9c] bg-red-500/15 group-hover:bg-gradient-to-r group-hover:from-[#f43f5e] group-hover:to-[#ff7f9c] group-hover:text-white px-2.5 py-1 rounded-md flex items-center gap-1 transition-all">
-                  Try tool <ArrowRight className="w-3 h-3" />
-                </span>
+            <div className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#ff7f9c]/40 rounded-[18px] p-5.5 transition-all hover:-translate-y-1">
+              <div className="w-9.5 h-9.5 rounded-[11px] bg-red-500/15 text-[#ff7f9c] flex items-center justify-center text-sm mb-4">
+                <Shield className="w-4 h-4" />
               </div>
               <h3 className="text-[14.5px] font-bold text-white mb-1.5">View deleted messages</h3>
               <p className="text-[12.5px] text-[#9a8fb3] leading-relaxed">
@@ -610,17 +421,9 @@ export default function App() {
             </div>
 
             {/* Card 10: Hide phone number */}
-            <div
-              onClick={() => setActiveTool('phone')}
-              className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#ffab6b]/40 rounded-[18px] p-5.5 cursor-pointer transition-all hover:-translate-y-1 group"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <div className="w-9.5 h-9.5 rounded-[11px] bg-amber-500/15 text-[#ffab6b] flex items-center justify-center text-sm">
-                  <EyeOff className="w-4 h-4" />
-                </div>
-                <span className="text-[11px] font-bold text-[#ffab6b] bg-amber-500/15 group-hover:bg-gradient-to-r group-hover:from-[#f97316] group-hover:to-[#ffab6b] group-hover:text-black px-2.5 py-1 rounded-md flex items-center gap-1 transition-all">
-                  Try tool <ArrowRight className="w-3 h-3" />
-                </span>
+            <div className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#ffab6b]/40 rounded-[18px] p-5.5 transition-all hover:-translate-y-1">
+              <div className="w-9.5 h-9.5 rounded-[11px] bg-amber-500/15 text-[#ffab6b] flex items-center justify-center text-sm mb-4">
+                <EyeOff className="w-4 h-4" />
               </div>
               <h3 className="text-[14.5px] font-bold text-white mb-1.5">Hide phone number</h3>
               <p className="text-[12.5px] text-[#9a8fb3] leading-relaxed">
@@ -629,17 +432,9 @@ export default function App() {
             </div>
 
             {/* Card 11: Local Premium */}
-            <div
-              onClick={() => setActiveTool('premium')}
-              className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#f592c0]/40 rounded-[18px] p-5.5 cursor-pointer transition-all hover:-translate-y-1 group"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <div className="w-9.5 h-9.5 rounded-[11px] bg-pink-500/15 text-[#f592c0] flex items-center justify-center text-sm">
-                  <Star className="w-4 h-4" />
-                </div>
-                <span className="text-[11px] font-bold text-[#f592c0] bg-pink-500/15 group-hover:bg-gradient-to-r group-hover:from-[#ec4899] group-hover:to-[#f592c0] group-hover:text-white px-2.5 py-1 rounded-md flex items-center gap-1 transition-all">
-                  Try tool <ArrowRight className="w-3 h-3" />
-                </span>
+            <div className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#f592c0]/40 rounded-[18px] p-5.5 transition-all hover:-translate-y-1">
+              <div className="w-9.5 h-9.5 rounded-[11px] bg-pink-500/15 text-[#f592c0] flex items-center justify-center text-sm mb-4">
+                <Star className="w-4 h-4" />
               </div>
               <h3 className="text-[14.5px] font-bold text-white mb-1.5">Local Premium unlock</h3>
               <p className="text-[12.5px] text-[#9a8fb3] leading-relaxed">
@@ -648,17 +443,9 @@ export default function App() {
             </div>
 
             {/* Card 12: Notification preferences */}
-            <div
-              onClick={() => setActiveTool('notif')}
-              className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#59e0a8]/40 rounded-[18px] p-5.5 cursor-pointer transition-all hover:-translate-y-1 group"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <div className="w-9.5 h-9.5 rounded-[11px] bg-emerald-500/15 text-[#59e0a8] flex items-center justify-center text-sm">
-                  <i className="fa-solid fa-bell"></i>
-                </div>
-                <span className="text-[11px] font-bold text-[#59e0a8] bg-emerald-500/15 group-hover:bg-gradient-to-r group-hover:from-[#10b981] group-hover:to-[#59e0a8] group-hover:text-black px-2.5 py-1 rounded-md flex items-center gap-1 transition-all">
-                  Try tool <ArrowRight className="w-3 h-3" />
-                </span>
+            <div className="bg-[#130c20] hover:bg-[#1a1128] border border-white/8 hover:border-[#59e0a8]/40 rounded-[18px] p-5.5 transition-all hover:-translate-y-1">
+              <div className="w-9.5 h-9.5 rounded-[11px] bg-emerald-500/15 text-[#59e0a8] flex items-center justify-center text-sm mb-4">
+                <i className="fa-solid fa-bell"></i>
               </div>
               <h3 className="text-[14.5px] font-bold text-white mb-1.5">Notification diagnostics</h3>
               <p className="text-[12.5px] text-[#9a8fb3] leading-relaxed">
@@ -728,62 +515,160 @@ export default function App() {
           </div>
         </section>
 
+        {/* RAKSHITTIPS SUPPORT & DONATE SECTION */}
+        <section id="donate" className="py-13 border-t border-white/8">
+          <div className="bg-gradient-to-br from-[#8b5cf6]/15 via-[#130c20] to-[#ec4899]/15 border border-[#ec4899]/30 rounded-3xl p-7 sm:p-9 shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-[#ec4899]/10 to-transparent rounded-full blur-3xl pointer-events-none"></div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+              
+              <div className="lg:col-span-7">
+                <div className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-[#f592c0] bg-[#ec4899]/15 border border-[#ec4899]/30 px-3 py-1 rounded-full mb-3.5 shadow-xs">
+                  <Heart className="w-3.5 h-3.5 text-[#ec4899] fill-[#ec4899]" /> Rakshittips Community Support
+                </div>
+
+                <h2 className="text-2xl sm:text-3xl font-bold text-white font-['Syne',sans-serif] tracking-tight">
+                  Rakshittips Support &amp; Donate
+                </h2>
+                
+                <p className="text-[13.5px] text-[#9a8fb3] mt-2.5 max-w-[480px] leading-relaxed">
+                  MRTelegram is 100% free, privacy-first, and completely ad-free. If this iOS Telegram mod helps your daily messaging, you can support developer <strong>Rakshit Dhakariya</strong> directly via UPI.
+                </p>
+
+                {/* UPI ID Box */}
+                <div className="mt-5 p-4 bg-[#1a1128] border border-white/10 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 max-w-[480px] shadow-lg">
+                  <div>
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-[#9a8fb3]">Verified Official UPI ID</div>
+                    <div className="text-sm sm:text-base font-mono font-bold text-white select-all mt-0.5 text-[#59e0a8]">
+                      {UPI_ID}
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={handleCopyUpi}
+                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] hover:brightness-110 active:scale-95 text-white text-xs font-bold rounded-xl transition-all cursor-pointer shadow-md"
+                  >
+                    {copiedUpi ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-[#59e0a8]" />
+                        <span>Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5" />
+                        <span>Copy UPI ID</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                {/* Quick Action Buttons */}
+                <div className="mt-4 flex flex-wrap items-center gap-2.5">
+                  <a
+                    href={`upi://pay?pa=${UPI_ID}&pn=Rakshit%20Dhakariya&cu=INR`}
+                    className="inline-flex items-center gap-2 bg-[#59e0a8]/15 hover:bg-[#59e0a8]/25 text-[#59e0a8] border border-[#59e0a8]/30 px-4 py-2.5 rounded-xl text-xs font-bold transition-all active:scale-95 shadow-xs"
+                  >
+                    <i className="fa-solid fa-mobile-screen-button"></i>
+                    <span>Pay with Any UPI App</span>
+                  </a>
+
+                  <button
+                    onClick={() => setIsDonateOpen(true)}
+                    className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 text-white border border-white/15 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer active:scale-95"
+                  >
+                    <i className="fa-solid fa-qrcode text-[#ec4899]"></i>
+                    <span>Scan QR Code &amp; Select Amount</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Right Side: QR Card */}
+              <div className="lg:col-span-5 flex justify-center">
+                <div className="bg-[#160f24] border border-white/15 rounded-3xl p-5 shadow-2xl text-center max-w-[280px] w-full">
+                  <div className="bg-white p-3 rounded-2xl inline-block shadow-inner mb-3">
+                    <img
+                      src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi%3A%2F%2Fpay%3Fpa%3D${encodeURIComponent(UPI_ID)}%26pn%3DRakshit%2520Dhakariya%26cu%3DINR`}
+                      alt={`UPI QR Code - ${UPI_ID}`}
+                      className="w-36 h-36 object-contain rounded-lg mx-auto"
+                      loading="lazy"
+                    />
+                  </div>
+
+                  <div className="text-xs font-bold text-white font-['Syne',sans-serif]">Scan to Pay via UPI</div>
+                  <div className="text-[11.5px] font-mono text-[#f592c0] mt-0.5 font-bold">{UPI_ID}</div>
+                  <div className="text-[10px] text-[#5e5573] mt-1.5 flex items-center justify-center gap-1.5">
+                    <span>GPay</span> · <span>PhonePe</span> · <span>Paytm</span> · <span>BHIM</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
         {/* DEVELOPER SECTION */}
         <section id="developer" className="py-13 border-t border-white/8">
           {/* RAKSHITTIPS BY DEVELOPER CARD */}
           <div className="bg-white text-gray-900 rounded-[28px] p-6 sm:p-7 shadow-2xl border border-white/20 text-left relative overflow-hidden">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4.5 mb-5">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#8b5cf6] via-[#ec4899] to-[#f97316] flex items-center justify-center text-white text-2xl shadow-lg shadow-pink-500/25 shrink-0">
-                  <i className="fa-solid fa-robot"></i>
-                </div>
-                <div>
-                  <h3 className="text-xl sm:text-[22px] font-bold text-[#111827] font-['Syne',sans-serif] tracking-tight">
-                    Rakshittips by Developer
-                  </h3>
-                  <div className="inline-flex items-center gap-1.5 text-[11.5px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-300 px-3 py-0.5 rounded-full mt-1.5 mb-1 shadow-xs">
-                    <span>✓ Rakshit Dhakariya</span>
-                  </div>
-                  <p className="text-[12.5px] text-gray-600 leading-relaxed font-medium">
-                    Solo Developer • Android Mods, iOS Experience Ports &amp; Open Utilities
-                  </p>
-                </div>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4.5 mb-5">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#8b5cf6] via-[#ec4899] to-[#f97316] flex items-center justify-center text-white text-2xl shadow-lg shadow-pink-500/25 shrink-0">
+                <i className="fa-solid fa-robot"></i>
               </div>
-
-              <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 pt-2 border-t border-gray-100">
-                <button
-                  onClick={() => setIsAboutMeOpen(true)}
-                  className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 text-xs font-semibold px-4 py-2.5 rounded-full transition-all cursor-pointer shadow-xs active:scale-95"
-                >
-                  <User className="w-3.5 h-3.5 text-[#ec4899]" />
-                  <span>About Me</span>
-                </button>
-
-                <a
-                  href="https://youtube.com/@rakshittips"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 text-xs font-semibold px-4 py-2.5 rounded-full transition-all shadow-xs active:scale-95"
-                >
-                  <i className="fa-brands fa-youtube text-[#ff0000] text-sm"></i>
-                  <span>YouTube</span>
-                </a>
-
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 text-xs font-semibold px-4 py-2.5 rounded-full transition-all shadow-xs active:scale-95"
-                >
-                  <i className="fa-brands fa-instagram text-[#e1306c] text-sm"></i>
-                  <span>Instagram</span>
-                </a>
+              <div>
+                <h3 className="text-xl sm:text-[22px] font-bold text-[#111827] font-['Syne',sans-serif] tracking-tight">
+                  Rakshittips by Developer
+                </h3>
+                <div className="inline-flex items-center gap-1.5 text-[11.5px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-300 px-3 py-0.5 rounded-full mt-1.5 mb-1 shadow-xs">
+                  <span>✓ Rakshit Dhakariya</span>
+                </div>
+                <p className="text-[12.5px] text-gray-600 leading-relaxed font-medium">
+                  Solo Developer • Android Mods, iOS Experience Ports &amp; Open Utilities
+                </p>
               </div>
             </div>
+
+            <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 pt-2 border-t border-gray-100">
+              <button
+                onClick={() => setIsAboutMeOpen(true)}
+                className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 text-xs font-semibold px-4 py-2.5 rounded-full transition-all cursor-pointer shadow-xs active:scale-95"
+              >
+                <User className="w-3.5 h-3.5 text-[#ec4899]" />
+                <span>About Me</span>
+              </button>
+
+              <button
+                onClick={() => setIsDonateOpen(true)}
+                className="inline-flex items-center gap-2 bg-pink-50 hover:bg-pink-100 border border-pink-200 text-[#ec4899] text-xs font-bold px-4 py-2.5 rounded-full transition-all cursor-pointer shadow-xs active:scale-95"
+              >
+                <Heart className="w-3.5 h-3.5 fill-[#ec4899]" />
+                <span>Support &amp; Donate</span>
+              </button>
+
+              <a
+                href="https://youtube.com/@rakshittips"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 text-xs font-semibold px-4 py-2.5 rounded-full transition-all shadow-xs active:scale-95"
+              >
+                <i className="fa-brands fa-youtube text-[#ff0000] text-sm"></i>
+                <span>YouTube</span>
+              </a>
+
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 text-xs font-semibold px-4 py-2.5 rounded-full transition-all shadow-xs active:scale-95"
+              >
+                <i className="fa-brands fa-instagram text-[#e1306c] text-sm"></i>
+                <span>Instagram</span>
+              </a>
+            </div>
+          </div>
         </section>
 
         {/* FOOTER */}
         <footer className="pt-10 pb-20 border-t border-white/8">
-
           <div className="text-center text-[11.5px] text-[#9a8fb3] mb-2">
             Crafted with care by{' '}
             <strong className="font-bold bg-gradient-to-r from-[#8b5cf6] via-[#ec4899] to-[#f97316] bg-clip-text text-transparent">
@@ -808,771 +693,102 @@ export default function App() {
       </div>
 
       {/* ============================================================== */}
-      {/* FULL WORKING INTERACTIVE FEATURE TESTING MODAL */}
-      {activeTool && (
+      {/* RAKSHITTIPS SUPPORT & DONATE MODAL */}
+      {/* ============================================================== */}
+      {isDonateOpen && (
         <div
           onClick={(e) => {
-            if (e.target === e.currentTarget) setActiveTool(null);
+            if (e.target === e.currentTarget) setIsDonateOpen(false);
           }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-150"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
         >
-          <div className="bg-[#160f24] border border-white/10 rounded-3xl max-w-[460px] w-full p-6 sm:p-7 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+          <div className="bg-[#160f24] border border-white/10 rounded-3xl max-w-[440px] w-full p-6 sm:p-7 shadow-2xl relative max-h-[90vh] overflow-y-auto">
             <button
-              onClick={() => setActiveTool(null)}
-              className="absolute top-4 right-4 text-[#9a8fb3] hover:text-white text-xl cursor-pointer w-8 h-8 rounded-full flex items-center justify-center bg-white/5"
+              onClick={() => setIsDonateOpen(false)}
+              className="absolute top-4 right-4 text-[#9a8fb3] hover:text-white text-xl cursor-pointer w-8 h-8 rounded-full flex items-center justify-center bg-white/5 transition-colors"
             >
               &times;
             </button>
 
-            {/* Tool 1: iOS Interface Style */}
-            {activeTool === 'style' && (
+            <div className="flex items-center gap-3.5 mb-5">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#ec4899] to-[#f97316] flex items-center justify-center text-white text-xl shadow-lg shadow-pink-500/30 shrink-0">
+                <Heart className="w-6 h-6 fill-white" />
+              </div>
               <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-blue-500/20 text-[#7cc0ff] flex items-center justify-center text-lg">
-                    <i className="fa-brands fa-apple"></i>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-white text-base font-['Syne',sans-serif]">iOS Interface Style</h3>
-                    <p className="text-[11px] text-[#5e5573]">Visual presentation &amp; physics simulation</p>
-                  </div>
-                </div>
+                <h3 className="text-xl font-bold text-white font-['Syne',sans-serif]">
+                  Support &amp; Donate
+                </h3>
+                <div className="text-xs text-[#9a8fb3]">Rakshittips ({DEVELOPER_NAME})</div>
+              </div>
+            </div>
 
-                <p className="text-xs text-[#9a8fb3] mb-3">
-                  Toggle interface aesthetic and feel real fluid navigation feedback:
-                </p>
+            {/* QR Code Container */}
+            <div className="bg-[#1a1128] border border-white/10 rounded-2xl p-4 text-center mb-4.5">
+              <div className="bg-white p-3 rounded-xl inline-block shadow-md mb-2">
+                <img
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=upi%3A%2F%2Fpay%3Fpa%3D${encodeURIComponent(UPI_ID)}%26pn%3DRakshit%2520Dhakariya%26am%3D${donateAmount}%26cu%3DINR`}
+                  alt={`UPI QR Code - ₹${donateAmount}`}
+                  className="w-36 h-36 object-contain rounded-md mx-auto"
+                />
+              </div>
+              <div className="text-xs font-bold text-white">Scan via GPay, PhonePe, Paytm, BHIM</div>
+              <div className="text-[11px] text-[#59e0a8] font-mono mt-0.5">Amount: ₹{donateAmount}</div>
+            </div>
 
-                <div className="grid grid-cols-2 gap-2 mb-4">
+            {/* Quick Amount Selector */}
+            <div className="mb-4">
+              <label className="text-[11px] font-bold text-[#9a8fb3] uppercase tracking-wider block mb-2">
+                Choose Amount (INR)
+              </label>
+              <div className="grid grid-cols-4 gap-2">
+                {[50, 100, 200, 500].map((amt) => (
                   <button
-                    onClick={() => {
-                      setIosThemeStyle('ios18');
-                      showToast('Switched to iOS 18 Liquid theme');
-                    }}
-                    className={`p-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer border ${
-                      iosThemeStyle === 'ios18'
-                        ? 'bg-[#8b5cf6]/20 border-[#8b5cf6] text-[#b79bfb]'
-                        : 'bg-white/5 border-transparent text-[#9a8fb3]'
+                    key={amt}
+                    onClick={() => setDonateAmount(amt)}
+                    className={`py-2 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
+                      donateAmount === amt
+                        ? 'bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] text-white border-transparent shadow-md'
+                        : 'bg-white/5 border-white/10 text-[#9a8fb3] hover:text-white hover:bg-white/10'
                     }`}
                   >
-                    <i className="fa-brands fa-apple"></i> iOS 18 Liquid
+                    ₹{amt}
                   </button>
-                  <button
-                    onClick={() => {
-                      setIosThemeStyle('default');
-                      showToast('Switched to Telegram Default style');
-                    }}
-                    className={`p-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer border ${
-                      iosThemeStyle === 'default'
-                        ? 'bg-[#8b5cf6]/20 border-[#8b5cf6] text-[#b79bfb]'
-                        : 'bg-white/5 border-transparent text-[#9a8fb3]'
-                    }`}
-                  >
-                    <i className="fa-brands fa-telegram"></i> Telegram Default
-                  </button>
-                </div>
-
-                <div className="bg-[#1a1128] rounded-xl p-3 mb-4 flex items-center justify-between">
-                  <div>
-                    <div className="text-xs font-semibold text-white">Spring bounce physics</div>
-                    <div className="text-[10px] text-[#5e5573]">Apple-style rubber-band scroll elasticity</div>
-                  </div>
-                  <button
-                    onClick={() => {
-                      setSpringBounce(!springBounce);
-                      showToast(`Spring bounce physics: ${!springBounce ? 'Enabled' : 'Disabled'}`);
-                    }}
-                    className={`w-11 h-6 rounded-full transition-colors relative cursor-pointer ${
-                      springBounce ? 'bg-[#30d158]' : 'bg-slate-700'
-                    }`}
-                  >
-                    <span
-                      className={`block w-5 h-5 bg-white rounded-full transition-transform absolute top-0.5 ${
-                        springBounce ? 'translate-x-5.5' : 'translate-x-0.5'
-                      }`}
-                    />
-                  </button>
-                </div>
-
-                <div className="p-3 rounded-xl bg-blue-500/10 border border-blue-500/20 text-[11px] text-[#7cc0ff]">
-                  <i className="fa-solid fa-info-circle mr-1"></i> Mode active: Any chat or channel opened uses {iosThemeStyle === 'ios18' ? 'iOS 18 translucent glass headers and blurred toolbars.' : 'Stock Telegram Android styling.'}
-                </div>
+                ))}
               </div>
-            )}
+            </div>
 
-            {/* Tool 2: App Font */}
-            {activeTool === 'font' && (
+            {/* UPI ID Pill with Copy button */}
+            <div className="p-3.5 bg-white/5 border border-white/10 rounded-xl flex items-center justify-between mb-4">
               <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-purple-500/20 text-[#b79bfb] flex items-center justify-center text-lg">
-                    <i className="fa-solid fa-font"></i>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-white text-base font-['Syne',sans-serif]">App Font Preview</h3>
-                    <p className="text-[11px] text-[#5e5573]">System typography selector</p>
-                  </div>
-                </div>
-
-                <div className="bg-[#0e0817] border border-white/8 rounded-xl p-4 text-center mb-4">
-                  <div
-                    className="text-lg font-bold text-white transition-all"
-                    style={{
-                      fontFamily:
-                        selectedFont === 'SF Pro Display'
-                          ? '-apple-system, BlinkMacSystemFont, sans-serif'
-                          : selectedFont === 'Samsung One UI'
-                          ? '"Samsung One", sans-serif'
-                          : selectedFont === 'Linotte'
-                          ? 'cursive, sans-serif'
-                          : selectedFont === 'Rubrik'
-                          ? 'sans-serif'
-                          : 'inherit',
-                    }}
-                  >
-                    The quick brown fox jumps over 42 messages.
-                  </div>
-                  <div className="text-[11px] text-[#5e5573] mt-1.5 font-mono">
-                    Font: {selectedFont} · 10:42 AM · 35,702 messages
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-2 mb-4">
-                  {['SF Pro Display', 'Samsung One UI', 'Linotte', 'Rubrik Sans'].map((f) => (
-                    <button
-                      key={f}
-                      onClick={() => {
-                        setSelectedFont(f);
-                        showToast(`App typography updated to ${f}`);
-                      }}
-                      className={`p-2.5 rounded-xl text-xs font-semibold cursor-pointer border transition-all ${
-                        selectedFont === f
-                          ? 'bg-[#8b5cf6]/20 border-[#8b5cf6] text-[#b79bfb]'
-                          : 'bg-white/5 border-transparent text-[#9a8fb3]'
-                      }`}
-                    >
-                      {f}
-                    </button>
-                  ))}
-                </div>
+                <div className="text-[10px] text-[#5e5573] font-bold">UPI ID</div>
+                <div className="text-xs sm:text-[13px] font-mono font-bold text-[#59e0a8]">{UPI_ID}</div>
               </div>
-            )}
+              <button
+                onClick={handleCopyUpi}
+                className="px-3 py-1.5 bg-white/10 hover:bg-white/20 active:scale-95 text-white text-xs font-semibold rounded-lg flex items-center gap-1.5 cursor-pointer transition-all"
+              >
+                {copiedUpi ? <Check className="w-3.5 h-3.5 text-[#59e0a8]" /> : <Copy className="w-3.5 h-3.5" />}
+                <span>{copiedUpi ? 'Copied' : 'Copy'}</span>
+              </button>
+            </div>
 
-            {/* Tool 3: Turbo Speed */}
-            {activeTool === 'speed' && (
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-[#59e0a8] flex items-center justify-center text-lg">
-                    <Zap className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-white text-base font-['Syne',sans-serif]">Turbo Speed Accelerator</h3>
-                    <p className="text-[11px] text-[#5e5573]">Parallel chunk transmission engine</p>
-                  </div>
-                </div>
-
-                <div className="bg-[#1a1128] rounded-xl p-3.5 mb-3">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-xs font-semibold text-white">Parallel Download Streams</span>
-                    <span className="text-xs font-bold text-[#59e0a8] font-mono">{downloadStreams}x Turbo</span>
-                  </div>
-                  <input
-                    type="range"
-                    min="4"
-                    max="32"
-                    step="4"
-                    value={downloadStreams}
-                    onChange={(e) => setDownloadStreams(Number(e.target.value))}
-                    className="w-full accent-[#59e0a8] cursor-pointer"
-                  />
-                  <div className="flex justify-between text-[10px] text-[#5e5573] mt-1 font-mono">
-                    <span>4 streams</span>
-                    <span>16 standard</span>
-                    <span>32 max</span>
-                  </div>
-                </div>
-
-                <div className="bg-[#1a1128] rounded-xl p-3 mb-4 flex items-center justify-between">
-                  <div>
-                    <div className="text-xs font-semibold text-white">Upload Fastlane Buffer</div>
-                    <div className="text-[10px] text-[#5e5573]">Reduces server round-trip handshake latency</div>
-                  </div>
-                  <button
-                    onClick={() => {
-                      setUploadFastlane(!uploadFastlane);
-                      showToast(`Upload Fastlane: ${!uploadFastlane ? 'Active' : 'Disabled'}`);
-                    }}
-                    className={`w-11 h-6 rounded-full transition-colors relative cursor-pointer ${
-                      uploadFastlane ? 'bg-[#30d158]' : 'bg-slate-700'
-                    }`}
-                  >
-                    <span
-                      className={`block w-5 h-5 bg-white rounded-full transition-transform absolute top-0.5 ${
-                        uploadFastlane ? 'translate-x-5.5' : 'translate-x-0.5'
-                      }`}
-                    />
-                  </button>
-                </div>
-
-                <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-3.5 text-center mb-3">
-                  <div className="text-[11px] text-[#9a8fb3] mb-1">Benchmarked Real-Time Throughput</div>
-                  <div className="text-2xl font-black text-[#59e0a8] font-mono">
-                    {speedBenchmark} MB/s
-                  </div>
-                  <button
-                    onClick={runSpeedBenchmark}
-                    disabled={isSpeedTesting}
-                    className="mt-2 text-[11px] font-bold bg-[#59e0a8] text-black px-3.5 py-1.5 rounded-lg cursor-pointer hover:brightness-105 active:scale-95 transition-all"
-                  >
-                    {isSpeedTesting ? 'Testing stream...' : 'Run Live Speed Test'}
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Tool 4: Home Screen Customizer */}
-            {activeTool === 'home' && (
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-[#ffab6b] flex items-center justify-center text-lg">
-                    <i className="fa-solid fa-house"></i>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-white text-base font-['Syne',sans-serif]">Home Screen Customizer</h3>
-                    <p className="text-[11px] text-[#5e5573]">Chat list layout &amp; folder visibility</p>
-                  </div>
-                </div>
-
-                <div className="space-y-2.5 mb-4">
-                  <div className="bg-[#1a1128] rounded-xl p-3 flex items-center justify-between">
-                    <div>
-                      <div className="text-xs font-semibold text-white">Hide "All" folder tab</div>
-                      <div className="text-[10px] text-[#5e5573]">Only show customized categorized folders</div>
-                    </div>
-                    <button
-                      onClick={() => setHideAllFolder(!hideAllFolder)}
-                      className={`w-11 h-6 rounded-full transition-colors relative cursor-pointer ${
-                        hideAllFolder ? 'bg-[#30d158]' : 'bg-slate-700'
-                      }`}
-                    >
-                      <span className={`block w-5 h-5 bg-white rounded-full transition-transform absolute top-0.5 ${
-                        hideAllFolder ? 'translate-x-5.5' : 'translate-x-0.5'
-                      }`} />
-                    </button>
-                  </div>
-
-                  <div className="bg-[#1a1128] rounded-xl p-3 flex items-center justify-between">
-                    <div>
-                      <div className="text-xs font-semibold text-white">Hide search bar</div>
-                      <div className="text-[10px] text-[#5e5573]">Keep header minimalist and compact</div>
-                    </div>
-                    <button
-                      onClick={() => setHideSearchBox(!hideSearchBox)}
-                      className={`w-11 h-6 rounded-full transition-colors relative cursor-pointer ${
-                        hideSearchBox ? 'bg-[#30d158]' : 'bg-slate-700'
-                      }`}
-                    >
-                      <span className={`block w-5 h-5 bg-white rounded-full transition-transform absolute top-0.5 ${
-                        hideSearchBox ? 'translate-x-5.5' : 'translate-x-0.5'
-                      }`} />
-                    </button>
-                  </div>
-
-                  <div className="bg-[#1a1128] rounded-xl p-3 flex items-center justify-between">
-                    <div>
-                      <div className="text-xs font-semibold text-white">Chat preview lines</div>
-                      <div className="text-[10px] text-[#5e5573]">Amount of message text shown per chat row</div>
-                    </div>
-                    <div className="flex gap-1">
-                      <button
-                        onClick={() => setChatRowLines(2)}
-                        className={`px-2.5 py-1 rounded-md text-xs font-bold cursor-pointer ${
-                          chatRowLines === 2 ? 'bg-[#ffab6b] text-black' : 'bg-white/10 text-white'
-                        }`}
-                      >
-                        2 Lines
-                      </button>
-                      <button
-                        onClick={() => setChatRowLines(3)}
-                        className={`px-2.5 py-1 rounded-md text-xs font-bold cursor-pointer ${
-                          chatRowLines === 3 ? 'bg-[#ffab6b] text-black' : 'bg-white/10 text-white'
-                        }`}
-                      >
-                        3 Lines
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Tool 5: Hide Read Checks */}
-            {activeTool === 'checks' && (
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-pink-500/20 text-[#f592c0] flex items-center justify-center text-lg">
-                    <CheckCheck className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-white text-base font-['Syne',sans-serif]">Channel Stealth Reading</h3>
-                    <p className="text-[11px] text-[#5e5573]">Read without triggering channel view counts</p>
-                  </div>
-                </div>
-
-                <div className="bg-[#1a1128] border border-white/8 rounded-2xl p-4 mb-4">
-                  <div className="text-[10.5px] text-[#5e5573] mb-2 font-mono">Channel Post Preview:</div>
-                  <div className="bg-[#28183c] rounded-xl p-3 flex justify-between items-end">
-                    <span className="text-xs text-white">"MRTelegram release build v10.8.2 is live with stealth mode."</span>
-                    <span className={`text-[11px] font-bold ml-2 ${channelChecksHidden ? 'text-[#9a8fb3]' : 'text-[#59e0a8]'}`}>
-                      {channelChecksHidden ? (
-                        <span className="flex items-center gap-1"><EyeOff className="w-3 h-3" /> Hidden</span>
-                      ) : (
-                        <span className="flex items-center gap-1"><CheckCheck className="w-3 h-3" /> Read</span>
-                      )}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="bg-[#1a1128] rounded-xl p-3 mb-4 flex items-center justify-between">
-                  <div>
-                    <div className="text-xs font-semibold text-white">Stealth read checks in channels</div>
-                    <div className="text-[10px] text-[#5e5573]">Keeps your profile hidden from admin view logs</div>
-                  </div>
-                  <button
-                    onClick={() => {
-                      setChannelChecksHidden(!channelChecksHidden);
-                      showToast(`Channel read checks: ${!channelChecksHidden ? 'Stealth Hidden' : 'Visible'}`);
-                    }}
-                    className={`w-11 h-6 rounded-full transition-colors relative cursor-pointer ${
-                      channelChecksHidden ? 'bg-[#30d158]' : 'bg-slate-700'
-                    }`}
-                  >
-                    <span className={`block w-5 h-5 bg-white rounded-full transition-transform absolute top-0.5 ${
-                      channelChecksHidden ? 'translate-x-5.5' : 'translate-x-0.5'
-                    }`} />
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Tool 6: Conversation screen */}
-            {activeTool === 'conv' && (
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-blue-500/20 text-[#7cc0ff] flex items-center justify-center text-lg">
-                    <i className="fa-solid fa-comments"></i>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-white text-base font-['Syne',sans-serif]">Conversation Screen Tools</h3>
-                    <p className="text-[11px] text-[#5e5573]">Cupertino input bar &amp; context helpers</p>
-                  </div>
-                </div>
-
-                <div className="bg-[#0e0817] border border-white/8 rounded-2xl p-3.5 mb-4">
-                  <div className="text-[10px] text-[#5e5573] mb-2 font-mono">Cupertino Chat Input Bar:</div>
-                  <div className="flex items-center gap-2 bg-[#1a1128] rounded-full px-3 py-2 border border-white/10">
-                    <input
-                      type="text"
-                      value={chatMessageInput}
-                      onChange={(e) => setChatMessageInput(e.target.value)}
-                      placeholder="Type a message..."
-                      className="bg-transparent flex-1 text-xs text-white focus:outline-none"
-                    />
-                    <button
-                      onClick={() => showToast(`Simulated message sent: "${chatMessageInput}"`)}
-                      className="w-6 h-6 rounded-full bg-[#8b5cf6] flex items-center justify-center text-white cursor-pointer"
-                    >
-                      <Send className="w-3 h-3" />
-                    </button>
-                  </div>
-                </div>
-
-                <div className="space-y-2 mb-4">
-                  <div className="bg-[#1a1128] rounded-xl p-3 flex items-center justify-between">
-                    <div>
-                      <div className="text-xs font-semibold text-white">Instant message bubble translator</div>
-                      <div className="text-[10px] text-[#5e5573]">Translate foreign chats inline without switching apps</div>
-                    </div>
-                    <button
-                      onClick={() => setBubbleTranslator(!bubbleTranslator)}
-                      className={`w-11 h-6 rounded-full transition-colors relative cursor-pointer ${
-                        bubbleTranslator ? 'bg-[#30d158]' : 'bg-slate-700'
-                      }`}
-                    >
-                      <span className={`block w-5 h-5 bg-white rounded-full transition-transform absolute top-0.5 ${
-                        bubbleTranslator ? 'translate-x-5.5' : 'translate-x-0.5'
-                      }`} />
-                    </button>
-                  </div>
-
-                  <div className="bg-[#1a1128] rounded-xl p-3 flex items-center justify-between">
-                    <div>
-                      <div className="text-xs font-semibold text-white">Cupertino haptic context menu</div>
-                      <div className="text-[10px] text-[#5e5573]">Long press message menu with quick reactions</div>
-                    </div>
-                    <button
-                      onClick={() => setHapticMenu(!hapticMenu)}
-                      className={`w-11 h-6 rounded-full transition-colors relative cursor-pointer ${
-                        hapticMenu ? 'bg-[#30d158]' : 'bg-slate-700'
-                      }`}
-                    >
-                      <span className={`block w-5 h-5 bg-white rounded-full transition-transform absolute top-0.5 ${
-                        hapticMenu ? 'translate-x-5.5' : 'translate-x-0.5'
-                      }`} />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Tool 7: Stickers and Bubbles */}
-            {activeTool === 'stickers' && (
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-purple-500/20 text-[#b79bfb] flex items-center justify-center text-lg">
-                    <i className="fa-regular fa-face-smile"></i>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-white text-base font-['Syne',sans-serif]">Stickers &amp; Bubble Resizer</h3>
-                    <p className="text-[11px] text-[#5e5573]">Interactive live scale simulator</p>
-                  </div>
-                </div>
-
-                <div className="bg-[#0e0817] border border-white/8 rounded-2xl p-6 text-center mb-4">
-                  <div
-                    className="inline-block transition-transform duration-100"
-                    style={{ transform: `scale(${stickerSize / 14})` }}
-                  >
-                    <span className="text-4xl">{selectedStickerEmoji}</span>
-                  </div>
-                  <div className="text-[11px] text-[#9a8fb3] mt-3 font-mono">
-                    Size: <strong className="text-[#b79bfb]">{stickerSize}</strong> px unit
-                  </div>
-                </div>
-
-                <div className="flex justify-center gap-2 mb-4">
-                  {['🎉', '🚀', '🔥', '💎', '❤️'].map((em) => (
-                    <button
-                      key={em}
-                      onClick={() => setSelectedStickerEmoji(em)}
-                      className={`w-9 h-9 rounded-xl text-lg flex items-center justify-center cursor-pointer ${
-                        selectedStickerEmoji === em ? 'bg-purple-500/20 border border-purple-500' : 'bg-white/5'
-                      }`}
-                    >
-                      {em}
-                    </button>
-                  ))}
-                </div>
-
-                <div className="bg-[#1a1128] rounded-xl p-3.5 mb-4">
-                  <label className="text-xs font-semibold text-white block mb-2">
-                    Resize Slider (10 to 22):
-                  </label>
-                  <input
-                    type="range"
-                    min="10"
-                    max="22"
-                    value={stickerSize}
-                    onChange={(e) => setStickerSize(Number(e.target.value))}
-                    className="w-full accent-[#8b5cf6] cursor-pointer"
-                  />
-                </div>
-              </div>
-            )}
-
-            {/* Tool 8: Voice messages */}
-            {activeTool === 'voice' && (
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-[#59e0a8] flex items-center justify-center text-lg">
-                    <Volume2 className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-white text-base font-['Syne',sans-serif]">Voice Message Optimizer</h3>
-                    <p className="text-[11px] text-[#5e5573]">Live waveform audio simulation</p>
-                  </div>
-                </div>
-
-                <div className="bg-[#1a1128] border border-white/8 rounded-2xl p-4 flex items-center gap-3.5 mb-4">
-                  <button
-                    onClick={() => setIsVoicePlaying(!isVoicePlaying)}
-                    className="w-10 h-10 rounded-full bg-[#59e0a8] text-black flex items-center justify-center cursor-pointer hover:scale-105 active:scale-95 transition-all shadow-md"
-                  >
-                    {isVoicePlaying ? <Pause className="w-4 h-4 fill-black" /> : <Play className="w-4 h-4 fill-black ml-0.5" />}
-                  </button>
-
-                  <div className="flex-1 flex items-center gap-1.5 h-8">
-                    {[12, 22, 16, 28, 14, 26, 18, 30, 16, 24, 12, 20].map((h, i) => (
-                      <div
-                        key={i}
-                        className={`w-1.5 rounded-full transition-all duration-200 ${
-                          isVoicePlaying ? 'bg-[#59e0a8]' : 'bg-slate-700'
-                        }`}
-                        style={{
-                          height: isVoicePlaying ? `${((h * ((i % 3) + 1)) % 26) + 8}px` : `${h / 2}px`,
-                        }}
-                      />
-                    ))}
-                  </div>
-
-                  <span className="text-xs font-mono text-[#59e0a8]">
-                    0:{voiceSeconds < 10 ? `0${voiceSeconds}` : voiceSeconds} / 0:14
-                  </span>
-                </div>
-
-                <div className="bg-[#1a1128] rounded-xl p-3 mb-4 flex items-center justify-between">
-                  <div>
-                    <div className="text-xs font-semibold text-white">Studio Noise Suppression</div>
-                    <div className="text-[10px] text-[#5e5573]">Eliminates wind, fan, and room reverb</div>
-                  </div>
-                  <button
-                    onClick={() => {
-                      setStudioNoiseSuppression(!studioNoiseSuppression);
-                      showToast(`Studio Noise Suppression: ${!studioNoiseSuppression ? 'Enabled' : 'Disabled'}`);
-                    }}
-                    className={`w-11 h-6 rounded-full transition-colors relative cursor-pointer ${
-                      studioNoiseSuppression ? 'bg-[#30d158]' : 'bg-slate-700'
-                    }`}
-                  >
-                    <span className={`block w-5 h-5 bg-white rounded-full transition-transform absolute top-0.5 ${
-                      studioNoiseSuppression ? 'translate-x-5.5' : 'translate-x-0.5'
-                    }`} />
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Tool 9: Anti-Delete Guard */}
-            {activeTool === 'antidelete' && (
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-red-500/20 text-[#ff7f9c] flex items-center justify-center text-lg">
-                    <Shield className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-white text-base font-['Syne',sans-serif]">Anti-Delete Message Guard</h3>
-                    <p className="text-[11px] text-[#5e5573]">Preserves retracted text &amp; media locally</p>
-                  </div>
-                </div>
-
-                <div className="bg-[#1c0f1a] border border-red-500/30 rounded-2xl p-4 mb-4">
-                  <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#ff7f9c] mb-1">
-                    <Shield className="w-3.5 h-3.5" /> Preserved Revoked Chat Note:
-                  </div>
-                  <div className="text-sm font-medium text-white my-1.5">
-                    "Hey, the password for the meeting room is 8842!"
-                  </div>
-                  <div className="text-[10px] text-[#ff7f9c] font-mono">
-                    Deleted by sender 2m ago · Saved in local phone memory
-                  </div>
-                </div>
-
-                <div className="bg-[#1a1128] rounded-xl p-3 mb-4 flex items-center justify-between">
-                  <div>
-                    <div className="text-xs font-semibold text-white">Keep revoked messages</div>
-                    <div className="text-[10px] text-[#5e5573]">Prevents chat disappearances on your device</div>
-                  </div>
-                  <button
-                    onClick={() => {
-                      setAntiDeletePreserved(!antiDeletePreserved);
-                      showToast(`Anti-Delete guard: ${!antiDeletePreserved ? 'Active' : 'Disabled'}`);
-                    }}
-                    className={`w-11 h-6 rounded-full transition-colors relative cursor-pointer ${
-                      antiDeletePreserved ? 'bg-[#30d158]' : 'bg-slate-700'
-                    }`}
-                  >
-                    <span className={`block w-5 h-5 bg-white rounded-full transition-transform absolute top-0.5 ${
-                      antiDeletePreserved ? 'translate-x-5.5' : 'translate-x-0.5'
-                    }`} />
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Tool 10: Hide Phone Number */}
-            {activeTool === 'phone' && (
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-[#ffab6b] flex items-center justify-center text-lg">
-                    <EyeOff className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-white text-base font-['Syne',sans-serif]">Phone Number Privacy</h3>
-                    <p className="text-[11px] text-[#5e5573]">Client-side interface mask</p>
-                  </div>
-                </div>
-
-                <div className="bg-[#1a1128] border border-white/8 rounded-2xl p-4 text-center mb-4">
-                  <div className="text-[11px] text-[#5e5573] font-mono">Profile Screen Display:</div>
-                  <div className="text-xl font-bold text-[#ffab6b] font-mono my-2 tracking-wider">
-                    {phoneMasked ? '•••• •••• ••••' : '+1 (555) 019-2834'}
-                  </div>
-                  <div className="text-[10px] text-[#9a8fb3]">
-                    {phoneMasked ? 'Hidden from screenshots and screen recordings' : 'Shown normally in app menu'}
-                  </div>
-                </div>
-
-                <div className="bg-[#1a1128] rounded-xl p-3 mb-4 flex items-center justify-between">
-                  <div>
-                    <div className="text-xs font-semibold text-white">Mask phone number in UI</div>
-                    <div className="text-[10px] text-[#5e5573]">Telegram official privacy rules remain unchanged</div>
-                  </div>
-                  <button
-                    onClick={() => {
-                      setPhoneMasked(!phoneMasked);
-                      showToast(`Phone number: ${!phoneMasked ? 'Masked' : 'Revealed'}`);
-                    }}
-                    className={`w-11 h-6 rounded-full transition-colors relative cursor-pointer ${
-                      phoneMasked ? 'bg-[#30d158]' : 'bg-slate-700'
-                    }`}
-                  >
-                    <span className={`block w-5 h-5 bg-white rounded-full transition-transform absolute top-0.5 ${
-                      phoneMasked ? 'translate-x-5.5' : 'translate-x-0.5'
-                    }`} />
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Tool 11: Local Premium */}
-            {activeTool === 'premium' && (
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-pink-500/20 text-[#f592c0] flex items-center justify-center text-lg">
-                    <Star className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-white text-base font-['Syne',sans-serif]">Local Premium Features</h3>
-                    <p className="text-[11px] text-[#5e5573]">Interface premium perks unlock</p>
-                  </div>
-                </div>
-
-                <div className="bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-orange-500/10 border border-pink-500/30 rounded-2xl p-4 mb-4">
-                  <div className="font-bold text-xs text-[#f592c0] flex items-center gap-1.5 mb-2">
-                    <Star className="w-4 h-4 fill-pink-400" /> Active Local Premium Perks:
-                  </div>
-                  <ul className="text-xs text-[#9a8fb3] space-y-1.5">
-                    <li className="flex items-center gap-1.5">
-                      <Check className="w-3.5 h-3.5 text-[#59e0a8]" /> 4GB badge on heavy uploads
-                    </li>
-                    <li className="flex items-center gap-1.5">
-                      <Check className="w-3.5 h-3.5 text-[#59e0a8]" /> Animated reaction emoji picker
-                    </li>
-                    <li className="flex items-center gap-1.5">
-                      <Check className="w-3.5 h-3.5 text-[#59e0a8]" /> Custom application app icon selection
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="bg-[#1a1128] rounded-xl p-3 mb-4 flex items-center justify-between">
-                  <div>
-                    <div className="text-xs font-semibold text-white">Enable Local Premium mode</div>
-                    <div className="text-[10px] text-[#5e5573]">Applies premium layout styling on this device</div>
-                  </div>
-                  <button
-                    onClick={() => {
-                      setLocalPremiumActive(!localPremiumActive);
-                      showToast(`Local Premium: ${!localPremiumActive ? 'Enabled' : 'Disabled'}`);
-                    }}
-                    className={`w-11 h-6 rounded-full transition-colors relative cursor-pointer ${
-                      localPremiumActive ? 'bg-[#30d158]' : 'bg-slate-700'
-                    }`}
-                  >
-                    <span className={`block w-5 h-5 bg-white rounded-full transition-transform absolute top-0.5 ${
-                      localPremiumActive ? 'translate-x-5.5' : 'translate-x-0.5'
-                    }`} />
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Tool 12: Notification Diagnostics */}
-            {activeTool === 'notif' && (
-              <div>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-[#59e0a8] flex items-center justify-center text-lg">
-                    <i className="fa-solid fa-bell"></i>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-white text-base font-['Syne',sans-serif]">Notification Diagnostics</h3>
-                    <p className="text-[11px] text-[#5e5573]">Ensure zero delayed alerts on Android</p>
-                  </div>
-                </div>
-
-                <p className="text-xs text-[#9a8fb3] mb-3">
-                  Tap any item to test and toggle diagnostic status:
-                </p>
-
-                <div className="space-y-2 mb-4">
-                  <div
-                    onClick={() => {
-                      const next = !diagnostics.permission;
-                      setDiagnostics({ ...diagnostics, permission: next });
-                      showToast(`Notification Permission: ${next ? 'Allowed' : 'Denied'}`);
-                    }}
-                    className="bg-[#1a1128] hover:bg-white/8 rounded-xl p-3 flex items-center justify-between cursor-pointer"
-                  >
-                    <span className="text-xs font-semibold text-white">System Notification Permission</span>
-                    <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${
-                      diagnostics.permission ? 'bg-[#59e0a8]/20 text-[#59e0a8]' : 'bg-red-500/20 text-red-400'
-                    }`}>
-                      {diagnostics.permission ? 'Allowed' : 'Blocked'}
-                    </span>
-                  </div>
-
-                  <div
-                    onClick={() => {
-                      const next = !diagnostics.daemon;
-                      setDiagnostics({ ...diagnostics, daemon: next });
-                      showToast(`Push Daemon: ${next ? 'Active' : 'Disabled'}`);
-                    }}
-                    className="bg-[#1a1128] hover:bg-white/8 rounded-xl p-3 flex items-center justify-between cursor-pointer"
-                  >
-                    <span className="text-xs font-semibold text-white">Persistent Background Push Daemon</span>
-                    <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${
-                      diagnostics.daemon ? 'bg-[#59e0a8]/20 text-[#59e0a8]' : 'bg-red-500/20 text-red-400'
-                    }`}>
-                      {diagnostics.daemon ? 'Active' : 'Stopped'}
-                    </span>
-                  </div>
-
-                  <div
-                    onClick={() => {
-                      const next = !diagnostics.battery;
-                      setDiagnostics({ ...diagnostics, battery: next });
-                      showToast(`Battery Optimization: ${next ? 'Unrestricted' : 'Optimized'}`);
-                    }}
-                    className="bg-[#1a1128] hover:bg-white/8 rounded-xl p-3 flex items-center justify-between cursor-pointer"
-                  >
-                    <span className="text-xs font-semibold text-white">Battery Optimization Setting</span>
-                    <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${
-                      diagnostics.battery ? 'bg-[#59e0a8]/20 text-[#59e0a8]' : 'bg-amber-500/20 text-amber-400'
-                    }`}>
-                      {diagnostics.battery ? 'Unrestricted' : 'Optimized'}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-[11px] text-[#ffab6b]">
-                  <strong>Xiaomi / Samsung / OnePlus tip:</strong> Enable "Auto-start" in App Info so MRTelegram delivers message alerts even after reboot.
-                </div>
-              </div>
-            )}
-
-            {/* Bottom Done button */}
-            <button
-              onClick={() => {
-                setActiveTool(null);
-                showToast('Settings saved & applied!');
-              }}
-              className="w-full mt-4 bg-gradient-to-r from-[#8b5cf6] via-[#ec4899] to-[#f97316] text-white font-bold text-xs py-3 rounded-xl cursor-pointer hover:brightness-110 active:scale-98 transition-all"
+            {/* Direct Pay Link */}
+            <a
+              href={`upi://pay?pa=${UPI_ID}&pn=Rakshit%20Dhakariya&am=${donateAmount}&cu=INR`}
+              className="w-full bg-gradient-to-r from-[#8b5cf6] via-[#ec4899] to-[#f97316] text-white font-bold py-3.5 rounded-2xl text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xl hover:brightness-110 active:scale-98 transition-all"
             >
-              Apply &amp; Done
-            </button>
+              <i className="fa-solid fa-bolt"></i>
+              <span>Pay ₹{donateAmount} via UPI App</span>
+            </a>
+
+            <div className="text-center text-[10.5px] text-[#5e5573] mt-3">
+              Thank you for supporting 100% free open-source Android projects!
+            </div>
           </div>
         </div>
       )}
 
-      {/* ============================================================== */}
       {/* DOWNLOAD PROGRESS MODAL */}
-      {/* ============================================================== */}
       {isDlOpen && (
         <div
           onClick={(e) => {
@@ -1701,8 +917,19 @@ export default function App() {
             </div>
 
             <button
+              onClick={() => {
+                setIsAboutMeOpen(false);
+                setIsDonateOpen(true);
+              }}
+              className="w-full mb-2 bg-[#ec4899] hover:bg-[#db2777] text-white font-bold text-xs py-2.5 rounded-xl cursor-pointer transition-colors flex items-center justify-center gap-1.5"
+            >
+              <Heart className="w-3.5 h-3.5 fill-white" />
+              <span>Donate &amp; Support ({UPI_ID})</span>
+            </button>
+
+            <button
               onClick={() => setIsAboutMeOpen(false)}
-              className="w-full bg-gray-900 hover:bg-black text-white font-bold text-xs py-3 rounded-xl cursor-pointer transition-colors"
+              className="w-full bg-gray-900 hover:bg-black text-white font-bold text-xs py-2.5 rounded-xl cursor-pointer transition-colors"
             >
               Close
             </button>
