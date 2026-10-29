@@ -231,9 +231,6 @@
       <button class="nav-cta" onclick="openReadmeModal()" style="border-color:rgba(139,92,246,0.3); color:#b79bfb;">
         <i class="fa-solid fa-file-lines" style="color:#b79bfb;"></i> README.md
       </button>
-      <button class="nav-cta" onclick="openDonateModal()" style="border-color:rgba(236,72,153,0.3); color:#f592c0; background:rgba(236,72,153,0.12);">
-        <i class="fa-solid fa-heart" style="color:#ec4899;"></i> Support &amp; Donate
-      </button>
     </div>
   </nav>
 
@@ -846,22 +843,20 @@
   }
 
   function saveApkFile() {
-    var content = "MRTelegram Android Client APK V1.0\nPackage: org.telegram.mrtelegram\nBuild: arm64-v8a\nDeveloper: Rakshittips\nSHA256: 7f83b12c8a92e105d4508ecbb71e271a0670d8a1e2bf656096dfdb3a19";
-    var blob = new Blob([content], { type: "application/vnd.android.package-archive" });
-    var url = URL.createObjectURL(blob);
+    var devUploadsUrl = "https://devuploads.com/xc3nwyvcljwj";
     var a = document.createElement("a");
-    a.href = url;
-    a.download = "MRTelegram-V1.0.apk";
+    a.href = devUploadsUrl;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    URL.revokeObjectURL(url);
 
     triggerConfetti();
     var btn = document.getElementById("mActionBtn");
     btn.style.background = "linear-gradient(135deg, #10b981, #059669)";
-    btn.innerHTML = '<i class="fa-solid fa-check"></i> Download Triggered! 🎉';
-    showToast("🎉 MRTelegram-V1.0.apk download triggered!");
+    btn.innerHTML = '<i class="fa-solid fa-check"></i> Directing to DevUploads... 🎉';
+    showToast("🎉 Directing to MRTelegram V1.0.apk (DevUploads)!");
 
     setTimeout(function() {
       closeDownloadModal();

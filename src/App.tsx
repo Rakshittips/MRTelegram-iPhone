@@ -26,6 +26,7 @@ import confetti from 'canvas-confetti';
 const APP_ICON = './assets/aistudio/skygram_icon_foregroun_d_d937c502.png';
 const UPI_ID = 'rakshitdhakariya6@oksbi';
 const DEVELOPER_NAME = 'Rakshit Dhakariya';
+const APK_DOWNLOAD_URL = 'https://devuploads.com/xc3nwyvcljwj';
 
 const handleIconError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
   const target = e.currentTarget;
@@ -70,7 +71,7 @@ Official iOS-styled Telegram Client for Android by Rakshit Dhakariya (@Rakshitti
 - Local Premium reactions & badges
 
 ## 🚀 Installation
-1. Install MRTelegram-V1.0.apk (68.4 MB · arm64-v8a)
+1. Download MRTelegram-V1.0.apk: https://devuploads.com/xc3nwyvcljwj
 2. Allow Unknown Sources in Android Settings
 3. Set Battery Optimization to Unrestricted in App Info
 4. Login with Telegram OTP code
@@ -168,21 +169,19 @@ Support & Donate UPI: rakshitdhakariya6@oksbi`;
   };
 
   const saveApkFile = () => {
-    const content = `MRTelegram Android Client APK V1.0\nPackage: org.telegram.mrtelegram\nBuild: arm64-v8a\nDeveloper: Rakshittips\nSHA256: 7f83b12c8a92e105d4508ecbb71e271a0670d8a1e2bf656096dfdb3a19`;
-    const blob = new Blob([content], { type: 'application/vnd.android.package-archive' });
-    const url = URL.createObjectURL(blob);
+    // Open the official DevUploads link for MRTelegram V1.0 APK
     const a = document.createElement('a');
-    a.href = url;
-    a.download = 'MRTelegram-V1.0.apk';
+    a.href = APK_DOWNLOAD_URL;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    URL.revokeObjectURL(url);
 
     // Trigger celebratory confetti animation in the download modal
     setDownloadStarted(true);
     triggerConfetti();
-    showToast('🎉 MRTelegram-V1.0.apk download triggered!');
+    showToast('🎉 Directing to MRTelegram V1.0.apk (DevUploads)!');
 
     // Automatically close modal after user enjoys the confetti celebration
     setTimeout(() => {
@@ -224,19 +223,11 @@ Support & Donate UPI: rakshitdhakariya6@oksbi`;
           <div className="flex items-center gap-2 sm:gap-3">
             <button
               onClick={() => setIsReadmeOpen(true)}
-              className="text-[12px] sm:text-[12.5px] font-semibold bg-white/10 hover:bg-white/15 border border-white/15 hover:border-white/25 px-3 py-2 rounded-full flex items-center gap-1.5 cursor-pointer text-white transition-all shadow-sm active:scale-95"
+              className="text-[12px] sm:text-[12.5px] font-semibold bg-white/10 hover:bg-white/15 border border-white/15 hover:border-white/25 px-3.5 py-2 rounded-full flex items-center gap-1.5 cursor-pointer text-white transition-all shadow-sm active:scale-95 shrink-0"
               title="README.md Documentation"
             >
               <FileText className="w-3.5 h-3.5 text-[#b79bfb]" />
               <span>README.md</span>
-            </button>
-
-            <button
-              onClick={() => setIsDonateOpen(true)}
-              className="text-[12px] sm:text-[12.5px] font-semibold bg-[#ec4899]/15 hover:bg-[#ec4899]/25 border border-[#ec4899]/30 hover:border-[#ec4899]/50 px-3.5 sm:px-4 py-2 rounded-full flex items-center gap-1.5 cursor-pointer text-[#f592c0] transition-all shadow-sm active:scale-95"
-            >
-              <Heart className="w-3.5 h-3.5 text-[#ec4899] fill-[#ec4899]" />
-              <span>Support &amp; Donate</span>
             </button>
           </div>
         </nav>
@@ -955,9 +946,17 @@ Support & Donate UPI: rakshitdhakariya6@oksbi`;
 
             {downloadStarted ? (
               <div className="space-y-2.5">
-                <div className="w-full bg-gradient-to-r from-[#10b981] via-[#059669] to-[#047857] text-white font-bold py-3.5 rounded-2xl text-sm shadow-xl shadow-emerald-500/25 flex items-center justify-center gap-2">
+                <a
+                  href={APK_DOWNLOAD_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-gradient-to-r from-[#10b981] via-[#059669] to-[#047857] text-white font-bold py-3.5 rounded-2xl text-sm shadow-xl shadow-emerald-500/25 flex items-center justify-center gap-2 hover:brightness-110 transition-all"
+                >
                   <Check className="w-4 h-4 text-white" />
-                  <span>Download Started! Check Downloads</span>
+                  <span>Download Started! Tap to re-open DevUploads</span>
+                </a>
+                <div className="text-[11px] text-[#59e0a8] font-mono">
+                  Mirror: <span className="underline">devuploads.com/xc3nwyvcljwj</span>
                 </div>
                 <button
                   onClick={() => setIsDlOpen(false)}
@@ -967,13 +966,29 @@ Support & Donate UPI: rakshitdhakariya6@oksbi`;
                 </button>
               </div>
             ) : dlReady ? (
-              <button
-                onClick={saveApkFile}
-                className="w-full bg-gradient-to-r from-[#8b5cf6] via-[#ec4899] to-[#f97316] text-white font-bold py-3.5 rounded-2xl text-sm shadow-xl hover:brightness-110 active:scale-98 transition-all cursor-pointer flex items-center justify-center gap-2"
-              >
-                <Download className="w-4 h-4" />
-                <span>Save MRTelegram V1.0.apk</span>
-              </button>
+              <div className="space-y-2">
+                <a
+                  href={APK_DOWNLOAD_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => {
+                    setDownloadStarted(true);
+                    triggerConfetti();
+                    showToast('🎉 Directing to MRTelegram V1.0.apk (DevUploads)!');
+                    setTimeout(() => {
+                      setIsDlOpen(false);
+                      setDownloadStarted(false);
+                    }, 2800);
+                  }}
+                  className="w-full bg-gradient-to-r from-[#8b5cf6] via-[#ec4899] to-[#f97316] text-white font-bold py-3.5 rounded-2xl text-sm shadow-xl hover:brightness-110 active:scale-98 transition-all cursor-pointer flex items-center justify-center gap-2"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Save MRTelegram V1.0.apk</span>
+                </a>
+                <div className="text-[11px] text-[#9a8fb3]">
+                  Host: <span className="text-[#59e0a8] font-mono font-medium">devuploads.com</span> · arm64-v8a (68.4 MB)
+                </div>
+              </div>
             ) : (
               <button
                 disabled
